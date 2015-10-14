@@ -4,18 +4,40 @@ module.exports = {
   client: {
     lib: {
       css: [
-        'public/lib/bootstrap/dist/css/bootstrap.css',
-        'public/lib/bootstrap/dist/css/bootstrap-theme.css'
+        'public/lib/c3/c3.css',
+        'public/lib/patternfly/dist/css/patternfly.css',
+        'public/lib/patternfly/dist/css/patternfly-additions.css',
+        'public/lib/angular-patternfly/dist/styles/angular-patternfly.css',
+        'public/lib/angular-ui-grid/ui-grid.css',
+        'public/lib/angular-ui-select/dist/select.css',
+        'public/lib/angular-toastr/dist/angular-toastr.css',
+        'public/lib/angular-xeditable/dist/css/xeditable.css',
+        'public/lib/angular-ui-view-spinner/src/angular-ui-view-spinner.css'
       ],
       js: [
         'public/lib/angular/angular.js',
-        'public/lib/angular-resource/angular-resource.js',
         'public/lib/angular-animate/angular-animate.js',
         'public/lib/angular-messages/angular-messages.js',
+        'public/lib/angular-sanitize/angular-sanitize.js',
+        'public/lib/restangular/dist/restangular.js',
+        'public/lib/underscore/underscore.js',
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-        'public/lib/angular-file-upload/angular-file-upload.js'
+        'public/lib/angular-toastr/dist/angular-toastr.tpls.js',
+        'public/lib/angular-breadcrumb/dist/angular-breadcrumb.js',
+        'public/lib/angular-input-masks/angular-input-masks-standalone.js',
+        'public/lib/angular-ui-select/dist/select.js',
+        'public/lib/angular-ui-grid/ui-grid.js',
+        'public/lib/select-utils/dist/select.utils.js',
+        'public/lib/angular-xeditable/dist/js/xeditable.js',
+        'public/lib/spin.js/spin.js',
+        'public/lib/angular-spinner/angular-spinner.js',
+        'public/lib/angular-ui-view-spinner/src/angular-ui-view-spinner.js',
+        'public/lib/d3/d3.js',
+        'public/lib/c3/c3.js',
+        'public/lib/angular-patternfly/dist/angular-patternfly.js',
+        'public/lib/ng-file-upload/ng-file-upload-all.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

@@ -35,3 +35,36 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
+
+
+/**Sistcoop**/
+.grid {
+  min-height: 381px;
+}
+
+.has-error {
+  color: #f05050 !important;
+}
+
+.has-error .form-control {
+  border-color: #f05050 !important;
+}
+
+.required {
+  color: #f00;
+}
+
+.optional {
+  color: #929292;
+}
+
+.sg-grid-top-panel {
+  background-color: #f5f5f5;
+  border: 1px solid #d1d1d1;
+  border-bottom: 0px;
+  padding: 5px;
+}
+
+.sg-grid-top-panel .form-group {
+  margin-bottom: 0px;
+}

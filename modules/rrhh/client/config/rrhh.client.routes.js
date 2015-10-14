@@ -84,11 +84,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/buscar',
                 templateUrl: 'modules/rrhh/client/views/sucursal/form-buscar-sucursal.html',
                 controller: 'Rrhh.Sucursal.BuscarSucursalController',
-                resolve: {
-                    loggedin: function ($q, $timeout, $http, $location, Auth) {
-                        return checkUserRole('ver-sucursales', $q, $timeout, $http, $location, Auth);
-                    }
-                },
+                resolve: {},
                 ncyBreadcrumb: {
                     label: 'Home'
                 }
@@ -97,11 +93,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/crear',
                 templateUrl: 'modules/rrhh/client/views/sucursal/form-crear-sucursal.html',
                 controller: 'Rrhh.Sucursal.CrearSucursalController',
-                resolve: {
-                    loggedin: function ($q, $timeout, $http, $location, Auth) {
-                        return checkUserRole('ver-sucursales', $q, $timeout, $http, $location, Auth);
-                    }
-                },
+                resolve: {},
                 ncyBreadcrumb: {
                     label: 'Crear sucursal',
                     parent: 'rrhh.app.organizacion.sucursal.buscar'
@@ -111,9 +103,6 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/editar/:sucursal',
                 templateUrl: 'modules/rrhh/client/views/sucursal/form-editar-sucursal.html',
                 resolve: {
-                    loggedin: function ($q, $timeout, $http, $location, Auth) {
-                        return checkUserRole('ver-sucursales', $q, $timeout, $http, $location, Auth);
-                    },
                     sucursal: function ($state, $stateParams, SGSucursal) {
                         return SGSucursal.$find($stateParams.sucursal);
                     }
@@ -128,11 +117,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/resumen',
                 templateUrl: 'modules/rrhh/client/views/sucursal/form-editar-sucursal-resumen.html',
                 controller: 'Rrhh.Sucursal.EditarSucursal.ResumenController',
-                resolve: {
-                    loggedin: function ($q, $timeout, $http, $location, Auth) {
-                        return checkUserRole('ver-sucursales', $q, $timeout, $http, $location, Auth);
-                    }
-                },
+                resolve: {},
                 ncyBreadcrumb: {
                     skip: true // Never display this state in breadcrumb.
                 }
@@ -141,11 +126,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/datosPrincipales',
                 templateUrl: 'modules/rrhh/client/views/sucursal/form-editar-sucursal-datosPrincipales.html',
                 controller: 'Rrhh.Sucursal.EditarSucursal.DatosPrincipalesController',
-                resolve: {
-                    loggedin: function ($q, $timeout, $http, $location, Auth) {
-                        return checkUserRole('ver-sucursales', $q, $timeout, $http, $location, Auth);
-                    }
-                },
+                resolve: {},
                 ncyBreadcrumb: {
                     label: 'Datos principales'
                 }
@@ -163,11 +144,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/buscar',
                 templateUrl: 'modules/rrhh/client/views/sucursal/agencia/form-buscar-agencia.html',
                 controller: 'Rrhh.Sucursal.Agencia.BuscarAgenciaController',
-                resolve: {
-                    loggedin: function ($q, $timeout, $http, $location, Auth) {
-                        return checkUserRole('ver-sucursales', $q, $timeout, $http, $location, Auth);
-                    }
-                },
+                resolve: {},
                 ncyBreadcrumb: {
                     label: 'Agencias'
                 }
@@ -176,11 +153,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/crear',
                 templateUrl: 'modules/rrhh/client/views/sucursal/agencia/form-crear-agencia.html',
                 controller: 'Rrhh.Sucursal.Agencia.CrearAgenciaController',
-                resolve: {
-                    loggedin: function ($q, $timeout, $http, $location, Auth) {
-                        return checkUserRole('ver-sucursales', $q, $timeout, $http, $location, Auth);
-                    }
-                },
+                resolve: {},
                 ncyBreadcrumb: {
                     label: 'Crear agencia',
                     parent: 'rrhh.app.organizacion.sucursal.editar.agencia.buscar'
@@ -191,9 +164,6 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 templateUrl: 'modules/rrhh/client/views/sucursal/agencia/form-editar-agencia-datosPrincipales.html',
                 controller: 'Rrhh.Sucursal.Agencia.EditarAgenciaController',
                 resolve: {
-                    loggedin: function ($q, $timeout, $http, $location, Auth) {
-                        return checkUserRole('ver-sucursales', $q, $timeout, $http, $location, Auth);
-                    },
                     agencia: function ($state, $stateParams, sucursal, SGSucursal) {
                         return sucursal.SGAgencia().$find($stateParams.agencia);
                     }
@@ -216,11 +186,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/buscar',
                 templateUrl: 'modules/rrhh/client/views/trabajador/form-buscar-trabajador.html',
                 controller: 'Rrhh.Trabajador.BuscarTrabajadorController',
-                resolve: {
-                    loggedin: function ($q, $timeout, $http, $location, Auth) {
-                        return checkUserRole('ver-trabajadores', $q, $timeout, $http, $location, Auth);
-                    }
-                },
+                resolve: {},
                 ncyBreadcrumb: {
                     label: 'Home'
                 }
@@ -229,11 +195,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/crear',
                 templateUrl: 'modules/rrhh/client/views/trabajador/form-crear-trabajador.html',
                 controller: 'Rrhh.Trabajador.CrearTrabajadorController',
-                resolve: {
-                    loggedin: function ($q, $timeout, $http, $location, Auth) {
-                        return checkUserRole('ver-trabajadores', $q, $timeout, $http, $location, Auth);
-                    }
-                },
+                resolve: {},
                 ncyBreadcrumb: {
                     label: 'Crear trabajador',
                     parent: 'rrhh.app.rrhh.trabajador.buscar'
@@ -243,9 +205,6 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/editar/:trabajador',
                 templateUrl: 'modules/rrhh/client/views/trabajador/form-editar-trabajador.html',
                 resolve: {
-                    loggedin: function ($q, $timeout, $http, $location, Auth) {
-                        return checkUserRole('ver-trabajadores', $q, $timeout, $http, $location, Auth);
-                    },
                     trabajador: function ($state, $stateParams, SGTrabajador, $q, $timeout, $http, $location, Auth) {
                         if (Auth.authz.hasResourceRole('administrar-trabajadores', moduleName)) {
                             return SGTrabajador.$find($stateParams.trabajador);
@@ -272,11 +231,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/resumen',
                 templateUrl: 'modules/rrhh/client/views/trabajador/form-editar-trabajador-resumen.html',
                 controller: 'Rrhh.Trabajador.EditarTrabajador.ResumenController',
-                resolve: {
-                    loggedin: function ($q, $timeout, $http, $location, Auth) {
-                        return checkUserRole('ver-trabajadores', $q, $timeout, $http, $location, Auth);
-                    }
-                },
+                resolve: {},
                 ncyBreadcrumb: {
                     label: 'Resumen'
                 }
@@ -285,11 +240,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/datosPrincipales',
                 templateUrl: 'modules/rrhh/client/views/trabajador/form-editar-trabajador-datosPrincipales.html',
                 controller: 'Rrhh.Trabajador.EditarTrabajador.DatosPrincipalesController',
-                resolve: {
-                    loggedin: function ($q, $timeout, $http, $location, Auth) {
-                        return checkUserRole('ver-trabajadores', $q, $timeout, $http, $location, Auth);
-                    }
-                },
+                resolve: {},
                 ncyBreadcrumb: {
                     label: 'Datos principales'
                 }
@@ -298,11 +249,7 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/accesoSistema',
                 templateUrl: 'modules/rrhh/client/views/trabajador/form-editar-trabajador-accesoSistema.html',
                 controller: 'Rrhh.Trabajador.EditarTrabajador.AccesoSistemaController',
-                resolve: {
-                    loggedin: function ($q, $timeout, $http, $location, Auth) {
-                        return checkUserRole('ver-trabajadores', $q, $timeout, $http, $location, Auth);
-                    }
-                },
+                resolve: {},
                 ncyBreadcrumb: {
                     label: 'Acceso al sistema'
                 }

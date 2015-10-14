@@ -117,7 +117,6 @@ angular.module('mean').controller('KeycloakController',
       };
 
       $scope.loadRoles = function () {
-        console.log(Auth.authz);
         if(!angular.isUndefined(Auth.authz.realmAccess)) {
           var realmRoles = Auth.authz.realmAccess.roles;
           for (var i = 0; i < realmRoles.length; i++) {

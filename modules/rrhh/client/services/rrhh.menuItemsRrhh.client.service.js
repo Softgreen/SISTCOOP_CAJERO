@@ -84,15 +84,11 @@ angular.module('rrhh').service('$menuItemsRrhh', ['Auth',
 				rolesSession = Auth.authz.resourceAccess.rrhh.roles;
 			}
 
-			if (rolesSession.indexOf('ver-sucursales') !== -1) {
-				var organizacion = this.addItem('Organizacion', '');
-				organizacion.addItem('Sucursales', 'rrhh.app.organizacion.sucursal');
-			}
+			var organizacion = this.addItem('Organizacion', '');
+			organizacion.addItem('Sucursales', 'rrhh.app.organizacion.sucursal');
 
-			if (rolesSession.indexOf('ver-trabajadores') !== -1) {
-				var rrhh = this.addItem('Rrhh', '');
-				rrhh.addItem('Trabajadores', 'rrhh.app.rrhh.trabajador');
-			}
+			var rrhh = this.addItem('Rrhh', '');
+			rrhh.addItem('Trabajadores', 'rrhh.app.rrhh.trabajador');
 
 			return this;
 		};

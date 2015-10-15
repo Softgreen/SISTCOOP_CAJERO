@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('persona').controller('PersonaController', ['$scope', 'Auth',
-    function($scope, Auth) {
+    function ($scope, Auth) {
 
         $scope.package = {
             name: 'persona'
@@ -13,9 +13,11 @@ angular.module('persona').controller('PersonaController', ['$scope', 'Auth',
                 return false;
             }
 
-            var rolesSession = Auth.authz.resourceAccess.persona.roles;
-            if(rolesSession.indexOf(role) !== -1) {
-                return true;
+            if (!angular.isUndefined(Auth.authz.resourceAccess.persona)) {
+                var rolesSession = Auth.authz.resourceAccess.persona.roles;
+                if (rolesSession.indexOf(role) !== -1) {
+                    return true;
+                }
             }
 
             return false;
@@ -30,7 +32,7 @@ angular.module('persona').controller('PersonaController', ['$scope', 'Auth',
                 return getAccess('ver-documentos');
             },
 
-            get verPersonas(){
+            get verPersonas() {
                 return getAccess('ver-personas');
             },
 

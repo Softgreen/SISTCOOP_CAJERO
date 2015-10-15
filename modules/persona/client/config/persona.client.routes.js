@@ -141,8 +141,8 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/editar/:personaNatural',
                 templateUrl: 'modules/persona/client/views/natural/form-editar-personaNatural.html',
                 resolve: {
-                    personaNatural: function ($state, $stateParams, SGPersonaNatural) {
-                        return SGPersonaNatural.$find($stateParams.personaNatural);
+                    personaNatural: function ($state, $stateParams, PersonaNaturalService) {
+                        return PersonaNaturalService.findById($stateParams.personaNatural);
                     }
                 },
                 controller: 'Persona.Natural.EditarPersonaNaturalController',

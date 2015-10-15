@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('persona').controller('Persona.Natural.EditarPersonaNatural.DatosAdicionalesController',
-    function ($scope, personaNatural, toastr) {
+    function ($scope, personaNatural, toastr, PersonaNaturalService) {
 
         $scope.working = false;
 
@@ -12,13 +12,13 @@ angular.module('persona').controller('Persona.Natural.EditarPersonaNatural.Datos
 
         $scope.save = function () {
             $scope.working = true;
-            $scope.view.persona.$save().then(
-                function (response) {
+            PersonaNaturalService.update($scope.view.persona).then(
+                function(response){
                     $scope.working = false;
                     toastr.success('Persona actualizada');
                 },
-                function error(err) {
-                    toastr.error(err.data.errorMessage, 'Error');
+                function error(err){
+                    toastr.error(err.data.message);
                 }
             );
         };

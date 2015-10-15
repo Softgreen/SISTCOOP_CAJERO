@@ -1,11 +1,11 @@
-<form name="form" sg-read-only="!access.administrarPersonas" class="form-horizontal" novalidate>
+<form name="form" class="form-horizontal" novalidate>
 
-    <sg-ubigeo data-ng-model="view.persona.ubigeo" form-layout="horizontal" ng-disabled="!access.administrarPersonas"></sg-ubigeo>
+    <sg-ubigeo data-ng-model="view.persona.ubigeo" form-layout="horizontal"></sg-ubigeo>
 
     <div class="form-group" data-ng-class="{ 'has-error' : form.ocupacion.$invalid && form.$submitted }">
         <label class="col-sm-2 control-label">Ocupacion:</label>
         <div class="col-sm-3">
-            <input name="ocupacion" type="text" data-ng-model="view.persona.ocupacion" data-ng-maxlength="70" class="form-control" capitalize />
+            <input name="ocupacion" type="text" data-ng-model="view.persona.ocupacion" data-ng-maxlength="70" class="form-control" pf-focused="true" capitalize />
             <div data-ng-messages="form.ocupacion.$error" data-ng-if="form.ocupacion.$touched || form.$submitted">
                 <div class="has-error" data-ng-message="maxlength">Maximo 70 Caracteres.</div>
             </div>

@@ -2,19 +2,17 @@
 
 <h1><strong>Crear persona natural</strong></h1>
 
-<form name="form" sg-read-only="!access.administrarPersonas" class="form-horizontal" novalidate>
+<form name="form" class="form-horizontal" novalidate>
 
 	<div class="form-group" data-ng-class="{ 'has-error' : form.pais.$invalid && (form.pais.$touched || form.$submitted)}">
 		<label class="col-sm-2 control-label">Nacionalidad:</label>
 		<div class="col-sm-3">
 			<div class="input-group">
-				<span data-ng-bind="combo.selected.pais ? combo.selected.pais.alpha3Code : 'NA'" class="input-group-addon"></span>
-				<ui-select name="pais" data-ng-model="combo.selected.pais" ng-disabled="!access.administrarPersonas" pf-focused="true" autofocus required>
-					<ui-select-autoload pk-name="alpha3Code" comparator="view.persona.codigoPais" ignore-case="true"></ui-select-autoload>
-					<ui-select-match placeholder="Seleccione">{{$select.selected.fullNameEn}}</ui-select-match>
+				<span data-ng-bind="combo.selected.pais ? combo.selected.pais.denominacion : 'NA'" class="input-group-addon"></span>
+				<ui-select name="pais" data-ng-model="combo.selected.pais" pf-focused="true" autofocus required>
+					<ui-select-match placeholder="Seleccione">{{$select.selected.denominacion}}</ui-select-match>
 					<ui-select-choices repeat="item in combo.pais | filter: $select.search">
-						<div data-ng-bind-html="item.fullNameEn | highlight: $select.search"></div>
-						<small data-ng-bind-html="item.alpha3Code | highlight: $select.search"></small>
+						<div data-ng-bind-html="item.denominacion | highlight: $select.search"></div>
 					</ui-select-choices>
 				</ui-select>
 			</div>
@@ -26,7 +24,7 @@
 	<div class="form-group" data-ng-class="{ 'has-error' : (form.tipoDocumento.$invalid || form.numeroDocumento.$invalid ) && (form.tipoDocumento.$dirty || form.numeroDocumento.$dirty || form.$submitted) }">
 		<label class="col-sm-2 control-label">Documento identidad:</label>
 		<div class="col-sm-2">
-			<ui-select name="tipoDocumento" data-ng-model="combo.selected.tipoDocumento" ng-disabled="!access.administrarPersonas" required>
+			<ui-select name="tipoDocumento" data-ng-model="combo.selected.tipoDocumento" required>
 				<ui-select-autoload pk-name="abreviatura" comparator="view.persona.tipoDocumento" ignore-case="true"></ui-select-autoload>
 				<ui-select-match placeholder="Documento">{{$select.selected.abreviatura}}</ui-select-match>
 				<ui-select-choices repeat="item in combo.tipoDocumento | filter: $select.search">
@@ -99,7 +97,7 @@
 	<div class="form-group" data-ng-class="{ 'has-error' : form.sexo.$invalid && form.$submitted }">
 		<label class="col-sm-2 control-label">Sexo:</label>
 		<div class="col-sm-2">
-			<ui-select name="sexo" data-ng-model="combo.selected.sexo" ng-disabled="!access.administrarPersonas" required>
+			<ui-select name="sexo" data-ng-model="combo.selected.sexo" required>
 				<ui-select-match placeholder="Seleccione">{{$select.selected}}</ui-select-match>
 				<ui-select-choices repeat="item in combo.sexo | filter: $select.search">
 					<div data-ng-bind-html="item | highlight: $select.search"></div>
@@ -113,7 +111,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Estado civil <span class="optional">(opcional)</span>:</label>
 		<div class="col-sm-2">
-			<ui-select name="estadoCivil" data-ng-model="combo.selected.estadoCivil" ng-disabled="!access.administrarPersonas">
+			<ui-select name="estadoCivil" data-ng-model="combo.selected.estadoCivil">
 				<ui-select-match placeholder="Seleccione">{{$select.selected}}</ui-select-match>
 				<ui-select-choices repeat="item in combo.estadoCivil | filter: $select.search">
 					<div data-ng-bind-html="item | highlight: $select.search"></div>

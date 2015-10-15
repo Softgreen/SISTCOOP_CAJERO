@@ -223,8 +223,8 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/editar/:personaJuridica',
                 templateUrl: 'modules/persona/client/views/juridica/form-editar-personaJuridica.html',
                 resolve: {
-                    personaJuridica: function ($state, $stateParams, SGPersonaJuridica) {
-                        return SGPersonaJuridica.$find($stateParams.personaJuridica);
+                    personaJuridica: function ($state, $stateParams, PersonaJuridicaService) {
+                        return PersonaJuridicaService.findById($stateParams.personaJuridica);
                     }
                 },
                 controller: 'Persona.Juridica.EditarPersonaJuridicaController',

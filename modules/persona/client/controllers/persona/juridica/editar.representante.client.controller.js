@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('persona').controller('Persona.Juridica.EditarPersonaJuridica.RepresentanteController',
-    function ($scope, $state, SGTipoDocumento, SGPersonaNatural, toastr) {
+    function ($scope, $state, toastr, MaestroService, PersonaNaturalService, PersonaJuridicaService) {
 
         $scope.working = false;
 
@@ -19,8 +19,8 @@ angular.module('persona').controller('Persona.Juridica.EditarPersonaJuridica.Rep
         };
 
         $scope.loadCombo = function () {
-            SGTipoDocumento.$search({tipoPersona: 'natural'}).then(function (response) {
-                $scope.combo.tipoDocumento = response.items;
+            PersonaNaturalService.getTipoDocumentos().then(function (response) {
+                $scope.combo.tipoDocumento = response;
             });
         };
         $scope.loadCombo();
@@ -30,29 +30,32 @@ angular.module('persona').controller('Persona.Juridica.EditarPersonaJuridica.Rep
                 $event.preventDefault();
 
             if (angular.isDefined($scope.combo.selected.tipoDocumento) && angular.isDefined($scope.representante.numeroDocumento)) {
-                SGPersonaNatural.$search({
-                    tipoDocumento: $scope.combo.selected.tipoDocumento.abreviatura,
-                    numeroDocumento: $scope.representante.numeroDocumento
-                }).then(function (response) {
-                    if (response.items.length)
-                        $scope.view.persona.representanteLegal = response.items[0];
+                PersonaNaturalService.findByTipoNumeroDocumento($scope.combo.selected.tipoDocumento.id, $scope.representante.numeroDocumento).then(function (response) {
+                    if (response)
+                        $scope.view.persona.representanteLegal = response;
                     else
                         toastr.warning('Persona no encontrada');
                 });
+
             }
         };
 
         $scope.save = function () {
             $scope.working = true;
-            $scope.view.persona.$save().then(
+
+            var persona = angular.copy($scope.view.persona);
+            persona.idRepresentanteLegal = $scope.view.persona.representanteLegal.id;
+            persona.representanteLegal = undefined;
+            PersonaJuridicaService.update(persona).then(
                 function (response) {
-                    toastr.success('Representante legal actualizado');
+                    toastr.success('Representante actualizado');
                     $scope.working = false;
                 },
                 function error(err) {
                     toastr.error(err.data.errorMessage);
                 }
             );
+
         };
 
     });

@@ -2,29 +2,21 @@
 
 /* jshint -W098 */
 angular.module('persona').controller('Persona.Juridica.EditarPersonaJuridica.DatosPrincipalesController',
-    function ($scope, $state, personaJuridica, SGCountryCode, SGTipoDocumento, SGTipoEmpresa, SGPersonaJuridica, toastr) {
+    function ($scope, $state, toastr, personaJuridica, MaestroService, PersonaJuridicaService) {
 
         $scope.working = false;
 
         $scope.combo = {
-            pais: undefined,
             tipoDocumento: undefined,
             tipoEmpresa: undefined
         };
         $scope.combo.selected = {
-            pais: undefined,
             tipoDocumento: undefined,
             tipoEmpresa: $scope.view.persona.tipoEmpresa
         };
 
         $scope.loadCombo = function () {
-            SGCountryCode.$getAll().then(function (response) {
-                $scope.combo.pais = response;
-            });
-            SGTipoDocumento.$search({tipoPersona: 'juridica'}).then(function (response) {
-                $scope.combo.tipoDocumento = response.items;
-            });
-            SGTipoEmpresa.$getAll().then(function (response) {
+            MaestroService.getTiposEmpresa().then(function (response) {
                 $scope.combo.tipoEmpresa = response;
             });
         };
@@ -35,16 +27,19 @@ angular.module('persona').controller('Persona.Juridica.EditarPersonaJuridica.Dat
         };
 
         $scope.save = function () {
-            $scope.view.persona.codigoPais = $scope.combo.selected.pais.alpha3Code;
-            $scope.view.persona.tipoEmpresa = $scope.combo.selected.tipoEmpresa;
             $scope.working = true;
-            $scope.view.persona.$save().then(
+
+            var persona = angular.copy($scope.view.persona);
+            persona.tipoEmpresa = $scope.combo.selected.tipoEmpresa;
+            persona.idRepresentanteLegal = $scope.view.persona.representanteLegal.id;
+            persona.representanteLegal = undefined;
+            PersonaJuridicaService.update(persona).then(
                 function (response) {
-                    $scope.working = false;
                     toastr.success('Persona actualizada');
+                    $scope.working = false;
                 },
                 function error(err) {
-                    toastr.error(err.data.errorMessage);
+                    toastr.error(err.data.message);
                 }
             );
         };

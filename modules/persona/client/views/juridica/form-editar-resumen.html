@@ -5,10 +5,8 @@
                 <fieldset class="border-top">
                     <legend><span class="text">Datos principales</span></legend>
                     <dl class="dl-horizontal left">
-                        <dt>Codigo pais:</dt>
-                        <dd data-ng-bind="view.persona.codigoPais"></dd>
                         <dt>Documento:</dt>
-                        <dd data-ng-bind="view.persona.tipoDocumento"></dd>
+                        <dd data-ng-bind="view.persona.tipoDocumento.abreviatura"></dd>
                         <dt>Numero:</dt>
                         <dd data-ng-bind="view.persona.numeroDocumento"></dd>
                     </dl>
@@ -82,7 +80,7 @@
                         <dt>Codigo pais:</dt>
                         <dd data-ng-bind="view.persona.representanteLegal.codigoPais"></dd>
                         <dt>Documento:</dt>
-                        <dd data-ng-bind="view.persona.representanteLegal.tipoDocumento"></dd>
+                        <dd data-ng-bind="view.persona.representanteLegal.tipoDocumento.abreviatura"></dd>
                         <dt>Numero:</dt>
                         <dd data-ng-bind="view.persona.representanteLegal.numeroDocumento"></dd>
                     </dl>
@@ -127,7 +125,7 @@
                         <tr data-ng-repeat="item in view.loadObjects.accionistas">
                             <td><span data-ng-bind="$index+1"></span></td>
                             <td>
-                                <span data-ng-bind="item.personaNatural.tipoDocumento"></span><span>/</span><span data-ng-bind="item.numeroDocumento"></span>
+                                <span data-ng-bind="item.personaNatural.tipoDocumento.abreviatura"></span><span>/</span><span data-ng-bind="item.numeroDocumento"></span>
                             </td>
                             <td>
                                 <span data-ng-bind="item.personaNatural.apellidoPaterno"></span><span>&nbsp;</span><span data-ng-bind="item.personaNatural.apellidoMaterno"></span><span>,&nbsp;</span><span data-ng-bind="item.personaNatural.nombres"></span>

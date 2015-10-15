@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('persona').controller('Persona.Juridica.EditarPersonaJuridica.DatosAdicionalesController',
-    function ($scope, personaJuridica, toastr) {
+    function ($scope, personaJuridica, toastr, PersonaJuridicaService) {
 
         $scope.working = false;
 
@@ -12,10 +12,14 @@ angular.module('persona').controller('Persona.Juridica.EditarPersonaJuridica.Dat
 
         $scope.save = function () {
             $scope.working = true;
-            $scope.view.persona.$save().then(
-                function (data) {
-                    $scope.working = false;
+
+            var persona = angular.copy($scope.view.persona);
+            persona.idRepresentanteLegal = $scope.view.persona.representanteLegal.id;
+            persona.representanteLegal = undefined;
+            PersonaJuridicaService.update(persona).then(
+                function (response) {
                     toastr.success('Persona actualizada');
+                    $scope.working = false;
                 },
                 function error(err) {
                     toastr.error(err.data.errorMessage);

@@ -13,9 +13,9 @@ angular.module('persona').controller('Persona.Juridica.EditarPersonaJuridica.Res
         };
 
         $scope.loadAccionistas = function () {
-            $scope.view.persona.SGAccionista().$getAll().then(function (response) {
+            /*$scope.view.persona.SGAccionista().$getAll().then(function (response) {
                 $scope.view.load.accionistas = response;
-            });
+            });*/
         };
         $scope.loadAccionistas();
 

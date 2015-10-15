@@ -5,7 +5,6 @@
 		<label class="col-sm-2 control-label"><span class="required">*</span> Persona:</label>
 		<div class="col-sm-2">
 			<ui-select name="tipoDocumento" data-ng-model="combo.selected.tipoDocumento" pf-focused="true" autofocus required>
-				<ui-select-autoload pk-name="abreviatura" comparator="view.representante.tipoDocumento" ignore-case="true"></ui-select-autoload>
 				<ui-select-match placeholder="Seleccione">{{$select.selected.abreviatura}}</ui-select-match>
 				<ui-select-choices repeat="item in combo.tipoDocumento | filter: $select.search">
 					<div data-ng-bind-html="item.abreviatura | highlight: $select.search"></div>
@@ -46,7 +45,7 @@
 				</thead>
 				<tbody>
 				<tr data-ng-show="view.representante.id">
-					<td><span data-ng-bind="view.representante.tipoDocumento"></span></td>
+					<td><span data-ng-bind="view.representante.tipoDocumento.abreviatura"></span></td>
 					<td><span data-ng-bind="view.representante.numeroDocumento"></span></td>
 					<td><span data-ng-bind="view.representante.apellidoPaterno"></span></td>
 					<td><span data-ng-bind="view.representante.apellidoMaterno"></span></td>

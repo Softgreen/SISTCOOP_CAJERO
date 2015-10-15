@@ -385,3 +385,216 @@ angular.module("sgtemplate/modal/modal.html", []).run(["$templateCache", functio
         ""
     );
 }]);
+
+/* jshint ignore:start */
+function resolveSgUbigeoTemplate(tElement, tAttrs) {
+    var layout = tAttrs.formLayout;
+    if (!layout)
+        layout = 'horizontal';
+
+    if (layout === 'basic') {
+        return ''
+            + '<div class="row">'
+            + '<div class="col-sm-4">'
+            + '<div class="form-group" ng-class="{ \'has-error\' : formSgUbigeo.departamento.$invalid && (formSgUbigeo.departamento.$touched || formSgUbigeo.$submitted)}">'
+            + '<label>Departamento</label>'
+            + '<ui-select name="departamento" ng-model="ubigeo.departamento">'
+            + '<ui-select-match placeholder="Seleccione">{{$select.selected.denominacion}}</ui-select-match>'
+            + '<ui-select-choices repeat="item in departamentos | filter: $select.search">'
+            + '<div ng-bind-html="item.denominacion | highlight: $select.search"></div>'
+            + '<small ng-bind-html="item.codigo | highlight: $select.search"></small>'
+            + '</ui-select-choices>'
+            + '</ui-select>'
+            + '<div ng-messages="formSgUbigeo.departamento.$error" ng-if="formSgUbigeo.departamento.$touched || formSgUbigeo.$submitted">'
+            + '<div class="help-block" ng-message="required">Ingrese departamento.</div>'
+            + '</div>'
+            + '</div>'
+            + '</div>'
+            + '<div class="col-sm-4">'
+            + '<div class="form-group" ng-class="{ \'has-error\' : formSgUbigeo.provincia.$invalid && (formSgUbigeo.provincia.$touched || formSgUbigeo.$submitted)}">'
+            + '<label>Provincia</label>'
+            + '<ui-select name="provincia" ng-model="ubigeo.provincia">'
+            + '<ui-select-match placeholder="Seleccione">{{$select.selected.denominacion}}</ui-select-match>'
+            + '<ui-select-choices repeat="item in provincias | filter: $select.search">'
+            + '<div ng-bind-html="item.denominacion | highlight: $select.search"></div>'
+            + '<small ng-bind-html="item.codigo | highlight: $select.search"></small>'
+            + '</ui-select-choices>'
+            + '</ui-select>'
+            + '<div ng-messages="formSgUbigeo.provincia.$error" ng-if="formSgUbigeo.provincia.$touched || formSgUbigeo.$submitted">'
+            + '<div class="help-block" ng-message="required">Ingrese provincia.</div>'
+            + '</div>'
+            + '</div>'
+            + '</div>'
+            + '<div class="col-sm-4">'
+            + '<div class="form-group" ng-class="{ \'has-error\' : formSgUbigeo.provincia.$invalid && (formSgUbigeo.provincia.$touched || formSgUbigeo.$submitted)}">'
+            + '<label>Distrito</label>'
+            + '<ui-select name="distrito" ng-model="ubigeo.distrito">'
+            + '<ui-select-match placeholder="Seleccione">{{$select.selected.denominacion}}</ui-select-match>'
+            + '<ui-select-choices repeat="item in distritos | filter: $select.search">'
+            + '<div ng-bind-html="item.denominacion | highlight: $select.search"></div>'
+            + '<small ng-bind-html="item.codigo | highlight: $select.search"></small>'
+            + '</ui-select-choices>'
+            + '</ui-select>'
+            + '<div ng-messages="formSgUbigeo.distrito.$error" ng-if="formSgUbigeo.distrito.$touched || formSgUbigeo.$submitted">'
+            + '<div class="help-block" ng-message="required">Ingrese provincia.</div>'
+            + '</div>'
+            + '</div>'
+            + '</div>'
+            + '</div>'
+    } else if (layout === 'inline') {
+
+    } else if (layout === 'horizontal') {
+        return ''
+            + '<div class="form-group" ng-class="{ \'has-error\' : (formSgUbigeo.departamento.$invalid || formSgUbigeo.provincia.$invalid || formSgUbigeo.distrito.$invalid) && (formSgUbigeo.departamento.$touched || formSgUbigeo.$submitted)}">'
+            + '<label class="col-sm-2 control-label">Ubigeo:</label>'
+            + '<div class="col-sm-3">'
+            + '<ui-select name="departamento" ng-model="ubigeo.departamento">'
+            + '<ui-select-match placeholder="Departamento">{{$select.selected.denominacion}}</ui-select-match>'
+            + '<ui-select-choices repeat="item in departamentos | filter: $select.search">'
+            + '<div ng-bind-html="item.denominacion | highlight: $select.search"></div>'
+            + '<small ng-bind-html="item.codigo | highlight: $select.search"></small>'
+            + '</ui-select-choices>'
+            + '</ui-select>'
+            + '<div ng-messages="formSgUbigeo.departamento.$error" ng-if="formSgUbigeo.departamento.$touched || formSgUbigeo.$submitted">'
+            + '<div class="help-block" ng-message="required">Ingrese departamento.</div>'
+            + '</div>'
+            + '</div>'
+            + '<div class="col-sm-3">'
+            + '<ui-select name="provincia" ng-model="ubigeo.provincia">'
+            + '<ui-select-match placeholder="Provincia">{{$select.selected.denominacion}}</ui-select-match>'
+            + '<ui-select-choices repeat="item in provincias | filter: $select.search">'
+            + '<div ng-bind-html="item.denominacion | highlight: $select.search"></div>'
+            + '<small ng-bind-html="item.codigo | highlight: $select.search"></small>'
+            + '</ui-select-choices>'
+            + '</ui-select>'
+            + '<div ng-messages="formSgUbigeo.provincia.$error" ng-if="formSgUbigeo.provincia.$touched || formSgUbigeo.$submitted">'
+            + '<div class="help-block" ng-message="required">Ingrese provincia.</div>'
+            + '</div>'
+            + '</div>'
+            + '<div class="col-sm-3">'
+            + '<ui-select name="distrito" ng-model="ubigeo.distrito">'
+            + '<ui-select-match placeholder="Distrito">{{$select.selected.denominacion}}</ui-select-match>'
+            + '<ui-select-choices repeat="item in distritos | filter: $select.search">'
+            + '<div ng-bind-html="item.denominacion | highlight: $select.search"></div>'
+            + '<small ng-bind-html="item.codigo | highlight: $select.search"></small>'
+            + '</ui-select-choices>'
+            + '</ui-select>'
+            + '<div ng-messages="formSgUbigeo.distrito.$error" ng-if="formSgUbigeo.distrito.$touched || formSgUbigeo.$submitted">'
+            + '<div class="help-block" ng-message="required">Ingrese provincia.</div>'
+            + '</div>'
+            + '</div>'
+            + '</div>'
+    }
+}
+/* jshint ignore:end */
+
+angular.module('persona').directive('sgUbigeo', ['MaestroService', function (MaestroService) {
+    return {
+        restrict: 'E',
+        replace: false,
+        require: ['^form', 'ngModel'],
+        link: function ($scope, elem, attrs, ngModel) {
+
+            ngModel[1].$validators.sgubigeo = function (modelValue, viewValue) {
+                var value = modelValue || viewValue;
+                value = value ? value : '';
+                //false representa error y true represeta exito
+                if ($scope.requerido)
+                    return (value.length === 6);
+                else
+                    return (value.length === 6 || value.length === 0);
+            };
+
+            MaestroService.getDepartamentos().then(function (data) {
+                $scope.departamentos = data;
+                $scope.activeListener();
+            });
+
+            $scope.provincias = undefined;
+            $scope.distritos = undefined;
+
+            $scope.ubigeo = {
+                departamento: undefined,
+                provincia: undefined,
+                distrito: undefined
+            };
+
+            $scope.$watch('ubigeo.departamento', function () {
+                if (!angular.isUndefined($scope.ubigeo.departamento) && $scope.ubigeo.departamento) {
+                    MaestroService.getProvinciasByCodigo($scope.ubigeo.departamento.codigo).then(function (data) {
+                        $scope.provincias = data;
+                    });
+                    ngModel[0].$setDirty();
+                } else {
+                    $scope.ubigeo.provincia = undefined;
+                    $scope.ubigeo.distrito = undefined;
+
+                    $scope.provincias = undefined;
+                    $scope.distritos = undefined;
+                }
+            });
+            $scope.$watch('ubigeo.provincia', function () {
+                if (!angular.isUndefined($scope.ubigeo.provincia) && $scope.ubigeo.provincia) {
+                    MaestroService.getDistritosByCodigo($scope.ubigeo.departamento.codigo, $scope.ubigeo.provincia.codigo).then(function (data) {
+                        $scope.distritos = data;
+                    });
+                } else {
+                    $scope.ubigeo.distrito = undefined;
+
+                    $scope.distritos = undefined;
+                }
+            });
+            $scope.$watch('ubigeo.distrito', function () {
+                if (!angular.isUndefined($scope.ubigeo.distrito) && $scope.ubigeo.distrito) {
+                    var ubigeo = $scope.ubigeo.departamento.codigo + $scope.ubigeo.provincia.codigo + $scope.ubigeo.distrito.codigo;
+                    ngModel[1].$setViewValue(ubigeo);
+                }
+            });
+
+            $scope.activeListener = function () {
+                var listener = $scope.$watch(function () {
+                    return ngModel[1].$modelValue;
+                }, function () {
+                    if (ngModel[1].$modelValue && ngModel[1].$modelValue.length === 6 && angular.isUndefined($scope.provincias) && angular.isUndefined($scope.distritos)) {
+
+                        for (var i = 0; i < $scope.departamentos.length; i++) {
+                            if ($scope.departamentos[i].codigo === ngModel[1].$modelValue.substring(0, 2)) {
+                                $scope.ubigeo.departamento = $scope.departamentos[i];
+                                break;
+                            }
+                        }
+
+                        MaestroService.getProvinciasByCodigo($scope.ubigeo.departamento.codigo).then(function (data) {
+                            $scope.provincias = data;
+                            for (var i = 0; i < $scope.provincias.length; i++) {
+                                if ($scope.provincias[i].codigo === ngModel[1].$modelValue.substring(2, 4)) {
+                                    $scope.ubigeo.provincia = $scope.provincias[i];
+                                    break;
+                                }
+                            }
+
+                            MaestroService.getDistritosByCodigo($scope.ubigeo.departamento.codigo, $scope.ubigeo.provincia.codigo).then(function (data) {
+                                $scope.distritos = data;
+                                for (var i = 0; i < $scope.distritos.length; i++) {
+                                    if ($scope.distritos[i].codigo === ngModel[1].$modelValue.substring(4, 6)) {
+                                        $scope.ubigeo.distrito = $scope.distritos[i];
+                                        break;
+                                    }
+                                }
+                            });
+                        });
+
+                        listener();
+                    } else {
+                        listener();
+                    }
+                });
+            };
+        },
+        scope: {
+            requerido: '@',
+            formLayout: '@'
+        },
+        template: resolveSgUbigeoTemplate // jshint ignore:line
+    };
+}]);

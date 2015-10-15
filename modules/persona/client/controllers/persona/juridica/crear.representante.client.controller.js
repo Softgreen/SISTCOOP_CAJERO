@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('persona').controller('Persona.Juridica.CrearPersonaJuridica.RepresentanteController',
-    function ($scope, $state, toastr, SGTipoDocumento, SGPersonaNatural) {
+    function ($scope, $state, toastr, MaestroService, PersonaNaturalService) {
 
         $scope.verificarDatos = function () {
             if (!$scope.view.persona.razonSocial) {
@@ -23,8 +23,8 @@ angular.module('persona').controller('Persona.Juridica.CrearPersonaJuridica.Repr
         };
 
         $scope.loadCombo = function () {
-            SGTipoDocumento.$search({tipoPersona: 'natural'}).then(function (response) {
-                $scope.combo.tipoDocumento = response.items;
+            PersonaNaturalService.getTipoDocumentos().then(function (response) {
+                $scope.combo.tipoDocumento = response;
             });
         };
         $scope.loadCombo();
@@ -34,13 +34,10 @@ angular.module('persona').controller('Persona.Juridica.CrearPersonaJuridica.Repr
                 $event.preventDefault();
             }
             if ($scope.combo.selected.tipoDocumento && $scope.view.representante.numeroDocumento) {
-                SGPersonaNatural.$search({
-                    tipoDocumento: $scope.combo.selected.tipoDocumento.abreviatura,
-                    numeroDocumento: $scope.view.representante.numeroDocumento
-                }).then(function (response) {
-                    if (response.items.length) {
-                        $scope.view.representante = response.items[0];
-                        $scope.$parent.view.persona.representanteLegal = response.items[0];
+                PersonaNaturalService.findByTipoNumeroDocumento($scope.combo.selected.tipoDocumento.id, $scope.view.representante.numeroDocumento).then(function (response) {
+                    if (response) {
+                        $scope.view.representante = response;
+                        $scope.$parent.view.persona.idRepresentanteLegal = response.id;
                         toastr.info('Persona encontrada');
                     } else {
                         toastr.warning('Persona no encontrada');

@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('persona').controller('Persona.Juridica.BuscarPersonaJuridicaController',
-    function ($scope, $state, SGPersonaJuridica) {
+    function ($scope, $state, PersonaJuridicaService) {
 
         var paginationOptions = {
             page: 1,
@@ -25,11 +25,12 @@ angular.module('persona').controller('Persona.Juridica.BuscarPersonaJuridicaCont
             useExternalSorting: true,
 
             columnDefs: [
-                {field: 'tipoDocumento', displayName: 'Documento'},
-                {field: 'numeroDocumento', displayName: 'Numero'},
-                {field: 'razonSocial', displayName: 'Razon social'},
-                {field: 'nombreComercial', displayName: 'Nombre comercial'},
-                {field: 'tipoEmpresa', displayName: 'Tipo Empresa'},
+                {field: 'tipoDocumento.abreviatura', displayName: 'TIPO DOC.', width: '10%'},
+                {field: 'numeroDocumento', displayName: 'NUM. DOCUMENTO', width: '15%'},
+                {field: 'razonSocial', displayName: 'RAZON SOCIAL', width: '20%'},
+                {field: 'nombreComercial', displayName: 'N.COMERCIAL', width: '20%'},
+                {field: 'tipoEmpresa', displayName: 'TIPO EMPRESA', width: '10%'},
+                {field: "fechaConstitucion", displayName: 'F. CONSTITUCION', cellFilter: "date:'dd/MM/yyyy'", width: '15%'},
                 {
                     name: 'edit',
                     displayName: 'Edit',
@@ -61,9 +62,15 @@ angular.module('persona').controller('Persona.Juridica.BuscarPersonaJuridicaCont
         };
 
         $scope.search = function () {
-            SGPersonaJuridica.$search(angular.extend($scope.filterOptions, paginationOptions)).then(function(response){
-                $scope.gridOptions.data = response.items;
-                $scope.gridOptions.totalItems = response.totalSize;
+            var ft = $scope.filterOptions.filterText;
+            var desde = (paginationOptions.page * paginationOptions.pageSize) - paginationOptions.pageSize;
+            var hasta = paginationOptions.pageSize;
+
+            PersonaJuridicaService.findByFilterText(ft, desde, hasta).then(function (response) {
+                $scope.gridOptions.data = response;
+            });
+            PersonaJuridicaService.count(ft).then(function (response) {
+                $scope.gridOptions.totalItems = response;
             });
         };
 

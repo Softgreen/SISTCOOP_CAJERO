@@ -2,12 +2,12 @@
 
 /* jshint -W098 */
 angular.module('persona').controller('Persona.Juridica.CrearPersonaJuridicaController',
-    function ($scope, $state, $stateParams, toastr, SGTipoEmpresa, SGTipoDocumento, SGCountryCode, SGPersonaJuridica) {
+    function ($scope, $state, $stateParams, toastr, MaestroService, PersonaNaturalService, PersonaJuridicaService) {
 
         $scope.working = false;
 
         $scope.view = {
-            persona: SGPersonaJuridica.$build()
+            persona: {}
         };
 
         $scope.loadParams = function () {
@@ -16,38 +16,25 @@ angular.module('persona').controller('Persona.Juridica.CrearPersonaJuridicaContr
         };
         $scope.loadParams();
 
-        $scope.loadDefaultConfiguration = function () {
-            $scope.view.persona.codigoPais = 'PER';
-        };
-        $scope.loadDefaultConfiguration();
-
         $scope.save = function () {
 
-            if (!$scope.view.persona.representanteLegal || !$scope.view.persona.representanteLegal.id) {
+            if (!$scope.view.persona.idRepresentanteLegal) {
                 toastr.warning('Representante legal no definido.');
                 return;
             }
 
-            SGPersonaJuridica.$search({
-                tipoDocumento: $scope.view.persona.tipoDocumento,
-                numeroDocumento: $scope.view.persona.numeroDocumento
-            }).then(function (response) {
-                if (!response.items.length) {
-                    $scope.view.persona.representanteLegal = {
-                        tipoDocumento: $scope.view.persona.representanteLegal.tipoDocumento,
-                        numeroDocumento: $scope.view.persona.representanteLegal.numeroDocumento
-                    };
-
+            PersonaJuridicaService.findByTipoNumeroDocumento($scope.view.persona.tipoDocumento.id, $scope.view.persona.numeroDocumento).then(function (response) {
+                if (!response) {
                     $scope.working = true;
 
-                    $scope.view.persona.$save().then(
+                    PersonaJuridicaService.crear($scope.view.persona).then(
                         function (response) {
                             toastr.success('Persona creada');
                             $scope.working = false;
                             $state.go('^.^.editar', {personaJuridica: response.id});
                         },
                         function error(err) {
-                            toastr.error(err.data.errorMessage);
+                            toastr.error(err.data.message);
                         }
                     );
                 } else {

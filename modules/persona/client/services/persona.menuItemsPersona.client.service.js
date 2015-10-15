@@ -89,8 +89,8 @@ angular.module('persona').service('$menuItemsPersona', ['Auth',
             personas.addItem('Naturales', 'persona.app.persona.natural');
             personas.addItem('Juridicas', 'persona.app.persona.juridica');
 
-            var administracion = this.addItem('Administracion', '');
-            administracion.addItem('Tipo documento', 'persona.app.administracion.documento');
+            //var administracion = this.addItem('Administracion', '');
+            //administracion.addItem('Tipo documento', 'persona.app.administracion.documento');
 
             return this;
         };

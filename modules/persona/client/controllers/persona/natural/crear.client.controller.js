@@ -66,7 +66,10 @@ angular.module('persona').controller('Persona.Natural.CrearPersonaNaturalControl
         $scope.save = function () {
             var save = function () {
                 $scope.view.persona.codigoPais = $scope.combo.selected.pais.abreviatura;
-                $scope.view.persona.tipoDocumento = {id: $scope.combo.selected.tipoDocumento.id};
+                $scope.view.persona.tipoDocumento = {
+                    id: $scope.combo.selected.tipoDocumento.id,
+                    abreviatura: $scope.combo.selected.tipoDocumento.abreviatura
+                };
                 $scope.view.persona.sexo = $scope.combo.selected.sexo;
                 $scope.view.persona.estadoCivil = $scope.combo.selected.estadoCivil;
                 $scope.working = true;

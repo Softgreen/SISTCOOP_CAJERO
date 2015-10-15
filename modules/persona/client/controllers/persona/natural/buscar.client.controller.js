@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('persona').controller('Persona.Natural.BuscarPersonaNaturalController',
-    function ($scope, $state, SGPersonaNatural) {
+    function ($scope, $state, PersonaNaturalService) {
 
         var paginationOptions = {
             page: 1,
@@ -25,12 +25,13 @@ angular.module('persona').controller('Persona.Natural.BuscarPersonaNaturalContro
             useExternalSorting: true,
 
             columnDefs: [
-                {field: 'tipoDocumento', displayName: 'Documento'},
-                {field: 'numeroDocumento', displayName: 'Numero'},
-                {field: 'apellidoPaterno', displayName: 'Ap.paterno'},
-                {field: 'apellidoMaterno', displayName: 'Ap.materno'},
-                {field: 'nombres', displayName: 'Nombres'},
-                {field: 'sexo', displayName: 'Sexo'},
+                {field: 'tipoDocumento.abreviatura', displayName: 'TIPO DOC.', width: '10%'},
+                {field: 'numeroDocumento', displayName: 'NUM. DOC.', width: '10%'},
+                {field: 'apellidoPaterno', displayName: 'AP. PATERNO', width: '17%'},
+                {field: 'apellidoMaterno', displayName: 'AP. MATERNO', width: '17%'},
+                {field: 'nombres', displayName: 'NOMBRES', width: '17%'},
+                {field: 'sexo', displayName: 'SEXO', width: '10%'},
+                {field: "fechaNacimiento", displayName: 'F. NACIMIENTO', cellFilter: "date:'dd/MM/yyyy'", width: '10%'},
                 {
                     name: 'edit',
                     displayName: 'Edit',
@@ -38,7 +39,7 @@ angular.module('persona').controller('Persona.Natural.BuscarPersonaNaturalContro
                     '<div style="text-align: center; padding-top: 5px;">' +
                     '<button type="button" ng-click="grid.appScope.gridActions.edit(row.entity)" class="btn btn-info btn-xs">' +
                     '<i class="pficon pficon-edit"></i>' +
-                    '<span>&nbsp;Editar</span>'+
+                    '<span>&nbsp;Editar</span>' +
                     '</button>' +
                     '</div>'
                 }
@@ -62,10 +63,17 @@ angular.module('persona').controller('Persona.Natural.BuscarPersonaNaturalContro
         };
 
         $scope.search = function () {
-            SGPersonaNatural.$search(angular.extend($scope.filterOptions, paginationOptions)).then(function(response){
-                $scope.gridOptions.data = response.items;
-                $scope.gridOptions.totalItems = response.totalSize;
+            var ft = $scope.filterOptions.filterText;
+            var desde = (paginationOptions.page * paginationOptions.pageSize) - paginationOptions.pageSize;
+            var hasta = paginationOptions.pageSize;
+
+            PersonaNaturalService.findByFilterText(ft, desde, hasta).then(function (response) {
+                $scope.gridOptions.data = response;
+            });
+            PersonaNaturalService.count(ft).then(function (response) {
+                $scope.gridOptions.totalItems = response;
             });
         };
+
 
     });

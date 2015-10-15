@@ -8,8 +8,7 @@ angular.module('usuario').config(['$stateProvider', '$urlRouterProvider',
             .state('usuario', {
                 abstract: true,
                 url: '/usuario',
-                templateUrl: 'modules/usuario/client/views/_body.html',
-                controller: 'UsuarioController'
+                templateUrl: 'modules/usuario/client/views/_body.html'
             })
             .state('usuario.home', {
                 url: '/home',
@@ -22,9 +21,7 @@ angular.module('usuario').config(['$stateProvider', '$urlRouterProvider',
             .state('usuario.app', {
                 url: '/app',
                 template: '<div ui-view></div>',
-                ncyBreadcrumb: {
-                    skip: true // Never display this state in breadcrumb.
-                }
+                controller: 'Usuario.BuscarUsuarioController'
             });
     }
 ]);

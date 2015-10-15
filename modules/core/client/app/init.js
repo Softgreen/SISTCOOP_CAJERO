@@ -220,6 +220,37 @@ angular.module('mean').config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');
 });
 
+angular.module('mean').factory('SGUsuarioKeycloak', ['Restangular', 'REALM', function (Restangular, REALM) {
+
+    var url = REALM.authServerUrl + '/users';
+
+    var modelMethos = {
+        $find: function (id) {
+            return Restangular.one(url, id).get();
+        },
+        $search: function (queryParams) {
+            return Restangular.all(url).getList(queryParams);
+        },
+        $roleMappings: function (username) {
+            return Restangular.one(url + '/' + username + '/role-mappings').get();
+        },
+        $realmRoles: function (username) {
+            return Restangular.one(url + '/' + username + '/role-mappings/realm').get();
+        },
+
+        $getRealmLevelRoles: function () {
+            return Restangular.all('roles').getList();
+        },
+        $getCreateRealmUserUrl: function () {
+            return REALM.authServerUrl + '/admin/' + REALM.name + '/console/#/create/user/' + REALM.name;
+        }
+
+    };
+
+    return modelMethos;
+
+}]);
+
 angular.module('mean').config(['RestangularProvider',
     function (RestangularProvider) {
         //RestangularProvider.setBaseUrl('http://localhost:8080/SistCoopREST/rest');

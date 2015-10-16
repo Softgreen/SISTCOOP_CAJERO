@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('rrhh').controller('Rrhh.Sucursal.Agencia.EditarAgenciaController',
-    function ($scope, $state, sucursal, agencia, toastr) {
+    function ($scope, $state, sucursal, agencia, toastr, SucursalService) {
 
         $scope.working = false;
 
@@ -13,16 +13,16 @@ angular.module('rrhh').controller('Rrhh.Sucursal.Agencia.EditarAgenciaController
 
         $scope.save = function () {
             $scope.working = true;
-            $scope.view.agencia.$save().then(
+
+            SucursalService.actualizarAgencia($scope.view.sucursal.id, $scope.view.agencia.id, $scope.view.agencia).then(
                 function (response) {
                     toastr.success('Agencia actualizada');
                     $scope.working = false;
                 },
                 function error(err) {
-                    toastr.error(err.data.errorMessage);
+                    toastr.error(err.data.message);
                 }
             );
-
         };
 
     });

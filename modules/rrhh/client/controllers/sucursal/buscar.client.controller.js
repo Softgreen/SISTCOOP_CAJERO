@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('rrhh').controller('Rrhh.Sucursal.BuscarSucursalController',
-    function ($scope, $state, SGSucursal) {
+    function ($scope, $state, SucursalService) {
 
         var paginationOptions = {
             page: 1,
@@ -25,7 +25,8 @@ angular.module('rrhh').controller('Rrhh.Sucursal.BuscarSucursalController',
             useExternalSorting: true,
 
             columnDefs: [
-                {field: 'denominacion', displayName: 'Denominacion', width: '90%'},
+                {field: 'denominacion', displayName: 'DENOMINACION', width: '70%'},
+                {field: 'abreviatura', displayName: 'ABREVIATURA', width: '20%'},
                 {
                     name: 'edit',
                     displayName: 'Edit',
@@ -58,9 +59,15 @@ angular.module('rrhh').controller('Rrhh.Sucursal.BuscarSucursalController',
         };
 
         $scope.search = function () {
-            SGSucursal.$search(angular.extend($scope.filterOptions, paginationOptions)).then(function (response) {
-                $scope.gridOptions.data = response.items;
-                $scope.gridOptions.totalItems = response.totalSize;
+            var ft = $scope.filterOptions.filterText;
+            var desde = (paginationOptions.page * paginationOptions.pageSize) - paginationOptions.pageSize;
+            var hasta = paginationOptions.pageSize;
+
+            SucursalService.findByFilterText(ft, desde, hasta).then(function (response) {
+                $scope.gridOptions.data = response;
+            });
+            SucursalService.count(ft).then(function (response) {
+                $scope.gridOptions.totalItems = response;
             });
         };
 

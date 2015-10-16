@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('rrhh').controller('Rrhh.Sucursal.EditarSucursal.DatosPrincipalesController',
-    function ($state, $scope, toastr, sucursal) {
+    function ($state, $scope, toastr, sucursal, SucursalService) {
 
         $scope.working = false;
 
@@ -12,13 +12,14 @@ angular.module('rrhh').controller('Rrhh.Sucursal.EditarSucursal.DatosPrincipales
 
         $scope.save = function () {
             $scope.working = true;
-            $scope.view.sucursal.$save().then(
+
+            SucursalService.actualizar($scope.view.sucursal.id, $scope.view.sucursal).then(
                 function (response) {
                     $scope.working = false;
                     toastr.success('Sucursal actualizada');
                 },
                 function error(err) {
-                    toastr.error(err.data.errorMessage);
+                    toastr.error(err.data.message);
                 }
             );
 

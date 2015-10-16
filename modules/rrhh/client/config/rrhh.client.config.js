@@ -5,7 +5,7 @@ angular.module('rrhh').run(['Menus',
     function (Menus) {
         // Set top bar menu items
         Menus.addMenuItem('topbar', {
-            title: 'Rrhh',
+            title: 'Sucursal/Trabajador',
             state: 'rrhh.app'
         });
     }

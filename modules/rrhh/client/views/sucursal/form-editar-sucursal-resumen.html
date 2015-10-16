@@ -7,6 +7,8 @@
                     <dl class="dl-horizontal left">
                         <dt>Denominacion:</dt>
                         <dd data-ng-bind="view.sucursal.denominacion"></dd>
+                        <dt>Abreviatura:</dt>
+                        <dd data-ng-bind="view.sucursal.abreviatura"></dd>
                     </dl>
                 </fieldset>
             </div>
@@ -22,9 +24,10 @@
                         <caption ng-show="!loadObjects.agencias.length">No se encontraron agencias.</caption>
                         <thead ng-show="loadObjects.agencias.length">
                         <tr>
-                            <th width="10%">#</th>
+                            <th>#</th>
                             <th>Denominacion</th>
-                            <th width="20%">Ubigeo</th>
+                            <th>Abreviatura</th>
+                            <th>Codigo</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -34,7 +37,10 @@
                                 <span ng-bind="item.denominacion"></span>
                             </td>
                             <td>
-                                <span ng-bind="item.ubigeo"></span>
+                              <span ng-bind="item.abreviatura"></span>
+                            </td>
+                            <td>
+                                <span ng-bind="item.codigo"></span>
                             </td>
                         </tr>
                         </tbody>

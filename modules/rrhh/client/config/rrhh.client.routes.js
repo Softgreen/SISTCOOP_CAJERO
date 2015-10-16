@@ -103,8 +103,8 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/editar/:sucursal',
                 templateUrl: 'modules/rrhh/client/views/sucursal/form-editar-sucursal.html',
                 resolve: {
-                    sucursal: function ($state, $stateParams, SGSucursal) {
-                        return SGSucursal.$find($stateParams.sucursal);
+                    sucursal: function ($state, $stateParams, SucursalService) {
+                        return SucursalService.findById($stateParams.sucursal);
                     }
                 },
                 controller: 'Rrhh.Sucursal.EditarSucursalController',
@@ -164,8 +164,8 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 templateUrl: 'modules/rrhh/client/views/sucursal/agencia/form-editar-agencia-datosPrincipales.html',
                 controller: 'Rrhh.Sucursal.Agencia.EditarAgenciaController',
                 resolve: {
-                    agencia: function ($state, $stateParams, sucursal, SGSucursal) {
-                        return sucursal.SGAgencia().$find($stateParams.agencia);
+                    agencia: function ($state, $stateParams, sucursal, AgenciaService) {
+                        return AgenciaService.findById($stateParams.agencia);
                     }
                 },
                 ncyBreadcrumb: {

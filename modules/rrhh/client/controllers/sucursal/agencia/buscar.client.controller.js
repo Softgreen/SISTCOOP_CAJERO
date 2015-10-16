@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('rrhh').controller('Rrhh.Sucursal.Agencia.BuscarAgenciaController',
-    function ($scope, $state, toastr, sucursal, SGDialog) {
+    function ($scope, $state, toastr, sucursal, SGDialog, SucursalService) {
 
         $scope.view = {
             sucursal: sucursal
@@ -13,8 +13,8 @@ angular.module('rrhh').controller('Rrhh.Sucursal.Agencia.BuscarAgenciaController
         };
 
         $scope.loadAgencias = function () {
-            $scope.view.sucursal.SGAgencia().$search().then(function (response) {
-                $scope.loadObjects.agencias = response.items;
+            SucursalService.getAgencias($scope.view.sucursal.id).then(function (response) {
+                $scope.loadObjects.agencias = response;
             });
         };
         $scope.loadAgencias();

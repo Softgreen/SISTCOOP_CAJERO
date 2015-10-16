@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('rrhh').controller('Rrhh.Trabajador.EditarTrabajador.AccesoSistemaController',
-    function ($scope, $window, toastr, trabajador, SGDialog, SGTrabajador, SGUsuarioKeycloak) {
+    function ($scope, $window, toastr, trabajador, SGDialog, TrabajadorService, SGUsuarioKeycloak) {
 
         $scope.working = false;
 

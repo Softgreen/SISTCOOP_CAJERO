@@ -3,7 +3,7 @@
 /* jshint -W098 */
 
 angular.module('rrhh').controller('Rrhh.Trabajador.EditarTrabajador.ResumenController',
-    function ($scope, trabajador, SGPersonaNatural, SGUsuarioKeycloak) {
+    function ($scope, trabajador, PersonaNaturalService, SGUsuarioKeycloak) {
 
         $scope.view = {
             trabajador: trabajador
@@ -17,11 +17,8 @@ angular.module('rrhh').controller('Rrhh.Trabajador.EditarTrabajador.ResumenContr
         };
 
         $scope.loadPersona = function () {
-            SGPersonaNatural.$search({
-                documento: $scope.view.trabajador.tipoDocumento,
-                numero: $scope.view.trabajador.numeroDocumento
-            }).then(function (response) {
-                $scope.view.loaded.persona = response.items[0];
+            PersonaNaturalService.findByTipoNumeroDocumento($scope.view.trabajador.idTipoDocumento, $scope.view.trabajador.numeroDocumento).then(function (response) {
+                $scope.view.loaded.persona = response;
             });
         };
         $scope.loadPersona();

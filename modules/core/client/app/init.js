@@ -220,26 +220,54 @@ angular.module('mean').config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');
 });
 
-angular.module('mean').factory('SGUsuarioKeycloak', ['Restangular', 'REALM', function (Restangular, REALM) {
+angular.module('mean').provider('sgKeycloak', function () {
 
-    var url = REALM.authServerUrl + '/users';
+    this.restUrl = 'http://localhost';
+
+    this.$get = function () {
+        var restUrl = this.restUrl;
+        return {
+            getRestUrl: function () {
+                return restUrl;
+            }
+        };
+    };
+
+    this.setRestUrl = function (restUrl) {
+        this.restUrl = restUrl;
+    };
+});
+
+angular.module('mean').factory('KeycloakRestangular', ['Restangular', 'sgKeycloak', function (Restangular, sgKeycloak) {
+    return Restangular.withConfig(function (RestangularConfigurer) {
+        RestangularConfigurer.setBaseUrl(sgKeycloak.getRestUrl());
+    });
+}]);
+
+angular.module('mean').config(function ($provide, sgKeycloakProvider, REALM) {
+    sgKeycloakProvider.restUrl = REALM.authServerUrl + '/admin/realms/' + REALM.name;
+});
+
+angular.module('mean').factory('SGUsuarioKeycloak', ['KeycloakRestangular', 'REALM', function (KeycloakRestangular, REALM) {
+
+    var url = 'users';
 
     var modelMethos = {
         $find: function (id) {
-            return Restangular.one(url, id).get();
+            return KeycloakRestangular.one(url, id).get();
         },
         $search: function (queryParams) {
-            return Restangular.all(url).getList(queryParams);
+            return KeycloakRestangular.all(url).getList(queryParams);
         },
         $roleMappings: function (username) {
-            return Restangular.one(url + '/' + username + '/role-mappings').get();
+            return KeycloakRestangular.one(url + '/' + username + '/role-mappings').get();
         },
         $realmRoles: function (username) {
-            return Restangular.one(url + '/' + username + '/role-mappings/realm').get();
+            return KeycloakRestangular.one(url + '/' + username + '/role-mappings/realm').get();
         },
 
         $getRealmLevelRoles: function () {
-            return Restangular.all('roles').getList();
+            return KeycloakRestangular.all('roles').getList();
         },
         $getCreateRealmUserUrl: function () {
             return REALM.authServerUrl + '/admin/' + REALM.name + '/console/#/create/user/' + REALM.name;

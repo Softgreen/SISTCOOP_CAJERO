@@ -205,20 +205,8 @@ angular.module('persona').config(['$stateProvider', '$urlRouterProvider',
                 url: '/editar/:trabajador',
                 templateUrl: 'modules/rrhh/client/views/trabajador/form-editar-trabajador.html',
                 resolve: {
-                    trabajador: function ($state, $stateParams, SGTrabajador, $q, $timeout, $http, $location, Auth) {
-                        if (Auth.authz.hasResourceRole('administrar-trabajadores', moduleName)) {
-                            return SGTrabajador.$find($stateParams.trabajador);
-                        } else if (Auth.authz.hasResourceRole('administrar-trabajadores-agencia', moduleName)) {
-                            var deferred = $q.defer();
-                            SGTrabajador.$find($stateParams.trabajador).then(function (response) {
-                                if (Auth.sistcoop.agencia === response.agencia.denominacion && Auth.sistcoop.sucursal === response.agencia.sucursal.denominacion) {
-                                    $timeout(deferred.resolve(response));
-                                } else {
-                                    $timeout(deferred.reject);
-                                }
-                            });
-                            return deferred.promise;
-                        }
+                    trabajador: function ($state, $stateParams, TrabajadorService) {
+                        return TrabajadorService.findById($stateParams.trabajador);
                     }
                 },
                 controller: 'Rrhh.Trabajador.EditarTrabajadorController',

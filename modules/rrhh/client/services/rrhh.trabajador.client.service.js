@@ -20,6 +20,10 @@ angular.module('rrhh').factory('TrabajadorService', ['Restangular',
             },
             desactivar: function (idTrabajador) {
                 return Restangular.one(baseUrl + '/' + idTrabajador + '/desactivar').post();
+            },
+
+            findById: function (idSucursal) {
+                return Restangular.one(baseUrl + '/' + idSucursal).get();
             }
         };
 

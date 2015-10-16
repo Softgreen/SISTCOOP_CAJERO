@@ -2,8 +2,7 @@
 
 <h1><strong>Crear trabajador</strong></h1>
 
-<form name="form" sg-read-only="!(access.administrarTrabajadores || access.administrarTrabajadoresAgencia)" class="form-horizontal"
-      novalidate>
+<form name="form" class="form-horizontal" novalidate>
 
     <fieldset class="border-top">
         <legend><span class="text ng-scope">Lugar de trabajo <i class="fa fa-question-circle text-muted ng-scope"
@@ -13,9 +12,7 @@
             <label class="col-sm-2 control-label"><span class="required">*</span> Sucursal:</label>
 
             <div class="col-sm-3">
-                <ui-select name="sucursal" ng-model="combo.selected.sucursal"
-                           ng-disabled="!(access.administrarTrabajadores || access.administrarTrabajadoresAgencia)" pf-focused="true"
-                           autofocus required>
+                <ui-select name="sucursal" ng-model="combo.selected.sucursal" pf-focused="true" autofocus required>
                     <ui-select-match placeholder="Sucursal">{{$select.selected.denominacion}}</ui-select-match>
                     <ui-select-choices repeat="item in combo.sucursal | filter: $select.search">
                         <div ng-bind-html="item.denominacion | highlight: $select.search"></div>
@@ -30,8 +27,7 @@
             <label class="col-sm-2 control-label"><span class="required">*</span> Agencia:</label>
 
             <div class="col-sm-3">
-                <ui-select name="agencia" ng-model="combo.selected.agencia"
-                           ng-disabled="!(access.administrarTrabajadores || access.administrarTrabajadoresAgencia)" required>
+                <ui-select name="agencia" ng-model="combo.selected.agencia" required>
                     <ui-select-match placeholder="Agencia">{{$select.selected.denominacion}}</ui-select-match>
                     <ui-select-choices repeat="item in combo.agencia | filter: $select.search">
                         <div ng-bind-html="item.denominacion | highlight: $select.search"></div>
@@ -53,8 +49,7 @@
             <label class="col-sm-2 control-label"><span class="required">*</span> Persona:</label>
 
             <div class="col-sm-3">
-                <ui-select name="tipoDocumento" data-ng-model="combo.selected.tipoDocumento"
-                           ng-disabled="!(access.administrarTrabajadores || access.administrarTrabajadoresAgencia)" required>
+                <ui-select name="tipoDocumento" data-ng-model="combo.selected.tipoDocumento" required>
                     <ui-select-match placeholder="Documento">{{$select.selected.abreviatura}}</ui-select-match>
                     <ui-select-choices repeat="item in combo.tipoDocumento | filter: $select.search">
                         <div data-ng-bind-html="item.abreviatura | highlight: $select.search"></div>
@@ -107,7 +102,7 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><span data-ng-bind="view.loaded.persona.tipoDocumento"></span></td>
+                        <td><span data-ng-bind="view.loaded.persona.tipoDocumento.abreviatura"></span></td>
                         <td><span data-ng-bind="view.loaded.persona.numeroDocumento"></span></td>
                         <td><span data-ng-bind="view.loaded.persona.apellidoPaterno"></span></td>
                         <td><span data-ng-bind="view.loaded.persona.apellidoMaterno"></span></td>

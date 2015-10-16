@@ -2,24 +2,23 @@
 
 /* jshint -W098 */
 angular.module('rrhh').controller('Rrhh.Trabajador.BuscarTrabajadorController',
-    function ($scope, $state, SUCURSAL, AGENCIA, SGSucursal, SGTrabajador, SGPersonaNatural) {
+    function ($scope, $state, TrabajadorService, SucursalService) {
 
         $scope.combo = {
             sucursal: undefined,
             agencia: undefined
         };
         $scope.combo.selected = {
-            sucursal: SUCURSAL ? SUCURSAL : undefined,
-            agencia: AGENCIA ? AGENCIA : undefined
+            sucursal: undefined,
+            agencia: undefined
         };
 
         $scope.loadCombo = function () {
-            SGSucursal.$getAll().then(function (response1) {
+            SucursalService.getSucursales().then(function (response1) {
                 $scope.combo.sucursal = response1;
-
                 $scope.$watch('combo.selected.sucursal', function () {
                     if (angular.isDefined($scope.combo.selected.sucursal)) {
-                        SGSucursal.$new($scope.combo.selected.sucursal.id).SGAgencia().$getAll().then(function (response2) {
+                        SucursalService.getAgencias($scope.combo.selected.sucursal.id).then(function (response2) {
                             $scope.combo.agencia = response2;
                         });
                     }
@@ -51,11 +50,14 @@ angular.module('rrhh').controller('Rrhh.Trabajador.BuscarTrabajadorController',
             useExternalSorting: true,
 
             columnDefs: [
-                {field: 'tipoDocumento', displayName: 'T.documento'},
-                {field: 'numeroDocumento', displayName: 'Num.documento'},
-                {field: 'persona.apellidoPaterno', displayName: 'A.Paterno'},
-                {field: 'persona.apellidoMaterno', displayName: 'A.Materno'},
-                {field: 'persona.nombres', displayName: 'Nombres'},
+                { field: 'personaNatural.tipoDocumento.abreviatura', displayName: 'TIPO DOC.'},
+                { field: 'personaNatural.numeroDocumento', displayName: 'NUM. DOC.'},
+                { field: 'personaNatural.apellidoPaterno', displayName: 'AP. PATERNO'},
+                { field: 'personaNatural.apellidoMaterno', displayName: 'AP. MATERNO'},
+                { field: 'personaNatural.nombres', displayName: 'NOMBRES'},
+                { field: 'usuario', displayName: 'USUARIO', width:110},
+                { field: 'agencia.abreviatura', displayName: 'AGENCIA'},
+                { field: 'estado', displayName: 'ESTADO', cellFilter: 'si_no: "ACTIVO"'},
                 {
                     name: 'edit',
                     displayName: 'Edit',
@@ -88,16 +90,8 @@ angular.module('rrhh').controller('Rrhh.Trabajador.BuscarTrabajadorController',
         };
 
         $scope.search = function () {
-            $scope.filterOptions.idSucursal = $scope.combo.selected.sucursal ? $scope.combo.selected.sucursal.id : undefined;
-            $scope.filterOptions.idAgencia = $scope.combo.selected.agencia ? $scope.combo.selected.agencia.id : undefined;
-            SGTrabajador.$search(angular.extend($scope.filterOptions, paginationOptions)).then(function (response1) {
-                $scope.gridOptions.data = response1.items;
-                $scope.gridOptions.totalItems = response1.totalSize;
-                angular.forEach($scope.gridOptions.data, function (row) {
-                    SGPersonaNatural.$search({tipoDocumento: row.tipoDocumento, numeroDocumento: row.numeroDocumento}).then(function (response2) {
-                        row.persona = response2.items[0];
-                    });
-                });
+            TrabajadorService.getTrabajadores($scope.combo.selected.agencia.id, $scope.filterOptions.filterText).then(function (response) {
+                $scope.gridOptions.data = response;
             });
         };
 

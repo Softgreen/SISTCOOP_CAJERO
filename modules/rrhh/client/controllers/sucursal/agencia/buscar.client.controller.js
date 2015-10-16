@@ -25,13 +25,12 @@ angular.module('rrhh').controller('Rrhh.Sucursal.Agencia.BuscarAgenciaController
 
         $scope.remove = function (row) {
             SGDialog.confirmDelete(row.denominacion, 'agencia', function () {
-                row.$remove().then(
-                    function (response) {
+                SucursalService.desactivarAgencia($scope.view.sucursal.id, row.id).then(
+                    function(response){
                         toastr.success('Agencia eliminada');
                         $scope.loadAgencias();
-                    },
-                    function error(err) {
-                        toastr.error(err.data.errorMessage);
+                    }, function error(err){
+                        toastr.error(err.data.message);
                     }
                 );
             });

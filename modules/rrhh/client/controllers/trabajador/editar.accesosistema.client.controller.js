@@ -32,7 +32,7 @@ angular.module('rrhh').controller('Rrhh.Trabajador.EditarTrabajador.AccesoSistem
 
         $scope.save = function () {
 
-            SGUsuarioKeycloak.$search({username: $scope.view.usuario, max: 1}).then(function (response1) {
+            /*SGUsuarioKeycloak.$search({username: $scope.view.usuario, max: 1}).then(function (response1) {
                 if (response1.length) {
                     SGTrabajador.$search({usuario: $scope.view.usuario}).then(function (response2) {
                         if (!response2.items.length) {
@@ -56,7 +56,7 @@ angular.module('rrhh').controller('Rrhh.Trabajador.EditarTrabajador.AccesoSistem
                 } else {
                     toastr.warning('Usuario no encontrado en Keycloak');
                 }
-            });
+            });*/
 
         };
 

@@ -5,14 +5,21 @@
 
   <div class="pull-right">
     <div class="btn-group">
-      <form name="form" data-ng-submit="remove()" novalidate>
-        <!--
-        <button sg-delete>
-          <i class="pficon pficon-delete"></i>
-          <span>Eliminar</span>
-        </button>
-        -->
-      </form>
+      <button type="button" ng-if="view.cuentaPersonal.tipoCuenta == 'RECAUDADORA'" ng-click="addChequera()" class="btn btn-default">A&#241;adir Chequera</button>
+    </div>
+    <div class="btn-group">
+      <button type="button" ng-if="view.cuentaPersonal.tipoCuenta == 'PLAZO_FIJO'" ng-click="renovarPlazoFijo()" class="btn btn-default">Renovar plazo fijo</button>
+      <button type="button" ng-if="view.cuentaPersonal.tipoCuenta == 'PLAZO_FIJO'" ng-click="recalcularPlazoFijo()" class="btn btn-default">Recalcular plazo fijo</button>
+    </div>
+    <div class="btn-group">
+      <button type="button" data-ng-if="view.cuentaPersonal.estadoCuenta == 'ACTIVO' || view.cuentaPersonal.estadoCuenta == 'CONGELADO'" data-ng-click="congelar()" class="btn btn-default">Congelar</button>
+      <button type="button" data-ng-if="view.cuentaPersonal.estadoCuenta == 'CONGELADO'" data-ng-click="descongelar()" class="btn btn-default">Descongelar</button>
+    </div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-danger">
+        <i class="pficon pficon-delete"></i>
+        <span>Cancelar</span>
+      </button>
     </div>
   </div>
 </h1>
@@ -28,16 +35,14 @@
               Resumen
             </a>
           </li>
-          <!--
           <li ui-sref-active="active">
-            <a href ui-sref=".cuentaAporte">
-              Cuenta aporte
+            <a href ui-sref=".titular">
+              Titulares
             </a>
           </li>
-          -->
           <li ui-sref-active="active">
-            <a href ui-sref=".cuentaPersonal">
-              Cuentas personales
+            <a href ui-sref=".beneficiario">
+              Beneficiarios
             </a>
           </li>
         </ul>

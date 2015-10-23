@@ -1,0 +1,19 @@
+<table class="table table-striped table-bordered table-condensed">
+  <caption data-ng-show="!view.load.titulares.length">No se encontraron titulares.</caption>
+  <thead data-ng-show="view.load.titulares.length">
+  <tr>
+    <th>#</th>
+    <th>Documento</th>
+    <th>Numero</th>
+    <th>Apellidos y nombres</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr data-ng-repeat="item in view.load.titulares">
+    <td><span data-ng-bind="$index+1"></span></td>
+    <td><span ng-bind="item.personaNatural.tipoDocumento.abreviatura"></span></td>
+    <td><span ng-bind="item.personaNatural.numeroDocumento"></span></td>
+    <td><span ng-bind-template="{{item.personaNatural.apellidoPaterno}} {{item.personaNatural.apellidoMaterno}}, {{item.personaNatural.nombres}}"></span></td>
+  </tr>
+  </tbody>
+</table>

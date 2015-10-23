@@ -188,6 +188,24 @@ angular.module('socio').config(['$stateProvider', '$urlRouterProvider',
                     skip: true // Never display this state in breadcrumb.
                 }
             })
+            .state('socio.app.socio.cuentaPersonal.editar.titular', {
+                url: '/titulares',
+                templateUrl: 'modules/socio/client/views/cuentaPersonal/form-editar-titulares.html',
+                controller: 'Socio.CuentaPersonal.EditarCuentaPersonal.TitularesController',
+                ncyBreadcrumb: {
+                    label: 'Titulares',
+                    parent: 'socio.app.socio.cuentaPersonal.editar.resumen'
+                }
+            })
+            .state('socio.app.socio.cuentaPersonal.editar.beneficiario', {
+                url: '/beneficiarios',
+                templateUrl: 'modules/socio/client/views/cuentaPersonal/form-editar-beneficiarios.html',
+                controller: 'Socio.CuentaPersonal.EditarCuentaPersonal.BeneficiariosController',
+                ncyBreadcrumb: {
+                    label: 'Beneficiarios',
+                    parent: 'socio.app.socio.cuentaPersonal.editar.resumen'
+                }
+            })
 
             //configuracion
             .state('socio.app.configuracion.configuracion', {

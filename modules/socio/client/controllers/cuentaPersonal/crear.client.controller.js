@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('socio').controller('Socio.CuentaPersonal.CrearCuentaPersonalController',
-    function ($scope, $state, $modal, toastr, PersonaNaturalService, PersonaJuridicaService, MonedaService, CuentaBancariaService) {
+    function ($scope, $state, $window, $modal, toastr, PersonaNaturalService, PersonaJuridicaService, MonedaService, CuentaBancariaService, SessionService) {
 
         $scope.working = false;
 
@@ -128,7 +128,7 @@ angular.module('socio').controller('Socio.CuentaPersonal.CrearCuentaPersonalCont
 
                 $scope.working = true;
 
-                if($scope.combo.tipoCuenta.valor === 'LIBRE') {
+                if ($scope.combo.tipoCuenta.valor === 'LIBRE') {
                     CuentaBancariaService.crearCuentaAhorro(cuenta).then(
                         function (response) {
                             toastr.success('Cuenta personal creada');
@@ -138,7 +138,7 @@ angular.module('socio').controller('Socio.CuentaPersonal.CrearCuentaPersonalCont
                             toastr.error(err.data.message);
                         }
                     );
-                } else if($scope.combo.tipoCuenta.valor === 'RECAUDADORA') {
+                } else if ($scope.combo.tipoCuenta.valor === 'RECAUDADORA') {
                     CuentaBancariaService.crearCuentaCorriente(cuenta).then(
                         function (response) {
                             toastr.success('Cuenta personal creada');
@@ -148,20 +148,20 @@ angular.module('socio').controller('Socio.CuentaPersonal.CrearCuentaPersonalCont
                             toastr.error(err.data.message);
                         }
                     );
-                } else if($scope.combo.tipoCuenta.valor === 'PLAZO_FIJO') {
-                    /*SessionService.crearCuentaPlazoFijo(cuenta).then(
-                        function(response){
+                } else if ($scope.combo.tipoCuenta.valor === 'PLAZO_FIJO') {
+                    SessionService.crearCuentaPlazoFijo(cuenta).then(
+                        function (response) {
                             toastr.success('Cuenta personal creada');
                             $scope.working = false;
+                            //$window.open(SGUsuarioKeycloak.$getCreateRealmUserUrl());
                             $state.go('^.editar', {cuentaPersonal: response.id});
 
                             //response.idTransaccion
                             //response.id
-                        }, function error(err){
+                        }, function error(err) {
                             toastr.error(err.data.message);
                         }
-                    );*/
-                    alert('Cuenta no implementada');
+                    );
                 } else {
                     toastr.error('Cuenta personal no valida');
                 }

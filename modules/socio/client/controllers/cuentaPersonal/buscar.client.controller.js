@@ -63,7 +63,7 @@ angular.module('socio').controller('Socio.CuentaPersonal.BuscarCuentaPersonalCon
 
         $scope.gridActions = {
             edit: function (row) {
-                $state.go('^.editar', {socio: row.id});
+                $state.go('^.editar', {cuentaPersonal: row.id});
             }
         };
 

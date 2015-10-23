@@ -34,6 +34,7 @@ angular.module('socio').config(['$stateProvider', '$urlRouterProvider',
         $urlRouterProvider.when('/socio/app/socio/socios/editar/:socio/cuentasPersonales', '/socio/app/socio/socios/editar/:socio/cuentasPersonales/buscar');
 
         $urlRouterProvider.when('/socio/app/socio/cuentasPersonales', '/socio/app/socio/cuentasPersonales/buscar');
+        $urlRouterProvider.when('/socio/app/socio/cuentasPersonales/editar/:cuentaPersonal', '/socio/app/socio/cuentasPersonales/editar/:cuentaPersonal/resumen');
 
         $stateProvider
             .state('socio', {
@@ -163,6 +164,28 @@ angular.module('socio').config(['$stateProvider', '$urlRouterProvider',
                 ncyBreadcrumb: {
                     label: 'Crear cuenta personal',
                     parent: 'socio.app.socio.cuentaPersonal.buscar'
+                }
+            })
+            .state('socio.app.socio.cuentaPersonal.editar', {
+                url: '/editar/:cuentaPersonal',
+                templateUrl: 'modules/socio/client/views/cuentaPersonal/form-editar-cuentaPersonal.html',
+                resolve: {
+                    cuentaPersonal: function ($state, $stateParams, CuentaBancariaService) {
+                        return CuentaBancariaService.findById($stateParams.cuentaPersonal);
+                    }
+                },
+                controller: 'Socio.CuentaPersonal.EditarCuentaPersonalController',
+                ncyBreadcrumb: {
+                    label: 'Editar cuenta personal',
+                    parent: 'socio.app.socio.cuentaPersonal.buscar'
+                }
+            })
+            .state('socio.app.socio.cuentaPersonal.editar.resumen', {
+                url: '/resumen',
+                templateUrl: 'modules/socio/client/views/cuentaPersonal/form-editar-resumen.html',
+                controller: 'Socio.CuentaPersonal.EditarCuentaPersonal.ResumenController',
+                ncyBreadcrumb: {
+                    skip: true // Never display this state in breadcrumb.
                 }
             })
 

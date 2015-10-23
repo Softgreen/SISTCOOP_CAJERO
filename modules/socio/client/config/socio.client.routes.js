@@ -27,9 +27,11 @@ angular.module('socio').config(['$stateProvider', '$urlRouterProvider',
             return deferred.promise;
         };
 
-        //$urlRouterProvider.when('/socio/app', '/socio/app/socio/socios');
+        $urlRouterProvider.when('/socio/app', '/socio/app/socio/socios');
 
         $urlRouterProvider.when('/socio/app/socio/socios', '/socio/app/socio/socios/buscar');
+
+        $urlRouterProvider.when('/socio/app/socio/socios/editar/:socio', '/socio/app/socio/socios/editar/:socio/resumen');
 
         $stateProvider
             .state('socio', {
@@ -93,8 +95,8 @@ angular.module('socio').config(['$stateProvider', '$urlRouterProvider',
                 url: '/editar/:socio',
                 templateUrl: 'modules/socio/client/views/socio/form-editar-socio.html',
                 resolve: {
-                    socio: function ($state, $stateParams, SGSocio) {
-                        return SGSocio.$find($stateParams.socio);
+                    socio: function ($state, $stateParams, SocioService) {
+                        return SocioService.findById($stateParams.socio);
                     }
                 },
                 controller: 'Socio.Socio.EditarSocioController',

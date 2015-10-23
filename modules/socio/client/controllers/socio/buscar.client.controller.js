@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('socio').controller('Socio.Socio.BuscarSocioController',
-    function ($scope, $state, SGSocio) {
+    function ($scope, $state, SocioService) {
 
         var paginationOptions = {
             page: 1,
@@ -26,12 +26,12 @@ angular.module('socio').controller('Socio.Socio.BuscarSocioController',
             useExternalSorting: true,
 
             columnDefs: [
-                {field: 'tipoPersona', displayName: 'Tipo persona'},
-                {field: 'tipoDocumento', displayName: 'Documento'},
-                {field: 'numeroDocumento', displayName: 'Numero'},
-                {field: 'fechaInicio', displayName: 'F.Inicio'},
-                {field: 'fechaFin', displayName: 'F.Fin'},
-                {field: 'estado', displayName: 'estado', cellFilter: 'si_no : "activo" | uppercase'},
+                {field: 'tipoDocumento', displayName: 'T.DOC.', width: '10%'},
+                {field: 'numeroDocumento', displayName: 'NRO.DOCUMENTO', width: '15%'},
+                {field: 'tipoPersona', displayName: 'PERSONA', width: '10%'},
+                {field: 'socio', displayName: 'SOCIO', width: '30%'},
+                {field: 'estado', displayName: 'ESTADO', cellFilter: 'si_no : "activo" | uppercase'},
+                {field: 'fechaAsociado', displayName: 'F.ASOCIADO', cellFilter: 'date : "dd/MM/yyyy"'},
                 {
                     name: 'edit',
                     displayName: 'Edit',
@@ -64,12 +64,17 @@ angular.module('socio').controller('Socio.Socio.BuscarSocioController',
         };
 
         $scope.search = function () {
-            SGSocio.$search(angular.extend($scope.filterOptions, paginationOptions)).then(function (response) {
-                $scope.gridOptions.data = response.items;
-                $scope.gridOptions.totalItems = response.totalSize;
+            var ft = $scope.filterOptions.filterText;
+            var desde = (paginationOptions.page * paginationOptions.pageSize) - paginationOptions.pageSize;
+            var hasta = paginationOptions.pageSize;
+
+            SocioService.findByFilterText(ft, $scope.filterOptions.estado, $scope.filterOptions.estado, desde, hasta).then(function (response) {
+                $scope.gridOptions.data = response;
+            });
+            SocioService.count(ft).then(function (response) {
+                $scope.gridOptions.totalItems = response;
             });
         };
 
     }
-)
-;
+);

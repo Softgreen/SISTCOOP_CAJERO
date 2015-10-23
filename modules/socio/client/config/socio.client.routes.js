@@ -30,9 +30,10 @@ angular.module('socio').config(['$stateProvider', '$urlRouterProvider',
         $urlRouterProvider.when('/socio/app', '/socio/app/socio/socios');
 
         $urlRouterProvider.when('/socio/app/socio/socios', '/socio/app/socio/socios/buscar');
-
         $urlRouterProvider.when('/socio/app/socio/socios/editar/:socio', '/socio/app/socio/socios/editar/:socio/resumen');
         $urlRouterProvider.when('/socio/app/socio/socios/editar/:socio/cuentasPersonales', '/socio/app/socio/socios/editar/:socio/cuentasPersonales/buscar');
+
+        $urlRouterProvider.when('/socio/app/socio/cuentasPersonales', '/socio/app/socio/cuentasPersonales/buscar');
 
         $stateProvider
             .state('socio', {
@@ -139,7 +140,33 @@ angular.module('socio').config(['$stateProvider', '$urlRouterProvider',
                 }
             })
 
-            //socios
+            // cuentas personales
+            .state('socio.app.socio.cuentaPersonal', {
+                url: '/cuentasPersonales',
+                template: '<div ui-view></div>',
+                ncyBreadcrumb: {
+                    skip: true // Never display this state in breadcrumb.
+                }
+            })
+            .state('socio.app.socio.cuentaPersonal.buscar', {
+                url: '/buscar',
+                templateUrl: 'modules/socio/client/views/cuentaPersonal/form-buscar-cuentaPersonal.html',
+                controller: 'Socio.CuentaPersonal.BuscarCuentaPersonalController',
+                ncyBreadcrumb: {
+                    label: 'Home'
+                }
+            })
+            .state('socio.app.socio.cuentaPersonal.crear', {
+                url: '/crear',
+                templateUrl: 'modules/socio/client/views/cuentaPersonal/form-crear-cuentaPersonal.html',
+                controller: 'Socio.CuentaPersonal.CrearCuentaPersonalController',
+                ncyBreadcrumb: {
+                    label: 'Crear cuenta personal',
+                    parent: 'socio.app.socio.cuentaPersonal.buscar'
+                }
+            })
+
+            //configuracion
             .state('socio.app.configuracion.configuracion', {
                 url: '/configuracion',
                 template: '<div ui-view></div>',

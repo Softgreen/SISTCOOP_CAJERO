@@ -1,8 +1,8 @@
 'use strict';
 
 /* jshint -W098 */
-angular.module('socio').controller('Socio.CuentaPersonal.BuscarSocioController',
-    function ($scope, $state, toastr, socio) {
+angular.module('socio').controller('Socio.Socio.CuentaPersonal.BuscarCuentaPersonalController',
+    function ($scope, $state, toastr, socio, SocioService) {
 
         $scope.view = {
             socio: socio
@@ -12,21 +12,15 @@ angular.module('socio').controller('Socio.CuentaPersonal.BuscarSocioController',
             cuentasPersonales: undefined
         };
 
-        $scope.filterOptions = {
-            filterText: undefined,
-            page: 0,
-            pageSize: 10
-        };
-
         $scope.loadCuentasPersonales = function () {
-            $scope.view.socio.SGCuentaPersonal().$getAll().then(function (response) {
+            SocioService.getCuentasBancarias($scope.view.socio.id).then(function (response) {
                 $scope.view.load.cuentasPersonales = response;
             });
         };
         $scope.loadCuentasPersonales();
 
         $scope.edit = function (row) {
-            $state.go('^.editar', {socio: row.id});
+            $state.go('^.editar', {cuentaPersonal: row.id});
         };
 
     });

@@ -32,6 +32,7 @@ angular.module('socio').config(['$stateProvider', '$urlRouterProvider',
         $urlRouterProvider.when('/socio/app/socio/socios', '/socio/app/socio/socios/buscar');
 
         $urlRouterProvider.when('/socio/app/socio/socios/editar/:socio', '/socio/app/socio/socios/editar/:socio/resumen');
+        $urlRouterProvider.when('/socio/app/socio/socios/editar/:socio/cuentasPersonales', '/socio/app/socio/socios/editar/:socio/cuentasPersonales/buscar');
 
         $stateProvider
             .state('socio', {
@@ -123,7 +124,7 @@ angular.module('socio').config(['$stateProvider', '$urlRouterProvider',
             .state('socio.app.socio.socio.editar.cuentaPersonal.buscar', {
                 url: '/buscar',
                 templateUrl: 'modules/socio/client/views/socio/cuentaPersonal/form-buscar-cuentaPersonal.html',
-                controller: 'Socio.Socio.CuentaPersonal.BuscarAgenciaController',
+                controller: 'Socio.Socio.CuentaPersonal.BuscarCuentaPersonalController',
                 ncyBreadcrumb: {
                     label: 'Cuentas personales'
                 }

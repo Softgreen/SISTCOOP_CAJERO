@@ -23,10 +23,14 @@ angular.module('persona').controller('Persona.Natural.EditarPersonaNatural.Cambi
                     $scope.loadPersona();
                     $timeout(function () {
                         $scope.uploader.progress = 0;
-                    }, 1000);
-                    $scope.ok();
+                    }, 100);
+                    $timeout(function () {
+                        $scope.ok();
+                    }, 500);
                 }).error(function (err) {
-                    $scope.ok();
+                    $timeout(function () {
+                        $scope.ok();
+                    }, 500);
                     //toastr.error('Error al subir el archivo');
                 });
 

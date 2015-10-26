@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('persona').factory('PersonaNaturalService', ['Restangular',
-    function (Restangular) {
+angular.module('persona').factory('PersonaNaturalService', ['Restangular', 'Upload',
+    function (Restangular, Upload) {
 
         var _personaNaturalService = Restangular.all('personas/naturales');
         var baseUrl = 'personas/naturales';
@@ -83,6 +83,27 @@ angular.module('persona').factory('PersonaNaturalService', ['Restangular',
             },
             getFirma: function (id) {
                 return Restangular.one('personanatural/' + id + '/firma').get();
+            },
+
+            setFoto: function (id, file) {
+                var urlFile = Restangular.one(baseUrl, id).all('fotoV2').getRestangularUrl();
+                return Upload.upload({
+                    url: urlFile,
+                    file: file
+                });
+            },
+            setFirma: function (id, file) {
+                var urlFile = Restangular.one(baseUrl, id).all('firmaV2').getRestangularUrl();
+                return Upload.upload({
+                    url: urlFile,
+                    file: file
+                });
+            },
+            getUrlFoto: function (id) {
+                return Restangular.one(baseUrl, id).all('fotoV2').getRestangularUrl();
+            },
+            getUrlFirma: function (id) {
+                return Restangular.one(baseUrl, id).all('firmaV2').getRestangularUrl();
             }
         };
 

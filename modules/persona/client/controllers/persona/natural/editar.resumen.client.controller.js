@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('persona').controller('Persona.Natural.EditarPersonaNatural.ResumenController',
-    function ($scope, $modal, personaNatural) {
+    function ($scope, $state, $modal, personaNatural, PersonaNaturalService) {
 
         $scope.view = {
             persona: personaNatural
@@ -23,10 +23,18 @@ angular.module('persona').controller('Persona.Natural.EditarPersonaNatural.Resum
             });
 
             modalInstance.result.then(function (persona) {
-                $scope.view.persona = persona;
+                //$scope.view.persona = persona;
+                $state.reload();
             }, function () {
             });
 
+        };
+
+        $scope.getUrlFoto = function(){
+            return PersonaNaturalService.getUrlFoto($scope.view.persona.id);
+        };
+        $scope.getUrlFirma = function(){
+            return PersonaNaturalService.getUrlFirma($scope.view.persona.id);
         };
 
     });

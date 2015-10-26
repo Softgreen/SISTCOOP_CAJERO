@@ -19,8 +19,8 @@ angular.module('socio').controller('Socio.Socio.CuentaPersonal.BuscarCuentaPerso
         };
         $scope.loadCuentasPersonales();
 
-        $scope.edit = function (row) {
-            $state.go('^.editar', {cuentaPersonal: row.id});
+        $scope.verCuentaPersonal = function (row) {
+            $state.go('socio.app.socio.cuentaPersonal.editar', {cuentaPersonal: row.id});
         };
 
     });

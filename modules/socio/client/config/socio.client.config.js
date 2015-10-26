@@ -5,7 +5,7 @@ angular.module('socio').run(['Menus',
 	function (Menus) {
 		// Set top bar menu items
 		Menus.addMenuItem('topbar', {
-			title: 'Socio',
+			title: 'Clientes',
 			state: 'socio.app'
 		});
 	}

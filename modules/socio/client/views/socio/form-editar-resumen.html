@@ -64,7 +64,6 @@
                     <th>Fecha cancela</th>
                     <th>Numero retirantes</th>
                     <th>Estado</th>
-                    <th>Edit</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -78,9 +77,6 @@
                     <td><span data-ng-bind="item.fechaCierre | date: 'dd/MM/yyyy'"></span></td>
                     <td><span data-ng-bind="item.cantidadRetirantes"></span></td>
                     <td><span data-ng-bind="item.estadoCuenta | si_no : 'ACTIVO'"></span></td>
-                    <td style="text-align: center">
-                      <button type="button" data-ng-click="verCuentaPersonal(item)" class="btn btn-info btn-xs">Editar</button>
-                    </td>
                   </tr>
                   </tbody>
                 </table>

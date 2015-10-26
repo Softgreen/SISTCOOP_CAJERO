@@ -9,7 +9,6 @@ angular.module('persona').controller('Persona.Natural.EditarPersonaNatural.Resum
         };
 
         $scope.openCambiarFotoModal = function () {
-
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: '/modules/persona/client/views/natural/form-editar-cambiarFoto.html',
@@ -27,7 +26,26 @@ angular.module('persona').controller('Persona.Natural.EditarPersonaNatural.Resum
                 $state.reload();
             }, function () {
             });
+        };
 
+        $scope.openCambiarFirmaModal = function () {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/modules/persona/client/views/natural/form-editar-cambiarFirma.html',
+                controller: 'Persona.Natural.EditarPersonaNatural.CambiarFirmaModalController',
+                size: 'lg',
+                resolve: {
+                    personaNatural: function () {
+                        return $scope.view.persona;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (persona) {
+                //$scope.view.persona = persona;
+                $state.reload();
+            }, function () {
+            });
         };
 
         $scope.getUrlFoto = function(){

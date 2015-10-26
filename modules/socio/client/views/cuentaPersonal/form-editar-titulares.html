@@ -7,7 +7,7 @@
     <label class="col-sm-2 control-label"><span class="required">*</span> Persona:</label>
 
     <div class="col-sm-3">
-      <ui-select name="tipoDocumento" data-ng-model="combo.selected.tipoDocumento" required>
+      <ui-select name="tipoDocumento" data-ng-model="combo.selected.tipoDocumento" pf-focused="true" autofocus required>
         <ui-select-match placeholder="Documento">{{$select.selected.abreviatura}}</ui-select-match>
         <ui-select-choices repeat="item in combo.tipoDocumento | filter: $select.search">
           <div data-ng-bind-html="item.abreviatura | highlight: $select.search"></div>

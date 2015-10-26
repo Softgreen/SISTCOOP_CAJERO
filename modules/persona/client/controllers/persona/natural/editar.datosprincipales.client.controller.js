@@ -9,6 +9,7 @@ angular.module('persona').controller('Persona.Natural.EditarPersonaNatural.Datos
         $scope.view = {
             persona: personaNatural
         };
+        $scope.view.persona.fechaNacimiento = new Date($scope.view.persona.fechaNacimiento);
 
         $scope.combo = {
             sexo: undefined,

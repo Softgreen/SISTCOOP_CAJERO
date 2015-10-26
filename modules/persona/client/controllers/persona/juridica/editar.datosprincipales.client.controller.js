@@ -25,6 +25,8 @@ angular.module('persona').controller('Persona.Juridica.EditarPersonaJuridica.Dat
         $scope.view = {
             persona: personaJuridica
         };
+        $scope.view.persona.fechaConstitucion = new Date($scope.view.persona.fechaConstitucion);
+
 
         $scope.save = function () {
             $scope.working = true;

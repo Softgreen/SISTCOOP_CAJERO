@@ -133,7 +133,7 @@ angular.module('persona').service('SGDialog', ['$modal', function ($modal) {
         var btns = {
             ok: {
                 label: title,
-                cssClass: 'btn btn-danger'
+                cssClass: 'btn btn-primary'
             },
             cancel: {
                 label: 'Cancel',

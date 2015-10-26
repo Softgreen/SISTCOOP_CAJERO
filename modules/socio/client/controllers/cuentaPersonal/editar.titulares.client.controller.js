@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('socio').controller('Socio.CuentaPersonal.EditarCuentaPersonal.TitularesController',
-    function ($scope, $state, toastr, cuentaPersonal, CuentaBancariaService, PersonaNaturalService) {
+    function ($scope, $state, toastr, SGDialog, cuentaPersonal, CuentaBancariaService, PersonaNaturalService) {
 
         $scope.view = {
             cuentaPersonal: cuentaPersonal,
@@ -21,7 +21,7 @@ angular.module('socio').controller('Socio.CuentaPersonal.EditarCuentaPersonal.Ti
             tipoDocumento: undefined
         };
 
-        $scope.loadCombo = function(){
+        $scope.loadCombo = function () {
             PersonaNaturalService.getTipoDocumentos().then(function (response) {
                 $scope.combo.tipoDocumento = response;
             });
@@ -46,6 +46,36 @@ angular.module('socio').controller('Socio.CuentaPersonal.EditarCuentaPersonal.Ti
                 } else {
                     toastr.warning('Persona no encontrada');
                 }
+            });
+        };
+
+        $scope.asignarTitular = function (item) {
+            SGDialog.confirm('Guardar', 'Estas seguro de querer asignar permanentemente este titular?', function () {
+                var titular = {
+                    idTipoDocumento: $scope.view.load.persona.tipoDocumento.id,
+                    numeroDocumento: $scope.view.load.persona.numeroDocumento
+                };
+                CuentaBancariaService.addTitular($scope.view.cuentaPersonal.id, titular).then(
+                    function (response) {
+                        toastr.info('Titular asignado');
+                        $scope.loadTitulares();
+                    }, function error(err) {
+                        toastr.warning(err.data.message);
+                    }
+                );
+            });
+        };
+
+        $scope.eliminarTitular = function (item) {
+            SGDialog.confirmDelete('Titular', 'titular', function () {
+                CuentaBancariaService.eliminarTitular($scope.view.cuentaPersonal.id, item.id).then(
+                    function (response) {
+                        toastr.info('Titular eliminado');
+                        $scope.loadTitulares();
+                    }, function error(err) {
+                        toastr.warning(err.data.message);
+                    }
+                );
             });
         };
 

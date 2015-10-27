@@ -1,8 +1,8 @@
 'use strict';
 
 /* jshint -W098 */
-angular.module('socio').controller('Socio.CuentaPersonal.EditarCuentaPersonalController',
-    function ($scope, $state, cuentaPersonal, CuentaBancariaService) {
+angular.module('socio').controller('Socio.CuentaPersonal.EditarCuentaPersonal.ResumenController',
+    function ($scope, $state, toastr, cuentaPersonal, CuentaBancariaService) {
 
         $scope.view = {
             cuentaPersonal: cuentaPersonal

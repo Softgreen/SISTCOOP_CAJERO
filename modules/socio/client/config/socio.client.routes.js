@@ -35,6 +35,7 @@ angular.module('socio').config(['$stateProvider', '$urlRouterProvider',
 
         $urlRouterProvider.when('/socio/app/socio/cuentasPersonales', '/socio/app/socio/cuentasPersonales/buscar');
         $urlRouterProvider.when('/socio/app/socio/cuentasPersonales/editar/:cuentaPersonal', '/socio/app/socio/cuentasPersonales/editar/:cuentaPersonal/resumen');
+        $urlRouterProvider.when('/socio/app/socio/cuentasPersonales/editar/:cuentaPersonal/chequeras', '/socio/app/socio/cuentasPersonales/editar/:cuentaPersonal/chequeras/buscar');
 
         $stateProvider
             .state('socio', {
@@ -206,13 +207,44 @@ angular.module('socio').config(['$stateProvider', '$urlRouterProvider',
                     parent: 'socio.app.socio.cuentaPersonal.editar.resumen'
                 }
             })
+
+            //Chequera
             .state('socio.app.socio.cuentaPersonal.editar.chequera', {
                 url: '/chequeras',
-                templateUrl: 'modules/socio/client/views/cuentaPersonal/form-editar-chequeras.html',
-                controller: 'Socio.CuentaPersonal.EditarCuentaPersonal.ChequerasController',
+                template: '<div ui-view></div>',
                 ncyBreadcrumb: {
-                    label: 'Chequeras',
-                    parent: 'socio.app.socio.cuentaPersonal.editar.resumen'
+                    skip: true // Never display this state in breadcrumb.
+                }
+            })
+            .state('socio.app.socio.cuentaPersonal.editar.chequera.buscar', {
+                url: '/buscar',
+                templateUrl: 'modules/socio/client/views/cuentaPersonal/chequera/form-buscar-chequera.html',
+                controller: 'Socio.CuentaPersonal.Chequera.BuscarController',
+                ncyBreadcrumb: {
+                    label: 'Chequeras'
+                }
+            })
+            .state('socio.app.socio.cuentaPersonal.editar.chequera.crear', {
+                url: '/crear',
+                templateUrl: 'modules/socio/client/views/cuentaPersonal/chequera/form-crear-chequera.html',
+                controller: 'Socio.CuentaPersonal.Chequera.CrearController',
+                ncyBreadcrumb: {
+                    label: 'Crear chequera',
+                    parent: 'socio.app.socio.cuentaPersonal.editar.chequera.buscar'
+                }
+            })
+            .state('socio.app.socio.cuentaPersonal.editar.chequera.editar', {
+                url: '/editar/:chequera',
+                templateUrl: 'modules/socio/client/views/cuentaPersonal/chequera/form-editar-chequera.html',
+                resolve: {
+                    chequera: function ($state, $stateParams, cuentaPersonal, CuentaBancariaService) {
+                        return CuentaBancariaService.getChequera(cuentaPersonal.id, $stateParams.chequera);
+                    }
+                },
+                controller: 'Socio.CuentaPersonal.Chequera.EditarController',
+                ncyBreadcrumb: {
+                    label: 'Editar chequera',
+                    parent: 'socio.app.socio.cuentaPersonal.editar.chequera.buscar'
                 }
             })
 

@@ -1,7 +1,7 @@
 'use strict';
 
 /* jshint -W098 */
-angular.module('socio').controller('Socio.CuentaPersonal.EditarCuentaPersonal.ChequerasController',
+angular.module('socio').controller('Socio.CuentaPersonal.Chequera.BuscarController',
     function ($scope, $state, $modal, toastr, SGDialog, cuentaPersonal, CuentaBancariaService) {
 
         $scope.view = {
@@ -48,11 +48,14 @@ angular.module('socio').controller('Socio.CuentaPersonal.EditarCuentaPersonal.Ch
             }
         }, true);
 
+        $scope.edit = function (row) {
+            $state.go('^.editar', {chequera: row.id});
+        };
 
         $scope.save = function () {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: '/modules/socio/client/views/cuentaPersonal/form-crear-chequera-verificarDatos.html',
+                templateUrl: '/modules/socio/client/views/cuentaPersonal/chequera/form-crear-chequera-verificarDatos.html',
                 controller: 'Socio.CuentaPersonal.VerificarCrearChequeraController',
                 resolve: {
                     cuentaPersonal: function () {

@@ -5,11 +5,8 @@
 
   <div class="pull-right">
     <div class="btn-group">
-      <button type="button" ng-if="view.cuentaPersonal.tipoCuenta == 'RECAUDADORA'" ng-click="addChequera()" class="btn btn-default">A&#241;adir Chequera</button>
-    </div>
-    <div class="btn-group">
-      <button type="button" ng-if="view.cuentaPersonal.tipoCuenta == 'PLAZO_FIJO'" ng-click="renovarPlazoFijo()" class="btn btn-default">Renovar plazo fijo</button>
-      <button type="button" ng-if="view.cuentaPersonal.tipoCuenta == 'PLAZO_FIJO'" ng-click="recalcularPlazoFijo()" class="btn btn-default">Recalcular plazo fijo</button>
+      <button type="button" data-ng-if="view.cuentaPersonal.tipoCuenta == 'PLAZO_FIJO'" ng-click="renovarPlazoFijo()" class="btn btn-default">Renovar plazo fijo</button>
+      <button type="button" data-ng-if="view.cuentaPersonal.tipoCuenta == 'PLAZO_FIJO'" ng-click="recalcularPlazoFijo()" class="btn btn-default">Recalcular plazo fijo</button>
     </div>
     <div class="btn-group">
       <button type="button" data-ng-if="view.cuentaPersonal.estadoCuenta == 'ACTIVO' || view.cuentaPersonal.estadoCuenta == 'CONGELADO'" data-ng-click="congelar()" class="btn btn-default">Congelar</button>
@@ -27,7 +24,6 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <div>
-
       <div class="tab-container">
         <ul class="nav nav-tabs">
           <li ui-sref-active="active">
@@ -40,12 +36,17 @@
               Titulares
             </a>
           </li>
+          <!--
           <li ui-sref-active="active">
-            <!--
             <a href ui-sref=".beneficiario">
               Beneficiarios
             </a>
-            -->
+          </li>
+           -->
+          <li data-ng-if="view.cuentaPersonal.tipoCuenta == 'RECAUDADORA'" ui-sref-active="active">
+            <a href ui-sref=".chequera">
+              Chequeras
+            </a>
           </li>
         </ul>
         <div class="tab-pane">

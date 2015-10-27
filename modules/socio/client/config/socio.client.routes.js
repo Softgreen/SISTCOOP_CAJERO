@@ -206,6 +206,15 @@ angular.module('socio').config(['$stateProvider', '$urlRouterProvider',
                     parent: 'socio.app.socio.cuentaPersonal.editar.resumen'
                 }
             })
+            .state('socio.app.socio.cuentaPersonal.editar.chequera', {
+                url: '/chequeras',
+                templateUrl: 'modules/socio/client/views/cuentaPersonal/form-editar-chequeras.html',
+                controller: 'Socio.CuentaPersonal.EditarCuentaPersonal.ChequerasController',
+                ncyBreadcrumb: {
+                    label: 'Chequeras',
+                    parent: 'socio.app.socio.cuentaPersonal.editar.resumen'
+                }
+            })
 
             //configuracion
             .state('socio.app.configuracion.configuracion', {

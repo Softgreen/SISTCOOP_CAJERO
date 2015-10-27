@@ -79,20 +79,22 @@ angular.module('cooperativa').service('$menuItemsCooperativa', [
         this.prepareSidebarMenu = function () {
             this.menuItems = [];
 
-            var estructura = this.addItem('Estructura', '', 'linecons-user');
-            var transaccionInterna = this.addItem('Transaccion interna', '', 'linecons-user');
+            //var estructura = this.addItem('Estructura', '', 'linecons-user');
             var transaccionCliente = this.addItem('Transaccion clientes', '', 'linecons-user');
+            var transaccionInterna = this.addItem('Transaccion interna', '', 'linecons-user');
+            var otros = this.addItem('Otros', '', 'linecons-user');
 
-            estructura.addItem('Bovedas', 'cooperativa.app.estructura.boveda');
-            estructura.addItem('Cajas', 'cooperativa.app.estructura.caja');
+            //estructura.addItem('Bovedas', 'cooperativa.app.estructura.boveda');
+            //estructura.addItem('Cajas', 'cooperativa.app.estructura.caja');
+
+            transaccionCliente.addItem('Transaccion cliente', 'cooperativa.app.transaccionCliente.buscarTransaccionesAporte');
+            transaccionCliente.addItem('Transacciones del dia', 'cooperativa.app.transaccionCliente.buscarTransaccionesAporte');
 
             transaccionInterna.addItem('Boveda/Caja', 'cooperativa.app.transaccionInterna.buscarTransaccionesBovedaCaja');
             transaccionInterna.addItem('Caja/Caja', 'cooperativa.app.transaccionInterna.buscarTransaccionesCajaCaja');
 
-            transaccionCliente.addItem('Transaccion aporte', 'cooperativa.app.transaccionCliente.buscarTransaccionesAporte');
-            transaccionCliente.addItem('Transaccion cta.personal', 'cooperativa.app.transaccionCliente.buscarTransaccionesAporte');
-            transaccionCliente.addItem('Transaccion compra/venta', 'cooperativa.app.transaccionCliente.buscarTransaccionesAporte');
-
+            otros.addItem('Pendientes caja', 'cooperativa.app.transaccionInterna.buscarTransaccionesBovedaCaja');
+            otros.addItem('Historial cierres', 'cooperativa.app.transaccionInterna.buscarTransaccionesCajaCaja');
 
             return this;
         };

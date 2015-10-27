@@ -5,7 +5,7 @@ angular.module('cooperativa').run(['Menus',
     function (Menus) {
         // Set top bar menu items
         Menus.addMenuItem('topbar', {
-            title: 'Cooperativa',
+            title: 'Caja',
             state: 'cooperativa.app'
         });
     }

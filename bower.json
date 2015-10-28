@@ -32,7 +32,8 @@
     "c3": "~0.4.10",
     "angular-patternfly": "~2.4.0",
     "jquery-ui": "~1.11.4",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "sistcoop": "https://github.com/Softgreen/SISTCOOP-JS.git#master"
   },
   "resolutions": {
     "angular": "~1.4"

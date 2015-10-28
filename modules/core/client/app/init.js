@@ -73,6 +73,8 @@ angular.element(document).ready(function () {
     var keycloakRealm = 'SISTEMA_FINANCIERO';
     var keycloakClientId = 'SISTCOOP_ADMIN';
 
+    var rrhhUrl = 'http://multivadelsur.ddns.net:8080/SISTCOOP_REST';
+
     /* jshint ignore:start */
     var keycloak = new Keycloak({
         url: keycloakUrl,
@@ -83,16 +85,32 @@ angular.element(document).ready(function () {
 
     /* jshint ignore:start */
     keycloak.init({onLoad: 'login-required'}).success(function () {
-
-        window.auth.authz = keycloak;
-        angular.module('mean').factory('Auth', function () {
-            return window.auth;
+        var sistcoop = new Sistcoop({
+            url: rrhhUrl,
+            authenticatedToken: keycloak.token
         });
 
-        angular.module('mean').constant('REALM', {name: keycloakRealm, authServerUrl: keycloakUrl});
+        sistcoop.init({onLoad: 'login-required'}).success(function () {
+            window.auth.authz = keycloak;
+            angular.module('mean').factory('Auth', function () {
+                return window.auth;
+            });
 
-        //Then init the app
-        angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
+            angular.module('mean').constant('REALM', {name: keycloakRealm, authServerUrl: keycloakUrl});
+            angular.module('mean').constant('AGENCIA', sistcoop.agencia);
+            angular.module('mean').constant('CAJA', sistcoop.caja);
+            angular.module('mean').constant('PERSONA', sistcoop.persona);
+
+            if(angular.isUndefined(sistcoop.agencia) || angular.isUndefined(sistcoop.caja) || angular.isUndefined(sistcoop.persona)) {
+                alert('No tiene una agencia, trabajador o caja asignada.');
+                keycloak.logout();
+            } else {
+                //Then init the app
+                angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
+            }
+        }).error(function () {
+            alert('No se pudo verificar el origen de sucursal y agencia para el usuario');
+        });
     }).error(function () {
         window.location.reload();
     });

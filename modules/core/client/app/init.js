@@ -49,6 +49,10 @@ angular.module(ApplicationConfiguration.applicationModuleName).run(function ($ro
 });
 
 window.auth = {};
+window.auth.keycloakUrl = 'http://multivadelsur.ddns.net:8080/auth';
+window.auth.keycloakRealm = 'SISTEMA_FINANCIERO';
+window.auth.keycloakClientId = 'SISTCOOP_ADMIN';
+window.auth.rrhhUrl = 'http://multivadelsur.ddns.net:8080/SISTCOOP_REST/rest';
 
 //Then define the init function for starting up the application
 angular.element(document).ready(function () {
@@ -69,11 +73,11 @@ angular.element(document).ready(function () {
         }
     }
 
-    var keycloakUrl = 'http://multivadelsur.ddns.net:8080/auth';
-    var keycloakRealm = 'SISTEMA_FINANCIERO';
-    var keycloakClientId = 'SISTCOOP_ADMIN';
+    var keycloakUrl = window.auth.keycloakUrl;
+    var keycloakRealm = window.auth.keycloakRealm;
+    var keycloakClientId = window.auth.keycloakClientId;
 
-    var rrhhUrl = 'http://multivadelsur.ddns.net:8080/SISTCOOP_REST';
+    var rrhhUrl = window.auth.rrhhUrl;
 
     /* jshint ignore:start */
     var keycloak = new Keycloak({
@@ -300,7 +304,8 @@ angular.module('mean').factory('SGUsuarioKeycloak', ['KeycloakRestangular', 'REA
 angular.module('mean').config(['RestangularProvider',
     function (RestangularProvider) {
         //RestangularProvider.setBaseUrl('http://localhost:8080/SistCoopREST/rest');
-        RestangularProvider.setBaseUrl('http://multivadelsur.ddns.net:8080/SISTCOOP_REST/rest');
+        //RestangularProvider.setBaseUrl('http://multivadelsur.ddns.net:8080/SISTCOOP_REST/rest');
+        RestangularProvider.setBaseUrl(window.auth.rrhhUrl);
     }
 ]);
 

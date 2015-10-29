@@ -24,6 +24,11 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
         //$urlRouterProvider.when('/cooperativa/app/estructura/cajas/editar/:caja/bovedaCajas/editar/:bovedaCaja/historiales', '/cooperativa/app/estructura/cajas/editar/:caja/bovedaCajas/editar/:bovedaCaja/historiales/buscar');
         $urlRouterProvider.when('/cooperativa/app/estructura/cajas/editar/:caja/bovedaCajas/editar/:bovedaCaja', '/cooperativa/app/estructura/cajas/editar/:caja/bovedaCajas/editar/:bovedaCaja/historiales/buscar');
         $urlRouterProvider.when('/cooperativa/app/estructura/cajas/editar/:caja/bovedaCajas/editar/:bovedaCaja/historiales/editar/:historial', '/cooperativa/app/estructura/cajas/editar/:caja/bovedaCajas/editar/:bovedaCaja/historiales/editar/:historial/resumen');
+
+
+        //Transacciones cliente
+        $urlRouterProvider.when('/cooperativa/app/transaccionCliente/transacciones', '/cooperativa/app/transaccionCliente/transacciones/compraVenta');
+
         $stateProvider
             .state('cooperativa', {
                 abstract: true,
@@ -547,6 +552,53 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                 templateUrl: 'modules/cooperativa/client/views/transaccionInterna/form-buscar-transaccionCajaCaja.html',
                 controller: 'Cooperativa.BuscarTransaccionCajaCajaController',
                 resolve: {}
+            })
+
+            //Transaccion Cliente
+            .state('cooperativa.app.transaccionCliente.transaccion', {
+                url: '/transacciones',
+                templateUrl: 'modules/cooperativa/client/views/transaccionCliente/form-transaccion-cliente.html',
+                ncyBreadcrumb: {
+                    skip: true // Never display this state in breadcrumb.
+                }
+            })
+            .state('cooperativa.app.transaccionCliente.historial', {
+                url: '/historial',
+                template: '<div ui-view></div>',
+                ncyBreadcrumb: {
+                    skip: true // Never display this state in breadcrumb.
+                }
+            })
+
+            .state('cooperativa.app.transaccionCliente.transaccion.compraVenta', {
+                url: '/compraVenta',
+                templateUrl: 'modules/cooperativa/client/views/transaccionCliente/form-transaccion-compraVenta.html',
+                //controller: 'Cooperativa.Boveda.BuscarController',
+                resolve: {},
+                ncyBreadcrumb: {
+                    label: 'Home'
+                }
+            })
+
+            .state('cooperativa.app.transaccionCliente.transaccion.cuentaPersonal', {
+                url: '/cuentaPersonal',
+                templateUrl: 'modules/cooperativa/client/views/transaccionCliente/form-transaccion-cuentaPersonal.html',
+                //controller: 'Cooperativa.Boveda.BuscarController',
+                resolve: {},
+                ncyBreadcrumb: {
+                    label: 'Home'
+                }
+            })
+
+
+            .state('cooperativa.app.transaccionCliente.historial.buscar', {
+                url: '/buscar',
+                templateUrl: 'modules/cooperativa/client/views/boveda/form-buscar-boveda.html',
+                controller: 'Cooperativa.Boveda.BuscarController',
+                resolve: {},
+                ncyBreadcrumb: {
+                    label: 'Home'
+                }
             });
 
     }

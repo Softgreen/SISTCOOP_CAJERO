@@ -87,8 +87,8 @@ angular.module('cooperativa').service('$menuItemsCooperativa', [
             //estructura.addItem('Bovedas', 'cooperativa.app.estructura.boveda');
             //estructura.addItem('Cajas', 'cooperativa.app.estructura.caja');
 
-            transaccionCliente.addItem('Transaccion cliente', 'cooperativa.app.transaccionCliente.buscarTransaccionesAporte');
-            transaccionCliente.addItem('Transacciones del dia', 'cooperativa.app.transaccionCliente.buscarTransaccionesAporte');
+            transaccionCliente.addItem('Transaccion cliente', 'cooperativa.app.transaccionCliente.transaccion');
+            transaccionCliente.addItem('Transacciones del dia', 'cooperativa.app.transaccionCliente.historial');
 
             transaccionInterna.addItem('Boveda/Caja', 'cooperativa.app.transaccionInterna.buscarTransaccionesBovedaCaja');
             transaccionInterna.addItem('Caja/Caja', 'cooperativa.app.transaccionInterna.buscarTransaccionesCajaCaja');

@@ -1,7 +1,7 @@
 'use strict';
 
 /* jshint ignore:start */
-angular.module('socio').factory('VoucherService', function (EMPRESA, $filter) {
+angular.module('cooperativa').factory('VoucherService', function (EMPRESA, $filter) {
 
     var fnResetPrinter = function () {
         qz.append("\x1B\x40");
@@ -44,7 +44,7 @@ angular.module('socio').factory('VoucherService', function (EMPRESA, $filter) {
         qz.print();//imprimir
     };
 
-    var imprimirCompraVenta = function (item) {
+    var fnCompraVenta = function (item) {
         if (notReady()) {
             return;
         }
@@ -90,7 +90,8 @@ angular.module('socio').factory('VoucherService', function (EMPRESA, $filter) {
     };
 
     return {
-        name: 'socio'
+        imprimirVoucherCompraVenta: fnCompraVenta
     };
+
 });
 /* jshint ignore:end */

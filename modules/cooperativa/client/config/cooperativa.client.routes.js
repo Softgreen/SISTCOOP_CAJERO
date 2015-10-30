@@ -28,7 +28,7 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
 
         //Transacciones cliente
         $urlRouterProvider.when('/cooperativa/app/transaccionCliente/transacciones', '/cooperativa/app/transaccionCliente/transacciones/compraVenta');
-
+        $urlRouterProvider.when('/cooperativa/app/transaccionCliente/historial', '/cooperativa/app/transaccionCliente/historial/buscar');
         $stateProvider
             .state('cooperativa', {
                 abstract: true,
@@ -579,7 +579,6 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                     label: 'Home'
                 }
             })
-
             .state('cooperativa.app.transaccionCliente.transaccion.cuentaPersonal', {
                 url: '/cuentaPersonal',
                 templateUrl: 'modules/cooperativa/client/views/transaccionCliente/form-transaccion-cuentaPersonal.html',
@@ -590,11 +589,10 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                 }
             })
 
-
             .state('cooperativa.app.transaccionCliente.historial.buscar', {
                 url: '/buscar',
-                templateUrl: 'modules/cooperativa/client/views/boveda/form-buscar-boveda.html',
-                controller: 'Cooperativa.Boveda.BuscarController',
+                templateUrl: 'modules/cooperativa/client/views/transaccionCliente/historial/form-buscar-transaccion.html',
+                controller: 'Cooperativa.TransaccionCliente.Historial.BuscarController',
                 resolve: {},
                 ncyBreadcrumb: {
                     label: 'Home'

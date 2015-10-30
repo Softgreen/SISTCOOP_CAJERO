@@ -56,11 +56,13 @@ angular.module('cooperativa').controller('Cooperativa.Operaciones.CerrarCajaCont
                 function error(err) {
                     $scope.working = false;
                     if (err.status === 400) {
+                        console.log(err);
+                        console.log(err.data);
                         for (var i = 0; i < err.data.length; i++) {
                             $scope.view.error.pendiente.push({
                                 idboveda: err.data[i].idboveda,
-                                boveda: error.data[i].boveda,
-                                monto: error.data[i].monto
+                                boveda: err.data[i].boveda,
+                                monto: err.data[i].monto
                             });
                         }
                     } else {

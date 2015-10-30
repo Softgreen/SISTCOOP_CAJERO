@@ -572,8 +572,8 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
 
             .state('cooperativa.app.transaccionCliente.transaccion.compraVenta', {
                 url: '/compraVenta',
-                templateUrl: 'modules/cooperativa/client/views/transaccionCliente/form-transaccion-compraVenta.html',
-                //controller: 'Cooperativa.Boveda.BuscarController',
+                templateUrl: 'modules/cooperativa/client/views/transaccionCliente/compraVenta/form-transaccion-compraVenta.html',
+                controller: 'Cooperativa.TransaccionCliente.CompraVenta.CrearController',
                 resolve: {},
                 ncyBreadcrumb: {
                     label: 'Home'

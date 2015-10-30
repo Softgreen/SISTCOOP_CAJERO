@@ -53,6 +53,7 @@ window.auth.keycloakUrl = 'http://multivadelsur.ddns.net:8080/auth';
 window.auth.keycloakRealm = 'SISTEMA_FINANCIERO';
 window.auth.keycloakClientId = 'SISTCOOP_ADMIN';
 window.auth.rrhhUrl = 'http://multivadelsur.ddns.net:8080/SISTCOOP_REST/rest';
+window.auth.empresa = 'MULTIVALORES DEL SUR';
 
 //Then define the init function for starting up the application
 angular.element(document).ready(function () {
@@ -105,7 +106,9 @@ angular.element(document).ready(function () {
             angular.module('mean').constant('CAJA', sistcoop.caja);
             angular.module('mean').constant('PERSONA', sistcoop.persona);
 
-            if(angular.isUndefined(sistcoop.agencia) || angular.isUndefined(sistcoop.caja) || angular.isUndefined(sistcoop.persona)) {
+            angular.module('mean').constant('EMPRESA', window.auth.empresa);
+
+            if (angular.isUndefined(sistcoop.agencia) || angular.isUndefined(sistcoop.caja) || angular.isUndefined(sistcoop.persona)) {
                 alert('No tiene una agencia, trabajador o caja asignada.');
                 keycloak.logout();
             } else {

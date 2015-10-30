@@ -53,7 +53,9 @@ window.auth.keycloakUrl = 'http://multivadelsur.ddns.net:8080/auth';
 window.auth.keycloakRealm = 'SISTEMA_FINANCIERO';
 window.auth.keycloakClientId = 'SISTCOOP_ADMIN';
 window.auth.rrhhUrl = 'http://multivadelsur.ddns.net:8080/SISTCOOP_REST/rest';
+
 window.auth.empresa = 'MULTIVALORES DEL SUR';
+window.auth.printer = 'EPSON TM-U220';
 
 //Then define the init function for starting up the application
 angular.element(document).ready(function () {
@@ -107,6 +109,7 @@ angular.element(document).ready(function () {
             angular.module('mean').constant('PERSONA', sistcoop.persona);
 
             angular.module('mean').constant('EMPRESA', window.auth.empresa);
+            angular.module('mean').constant('PRINTER', window.auth.printer);
 
             if (angular.isUndefined(sistcoop.agencia) || angular.isUndefined(sistcoop.caja) || angular.isUndefined(sistcoop.persona)) {
                 alert('No tiene una agencia, trabajador o caja asignada.');
@@ -304,11 +307,20 @@ angular.module('mean').factory('SGUsuarioKeycloak', ['KeycloakRestangular', 'REA
 
 }]);
 
-angular.module('mean').config(['RestangularProvider',
-    function (RestangularProvider) {
+/* jshint ignore:start */
+angular.module('mean').config(['RestangularProvider', 'PRINTER',
+    function (RestangularProvider, PRINTER) {
         //RestangularProvider.setBaseUrl('http://localhost:8080/SistCoopREST/rest');
         //RestangularProvider.setBaseUrl('http://multivadelsur.ddns.net:8080/SISTCOOP_REST/rest');
         RestangularProvider.setBaseUrl(window.auth.rrhhUrl);
+
+
+        if(isLoaded()){
+            findPrinter(PRINTER);
+            return;
+        }
+
     }
 ]);
+/* jshint ignore:end */
 

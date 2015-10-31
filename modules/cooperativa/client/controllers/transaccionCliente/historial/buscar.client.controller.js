@@ -64,18 +64,33 @@ angular.module('persona').controller('Cooperativa.TransaccionCliente.Historial.B
         };
         $scope.gridActions = {
             imprimir: function (row) {
-                if (row.tipoTransaccion === 'APORTE')
-                    VoucherService.imprimirVoucherAporte(row);
-                else if (row.tipoTransaccion === 'DEPOSITO' || row.tipoTransaccion === 'RETIRO')
-                    VoucherService.imprimirVoucherCuentaPersonal(row);
-                else if (row.tipoTransaccion === 'COMPRA' || row.tipoTransaccion === 'VENTA')
-                    VoucherService.imprimirVoucherCompraVenta(row);
-                else if (row.tipoTransaccion === 'TRANSFERENCIA')
-                    VoucherService.imprimirVoucherTransferencia(row);
-                else if (row.tipoTransaccion === 'COBRO_CHEQUE')
-                    VoucherService.imprimirVoucherCheque(row);
-                else
+                if (row.tipoTransaccion === 'APORTE') {
+                    CajaService.getVoucherCuentaAporte(row.idTransaccion).then(function (response) {
+                        VoucherService.imprimirVoucherAporte(response);
+                    });
+                }
+                else if (row.tipoTransaccion === 'DEPOSITO' || row.tipoTransaccion === 'RETIRO') {
+                    CajaService.getVoucherTransaccionBancaria(row.idTransaccion).then(function (response) {
+                        VoucherService.imprimirVoucherCuentaPersonal(response);
+                    });
+                }
+                else if (row.tipoTransaccion === 'COMPRA' || row.tipoTransaccion === 'VENTA') {
+                    CajaService.getVoucherCompraVenta(row.idTransaccion).then(function (response) {
+                        VoucherService.imprimirVoucherCompraVenta(response);
+                    });
+                }
+                else if (row.tipoTransaccion === 'TRANSFERENCIA') {
+                    CajaService.getVoucherTransferenciaBancaria(row.idTransaccion).then(function (response) {
+                        VoucherService.imprimirVoucherTransferencia(response);
+                    });
+                }
+                else if (row.tipoTransaccion === 'COBRO_CHEQUE') {
+                    CajaService.getVoucherTransaccionCheque(row.idTransaccion).then(function (response) {
+                        VoucherService.imprimirVoucherCheque(response);
+                    });
+                } else {
                     alert('Tipo de transaccion no encontrado');
+                }
             },
             extornar: function (row) {
                 SGDialog.confirmDelete('Transaccion', '', function () {

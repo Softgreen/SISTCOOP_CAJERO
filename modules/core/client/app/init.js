@@ -314,12 +314,10 @@ angular.module('mean').config(['RestangularProvider', 'PRINTER',
         //RestangularProvider.setBaseUrl('http://multivadelsur.ddns.net:8080/SISTCOOP_REST/rest');
         RestangularProvider.setBaseUrl(window.auth.rrhhUrl);
 
-
         if(isLoaded()){
             findPrinter(PRINTER);
             return;
         }
-
     }
 ]);
 /* jshint ignore:end */

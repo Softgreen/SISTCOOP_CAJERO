@@ -22,7 +22,7 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CompraV
             voucher: {
                 list: [],
                 limpiar: function () {
-                    $scope.voucher.list = [];
+                    $scope.view.voucher.list = [];
                 }
             }
         };
@@ -182,7 +182,7 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CompraV
         };
 
         $scope.imprimir = function (item) {
-            VoucherService.imprimirVoucher(item);
+            VoucherService.imprimirVoucherCompraVenta(item);
         };
 
     }

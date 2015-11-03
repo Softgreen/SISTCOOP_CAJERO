@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CompraVenta.CrearController',
-    function ($scope, $state, $modal, toastr, TasaInteresService, SessionService, CajaService, VoucherService) {
+    function ($scope, $state, $modal, toastr, SGDialog, TasaInteresService, SessionService, CajaService, VoucherService) {
 
         $scope.working = false;
 
@@ -183,6 +183,19 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CompraV
 
         $scope.imprimir = function (item) {
             VoucherService.imprimirVoucherCompraVenta(item);
+        };
+        $scope.extornar = function (item, index) {
+            SGDialog.confirmDelete('Transaccion', '', function () {
+                SessionService.extornarTransaccion(item.id).then(
+                    function (response) {
+                        toastr.success('Transaccion extornada satisfactoriamente.');
+                        $scope.view.voucher.list.splice(index, 1);
+                    }, function error(err) {
+                        toastr.error(err.data.message);
+                        $scope.search();
+                    }
+                );
+            });
         };
 
     }

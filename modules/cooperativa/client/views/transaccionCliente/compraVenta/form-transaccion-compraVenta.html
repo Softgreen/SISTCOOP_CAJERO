@@ -107,26 +107,32 @@
     </div>
     <ul class="list-group">
       <li class="list-group-item" data-ng-repeat="item in view.voucher.list">
-        <h3 class="list-group-item-heading" data-ng-bind-template="{{item.fecha | date: 'dd/MM/yyyy'}} {{item.hora | date : 'HH:mm:ss'}}"></h3>
-        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus.</p>
+        <h3 class="list-group-item-heading" data-ng-bind-template="COMPRA/VENTA OPERACION NRO.:{{item.fecha | date: 'dd/MM/yyyy'}}"></h3>
         <dl class="dl-horizontal left">
-          <dt>Nro.Trans:</dt>
-          <dd data-ng-bind="item.id"></dd>
-          <dt>Nro.Trans:</dt>
-          <dd data-ng-bind="item.numeroOperacion"></dd>
-          <dt>Operacion:</dt>
-          <dd data-ng-bind="item.tipoOperacion"></dd>
-          <dt>T.Cambio:</dt>
-          <dd data-ng-bind="item.tasaCambio | number: 3"></dd>
-          <dt>Recibido:</dt>
-          <dd data-ng-bind-template="{{view.transaccion.montoRecibido | currency: ''}} {{view.operacion.denominacionMonedaRecibida | uppercase}}"></dd>
-          <dt>Entregado:</dt>
-          <dd data-ng-bind-template="{{view.transaccion.montoEntregado | currency: ''}} {{view.operacion.denominacionMonedaEntregada | uppercase}}"></dd>
+          <dt style="width: 130px;">Nro.Trans:</dt>
+          <dd style="margin-left: 130px;" data-ng-bind="item.id"></dd>
+          <dt style="width: 130px;">Fecha:</dt>
+          <dd style="margin-left: 130px;" data-ng-bind-template="{{item.fecha | date: 'dd/MM/yyyy'}} {{item.hora | date : 'HH:mm:ss'}}"></dd>
+          <dt style="width: 130px;">Operacion:</dt>
+          <dd style="margin-left: 130px;" data-ng-bind="item.tipoTransaccion"></dd>
+          <dt style="width: 130px;">T.Cambio:</dt>
+          <dd style="margin-left: 130px;" data-ng-bind="item.tipoCambio | number: 3"></dd>
+          <dt style="width: 130px;">Recibido:</dt>
+          <dd style="margin-left: 130px;" data-ng-bind-template="{{item.montoRecibido | currency: ''}} {{item.monedaRecibida.denominacion | uppercase}}"></dd>
+          <dt style="width: 130px;">Entregado:</dt>
+          <dd style="margin-left: 130px;" data-ng-bind-template="{{item.montoEntregado | currency: ''}} {{item.monedaEntregada.denominacion | uppercase}}"></dd>
+          <dt style="width: 130px;">Estado:</dt>
+          <dd style="margin-left: 130px;" data-ng-bind="item.estado | si_no: 'ACTIVO' | uppercase"></dd>
         </dl>
-        <a href="" data-ng-click="imprimir(item)">Imprimir</a>
+        <button type="button" data-ng-click="imprimir(item)" data-ng-disabled="!item.estado" class="btn btn-info btn-xs">
+          <i class="pficon pficon-print"></i><span>&nbsp;Imprimir</span>
+        </button>
+        <button type="button" data-ng-click="extornar(item, $index)" data-ng-disabled="!item.estado" class="btn btn-danger btn-xs">
+          <i class="pficon pficon-delete"></i><span>&nbsp;Extornar</span>
+        </button>
       </li>
     </ul>
-    <p><a href="#">Mas transacciones</a></p>
+    <p><a href="#" ui-sref="cooperativa.app.transaccionCliente.historial.buscar">Mas transacciones</a></p>
   </div><!-- /col -->
 </div>
 

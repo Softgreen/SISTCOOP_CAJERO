@@ -126,9 +126,12 @@ angular.module('cooperativa').factory('VoucherService', function (EMPRESA, $filt
             }
         }
 
-        fnTabTexto('SALDO DISPONIBLE: ' + item.moneda.simbolo + $filter('number')(item.saldoDisponible, 2));
+        if (saldo === true) {
+            fnTabTexto('SALDO DISPONIBLE: ' + item.moneda.simbolo + $filter('number')(item.saldoDisponible, 2));
+        }
 
         if (item.tipoTransaccion === 'DEPOSITO') {
+            fnSaltoLinea();
             fnCentrado('Verifique su dinero antes  de retirarse de ventanilla');
         } else {
             fnSaltoLinea();

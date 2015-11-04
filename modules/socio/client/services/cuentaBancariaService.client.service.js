@@ -86,7 +86,7 @@ angular.module('socio').factory('CuentaBancariaService', ['Restangular',
                 return Restangular.one(baseUrl + '/' + id).get();
             },
             findCuentaByNumeroCuenta: function (numeroCuenta) {
-                return Restangular.one('cuentaBancaria/view/buscar').get({numeroCuenta: numeroCuenta}, {});
+                return Restangular.one(baseUrl + '/buscar').get({numeroCuenta: numeroCuenta}, {});
             },
             crearCuentaAhorro: function (transaccion) {
                 return Restangular.all(baseUrl).post(transaccion);

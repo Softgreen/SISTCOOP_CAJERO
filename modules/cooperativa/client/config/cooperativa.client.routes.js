@@ -581,8 +581,8 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
             })
             .state('cooperativa.app.transaccionCliente.transaccion.cuentaPersonal', {
                 url: '/cuentaPersonal',
-                templateUrl: 'modules/cooperativa/client/views/transaccionCliente/form-transaccion-cuentaPersonal.html',
-                //controller: 'Cooperativa.Boveda.BuscarController',
+                templateUrl: 'modules/cooperativa/client/views/transaccionCliente/cuentaPersonal/form-transaccion-cuentaPersonal.html',
+                controller: 'Cooperativa.TransaccionCliente.CuentaPersonal.CrearController',
                 resolve: {},
                 ncyBreadcrumb: {
                     label: 'Home'

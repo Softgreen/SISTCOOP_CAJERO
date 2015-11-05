@@ -4,117 +4,201 @@
 angular.module('persona').controller('Cooperativa.TransaccionInterna.CajaCaja.BuscarController',
     function ($scope, $state, toastr, CAJA, SGDialog, CajaService, SessionService, VoucherService) {
 
-        var paginationOptions = {
-            page: 1,
-            pageSize: 10
-        };
-
-        $scope.filterOptions = {
-            filterText: undefined
-        };
-
-        $scope.gridOptions = {
+        $scope.gridOptions_enviado_noConfirmado = {
             data: [],
             enableRowSelection: true,
             enableRowHeaderSelection: false,
             multiSelect: false,
 
-            paginationPageSizes: [10, 25, 50],
-            paginationPageSize: 10,
-            useExternalPagination: true,
-            useExternalSorting: true,
-
             columnDefs: [
-                {field: 'idTransaccion', displayName: 'TRANS.', width: '9%'},
-                {field: 'tipoTransaccion', displayName: 'TIPO TRANS.', width: '9%'},
-                {field: 'numeroOperacion', displayName: 'NRO.OP.', width: '9%'},
-                {field: 'moneda', displayName: 'MONEDA', width: '14%'},
-                {field: 'monto', displayName: 'MONTO', width: '14%'},
-                {field: 'fecha', cellFilter: 'date: "dd/MM/yyyy"', displayName: 'FECHA', width: '10%'},
-                {field: 'hora', cellFilter: 'date: "HH:mm:ss"', displayName: 'HORA', width: '10%'},
-                {field: 'estado', cellFilter: 'si_no: "ACTIVO"', displayName: 'ESTADO', width: '10%'},
+                {field: 'hora', cellFilter: 'date: "dd/MM/yyyy HH:mm:ss"', displayName: 'FECHA', width: '26%'},
+                {field: 'estadoConfirmacion', cellFilter: 'si_no: "CONFIRMADO"', displayName: 'E.CONFIRMACION', width: '20%'},
+                {
+                    name: 'monto',
+                    displayName: 'MONTO',
+                    cellTemplate: '' +
+                    '<div style="text-align: right; padding-top: 5px; padding-right: 5px;">' +
+                    '<span data-ng-bind="row.entity.moneda.simbolo"></span>' +
+                    '<span data-ng-bind="row.entity.monto | currency: \'\'"></span>' +
+                    '</div>',
+                    width: '21%'
+                },
+                {field: 'historialCajaDestino.caja.abreviatura', displayName: 'DESTINO', width: '14%'},
                 {
                     name: 'edit',
                     displayName: 'Edit',
                     cellTemplate: '' +
                     '<div style="text-align: center; padding-top: 5px;">' +
-                    '<button type="button" data-ng-click="grid.appScope.gridActions.imprimir(row.entity)" data-ng-disabled="!row.entity.estado" class="btn btn-info btn-xs">' +
-                    '<i class="pficon pficon-print"></i>' +
-                    '<span>&nbsp;Imprimir</span>' +
-                    '</button>' +
-                    '&nbsp;' +
-                    '<button type="button" data-ng-click="grid.appScope.gridActions.extornar(row.entity)" data-ng-disabled="!row.entity.estado" class="btn btn-danger btn-xs">' +
-                    '<i class="pficon pficon-delete"></i>' +
-                    '<span>&nbsp;Extornar</span>' +
+                    '<button type="button" data-ng-click="grid.appScope.gridActions.cancelar(row.entity)" data-ng-disabled="row.entity.estadoConfirmacion || !row.entity.estadoSolicitud" class="btn btn-danger btn-xs">Cancelar' +
                     '</button>' +
                     '</div>'
                 }
-            ],
-            onRegisterApi: function (gridApi) {
-                $scope.gridApi = gridApi;
-                $scope.gridApi.core.on.sortChanged($scope, function (grid, sortColumns) {
-                    console.log('Order by. Not available.');
-                });
-                gridApi.pagination.on.paginationChanged($scope, function (newPage, pageSize) {
-                    paginationOptions.page = newPage;
-                    paginationOptions.pageSize = pageSize;
-                    $scope.search();
-                });
-            }
+            ]
         };
+        $scope.gridOptions_enviado_confirmado = {
+            data: [],
+            enableRowSelection: true,
+            enableRowHeaderSelection: false,
+            multiSelect: false,
+
+            columnDefs: [
+                {field: 'hora', cellFilter: 'date: "dd/MM/yyyy HH:mm:ss"', displayName: 'FECHA', width: '26%'},
+                {field: 'estadoConfirmacion', cellFilter: 'si_no: "CONFIRMADO"', displayName: 'E.CONFIRMACION', width: '20%'},
+                {
+                    name: 'monto',
+                    displayName: 'MONTO',
+                    cellTemplate: '' +
+                    '<div style="text-align: right; padding-top: 5px; padding-right: 5px;">' +
+                    '<span data-ng-bind="row.entity.moneda.simbolo"></span>' +
+                    '<span data-ng-bind="row.entity.monto | currency: \'\'"></span>' +
+                    '</div>',
+                    width: '21%'
+                },
+                {field: 'historialCajaDestino.caja.abreviatura', displayName: 'DESTINO', width: '14%'},
+                {
+                    name: 'edit',
+                    displayName: 'Edit',
+                    cellTemplate: '' +
+                    '<div style="text-align: center; padding-top: 5px;">' +
+                    '<button type="button" data-ng-click="grid.appScope.gridActions.imprimir(row.entity)" data-ng-disabled="!row.entity.estadoConfirmacion" class="btn btn-info btn-xs">' +
+                    '<i class="pficon pficon-print"></i>' +
+                    '<span>&nbsp;Imprimir</span>' +
+                    '</button>' +
+                    '</div>'
+                }
+            ]
+        };
+
+        $scope.gridOptions_recibido_confirmado = {
+            data: [],
+            enableRowSelection: true,
+            enableRowHeaderSelection: false,
+            multiSelect: false,
+
+            columnDefs: [
+                {field: 'hora', cellFilter: 'date: "dd/MM/yyyy HH:mm:ss"', displayName: 'FECHA', width: '26%'},
+                {field: 'estadoConfirmacion', cellFilter: 'si_no: "CONFIRMADO"', displayName: 'E.CONFIRMACION', width: '20%'},
+                {
+                    name: 'monto',
+                    displayName: 'MONTO',
+                    cellTemplate: '' +
+                    '<div style="text-align: right; padding-top: 5px; padding-right: 5px;">' +
+                    '<span data-ng-bind="row.entity.moneda.simbolo"></span>' +
+                    '<span data-ng-bind="row.entity.monto | currency: \'\'"></span>' +
+                    '</div>',
+                    width: '21%'
+                },
+                {field: 'historialCajaOrigen.caja.abreviatura', displayName: 'ORIGEN', width: '14%'},
+                {
+                    name: 'edit',
+                    displayName: 'Edit',
+                    cellTemplate: '' +
+                    '<div style="text-align: center; padding-top: 5px;">' +
+                    '<button type="button" data-ng-click="grid.appScope.gridActions.imprimir(row.entity)" data-ng-disabled="!row.entity.estadoConfirmacion" class="btn btn-info btn-xs">' +
+                    '<i class="pficon pficon-print"></i>' +
+                    '<span>&nbsp;Imprimir</span>' +
+                    '</button>' +
+                    '</div>'
+                }
+            ]
+        };
+        $scope.gridOptions_recibido_noConfirmado = {
+            data: [],
+            enableRowSelection: true,
+            enableRowHeaderSelection: false,
+            multiSelect: false,
+
+            columnDefs: [
+                {field: 'hora', cellFilter: 'date: "dd/MM/yyyy HH:mm:ss"', displayName: 'FECHA', width: '24%'},
+                {field: 'estadoConfirmacion', cellFilter: 'si_no: "CONFIRMADO"', displayName: 'E.CONFIRMACION', width: '18%'},
+                {
+                    name: 'monto',
+                    displayName: 'MONTO',
+                    cellTemplate: '' +
+                    '<div style="text-align: right; padding-top: 5px; padding-right: 5px;">' +
+                    '<span data-ng-bind="row.entity.moneda.simbolo"></span>' +
+                    '<span data-ng-bind="row.entity.monto | currency: \'\'"></span>' +
+                    '</div>',
+                    width: '20%'
+                },
+                {field: 'historialCajaOrigen.caja.abreviatura', displayName: 'ORIGEN', width: '14%'},
+                {
+                    name: 'edit',
+                    displayName: 'Edit',
+                    cellTemplate: '' +
+                    '<div style="text-align: center; padding-top: 5px;">' +
+                    '<button type="button" data-ng-click="grid.appScope.gridActions.confirmar(row.entity)" data-ng-disabled="row.entity.estadoConfirmacion || !row.entity.estadoSolicitud" class="btn btn-info btn-xs">Confirmar' +
+                    '</button>' +
+                    '&nbsp;' +
+                    '<button type="button" data-ng-click="grid.appScope.gridActions.cancelar(row.entity)" data-ng-disabled="row.entity.estadoConfirmacion || !row.entity.estadoSolicitud" class="btn btn-danger btn-xs">Cancelar' +
+                    '</button>' +
+                    '</div>'
+                }
+            ]
+        };
+
         $scope.gridActions = {
-            imprimir: function (row) {
-                if (row.tipoTransaccion === 'APORTE') {
-                    CajaService.getVoucherCuentaAporte(row.idTransaccion).then(function (response) {
-                        VoucherService.imprimirVoucherAporte(response);
-                    });
-                }
-                else if (row.tipoTransaccion === 'DEPOSITO' || row.tipoTransaccion === 'RETIRO') {
-                    CajaService.getVoucherTransaccionBancaria(row.idTransaccion).then(function (response) {
-                        VoucherService.imprimirVoucherCuentaPersonal(response);
-                    });
-                }
-                else if (row.tipoTransaccion === 'COMPRA' || row.tipoTransaccion === 'VENTA') {
-                    CajaService.getVoucherCompraVenta(row.idTransaccion).then(function (response) {
-                        VoucherService.imprimirVoucherCompraVenta(response);
-                    });
-                }
-                else if (row.tipoTransaccion === 'TRANSFERENCIA') {
-                    CajaService.getVoucherTransferenciaBancaria(row.idTransaccion).then(function (response) {
-                        VoucherService.imprimirVoucherTransferencia(response);
-                    });
-                }
-                else if (row.tipoTransaccion === 'COBRO_CHEQUE') {
-                    CajaService.getVoucherTransaccionCheque(row.idTransaccion).then(function (response) {
-                        VoucherService.imprimirVoucherCheque(response);
-                    });
-                } else {
-                    alert('Tipo de transaccion no encontrado');
-                }
-            },
-            extornar: function (row) {
-                SGDialog.confirmDelete('Transaccion', '', function () {
-                    SessionService.extornarTransaccion(row.idTransaccion).then(
+            confirmar: function (row) {
+                SGDialog.confirm('Confirmar transaccion', 'Estas seguro de confirmar la transaccion', function () {
+                    SessionService.confirmarTransaccionCajaCaja(row.id).then(
                         function (response) {
-                            toastr.success('Transaccion extornada satisfactoriamente.');
-                            $scope.search();
+                            toastr.success('Transaccion confirmada');
+                            $scope.loadTransaccionEnviadas();
+                            $scope.loadTransaccionRecibidas();
                         }, function error(err) {
                             toastr.error(err.data.message);
-                            $scope.search();
                         }
                     );
+                });
+            },
+            cancelar: function (row) {
+                SGDialog.confirm('Cancelar transaccion', 'Estas seguro de cancelar la transaccion', function () {
+                    SessionService.cancelarTransaccionCajaCaja(row.id).then(
+                        function (response) {
+                            toastr.success('Transaccion cancelada');
+                            $scope.loadTransaccionEnviadas();
+                            $scope.loadTransaccionRecibidas();
+                        }, function error(err) {
+                            toastr.error(err.data.message);
+                        }
+                    );
+                });
+            },
+            imprimir: function (row) {
+                CajaService.getVoucherTransaccionCajaCaja(row.id).then(function (response) {
+                    VoucherService.imprimirVoucherTransaccionCajaCaja(response);
                 });
             }
         };
 
-        $scope.search = function () {
-            var ft = $scope.filterOptions.filterText;
-            var desde = (paginationOptions.page * paginationOptions.pageSize) - paginationOptions.pageSize;
-            var hasta = paginationOptions.pageSize;
-            CajaService.getHistorialTransaccion(CAJA.id, null, ft, desde, hasta).then(function (response) {
-                $scope.gridOptions.data = response;
-                $scope.gridOptions.totalItems = 1000;
+        $scope.loadTransaccionEnviadas = function () {
+            CajaService.getTransaccionCajaCajaEnviadas(CAJA.id).then(function (response) {
+                $scope.gridOptions_enviado_confirmado.data = [];
+                $scope.gridOptions_enviado_noConfirmado.data = [];
+                for (var i = 0; i < response.length; i++) {
+                    if (response[i].estadoConfirmacion === true) {
+                        $scope.gridOptions_enviado_confirmado.data.push(response[i]);
+                    } else {
+                        $scope.gridOptions_enviado_noConfirmado.data.push(response[i]);
+                    }
+                }
             });
         };
+        $scope.loadTransaccionRecibidas = function () {
+            CajaService.getTransaccionCajaCajaRecibidas(CAJA.id).then(function (response) {
+                $scope.gridOptions_recibido_confirmado.data = [];
+                $scope.gridOptions_recibido_noConfirmado.data = [];
+                for (var i = 0; i < response.length; i++) {
+                    if (response[i].estadoConfirmacion === true) {
+                        $scope.gridOptions_recibido_confirmado.data.push(response[i]);
+                    } else {
+                        $scope.gridOptions_recibido_noConfirmado.data.push(response[i]);
+                    }
+                }
+            });
+        };
+
+        $scope.loadTransaccionEnviadas();
+        $scope.loadTransaccionRecibidas();
 
     });

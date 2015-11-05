@@ -55,10 +55,10 @@ angular.module('cooperativa').factory('VoucherService', function (EMPRESA, $filt
         fnResetPrinter();
 
         fnCabecera();
+        fnNegritaCentrado(item.tipoTransaccion + ' M.E.');
         fnTabTexto(item.agenciaAbreviatura, 'TRANS.: ' + item.id);
         fnTabTexto('CAJA: ' + item.cajaDenominacion, 'NRO.OP.: ' + item.numeroOperacion);
         fnTabTexto('FECHA: ' + $filter('date')(item.fecha, 'dd/MM/yyyy'), 'HORA: ' + $filter('date')(item.hora, 'HH:mm:ss'));
-        fnTabTexto('CUENTA: ' + item.numeroCuenta);
         if (item.referencia) {
             fnTabTexto('CLIENTE: ' + item.referencia);
         }

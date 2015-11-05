@@ -612,12 +612,32 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                 controller: 'Cooperativa.TransaccionInterna.BovedaCaja.BuscarController',
                 resolve: {}
             })
+            .state('cooperativa.app.transaccionInterna.bovedaCaja.crear', {
+                url: '/crear',
+                templateUrl: 'modules/cooperativa/client/views/transaccionInterna/bovedaCaja/form-crear-transaccionBovedaCaja.html',
+                controller: 'Cooperativa.TransaccionInterna.BovedaCaja.CrearController',
+                resolve: {},
+                ncyBreadcrumb: {
+                    label: 'Crear transaccion boveda-caja',
+                    parent: 'cooperativa.app.transaccionInterna.bovedaCaja.buscar'
+                }
+            })
 
             .state('cooperativa.app.transaccionInterna.cajaCaja.buscar', {
                 url: '/buscar',
                 templateUrl: 'modules/cooperativa/client/views/transaccionInterna/cajaCaja/form-buscar-transaccionCajaCaja.html',
                 controller: 'Cooperativa.TransaccionInterna.CajaCaja.BuscarController',
                 resolve: {}
+            })
+            .state('cooperativa.app.transaccionInterna.cajaCaja.crear', {
+                url: '/crear',
+                templateUrl: 'modules/cooperativa/client/views/transaccionInterna/cajaCaja/form-crear-transaccionCajaCaja.html',
+                controller: 'Cooperativa.TransaccionInterna.CajaCaja.CrearController',
+                resolve: {},
+                ncyBreadcrumb: {
+                    label: 'Crear transaccion caja-caja',
+                    parent: 'cooperativa.app.transaccionInterna.cajaCaja.buscar'
+                }
             });
 
     }

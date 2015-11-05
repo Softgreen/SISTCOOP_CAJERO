@@ -610,7 +610,10 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                 url: '/buscar',
                 templateUrl: 'modules/cooperativa/client/views/transaccionInterna/bovedaCaja/form-buscar-transaccionBovedaCaja.html',
                 controller: 'Cooperativa.TransaccionInterna.BovedaCaja.BuscarController',
-                resolve: {}
+                resolve: {},
+                ncyBreadcrumb: {
+                    label: 'Home'
+                }
             })
             .state('cooperativa.app.transaccionInterna.bovedaCaja.crear', {
                 url: '/crear',
@@ -627,7 +630,10 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                 url: '/buscar',
                 templateUrl: 'modules/cooperativa/client/views/transaccionInterna/cajaCaja/form-buscar-transaccionCajaCaja.html',
                 controller: 'Cooperativa.TransaccionInterna.CajaCaja.BuscarController',
-                resolve: {}
+                resolve: {},
+                ncyBreadcrumb: {
+                    label: 'Home'
+                }
             })
             .state('cooperativa.app.transaccionInterna.cajaCaja.crear', {
                 url: '/crear',

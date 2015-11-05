@@ -4,22 +4,30 @@
             <div class="panel-body">
               <fieldset class="border-top">
                 <legend><span class="text">Datos principales</span></legend>
-                <dl class="dl-horizontal left">
+                <dl class="dl-horizontal left" data-ng-if="view.load.socioPersona.nombres">
                   <dt>Codigo pais:</dt>
-                  <dd data-ng-bind="view.load.socioPersonaNatural.codigoPais"></dd>
+                  <dd data-ng-bind="view.load.socioPersona.codigoPais"></dd>
                   <dt>Documento:</dt>
-                  <dd data-ng-bind-template="{{view.load.socioPersonaNatural.tipoDocumento.abreviatura}}/{{view.load.socioPersonaNatural.numeroDocumento}}"></dd>
+                  <dd data-ng-bind-template="{{view.load.socioPersona.tipoDocumento.abreviatura}}/{{view.load.socioPersona.numeroDocumento}}"></dd>
                   <dt>Apellidos:</dt>
-                  <dd data-ng-bind-template="{{view.load.socioPersonaNatural.apellidoPaterno}}&nbsp;{{view.load.socioPersonaNatural.apellidoMaterno}}"></dd>
+                  <dd data-ng-bind-template="{{view.load.socioPersona.apellidoPaterno}}&nbsp;{{view.load.socioPersona.apellidoMaterno}}"></dd>
                   <dt>Nombres:</dt>
-                  <dd data-ng-bind="view.load.socioPersonaNatural.nombres"></dd>
+                  <dd data-ng-bind="view.load.socioPersona.nombres"></dd>
                   <dt>Fecha de nacimiento:</dt>
-                  <dd data-ng-bind="view.load.socioPersonaNatural.fechaNacimiento | date : 'dd/MM/yyyy'"></dd>
+                  <dd data-ng-bind="view.load.socioPersona.fechaNacimiento | date : 'dd/MM/yyyy'"></dd>
                   <dt>Sexo:</dt>
-                  <dd data-ng-bind="view.load.socioPersonaNatural.sexo"></dd>
+                  <dd data-ng-bind="view.load.socioPersona.sexo"></dd>
                   <dt>Estado civil:</dt>
-                  <dd data-ng-if="view.load.socioPersonaNatural.estadoCivil" data-ng-bind="view.load.socioPersonaNatural.estadoCivil"></dd>
-                  <dd data-ng-if="!view.load.socioPersonaNatural.estadoCivil"><em>No registrado</em></dd>
+                  <dd data-ng-if="view.load.socioPersona.estadoCivil" data-ng-bind="view.load.socioPersona.estadoCivil"></dd>
+                  <dd data-ng-if="!view.load.socioPersona.estadoCivil"><em>No registrado</em></dd>
+                </dl>
+                <dl class="dl-horizontal left" data-ng-if="view.load.socioPersona.razonSocial">
+                  <dt>Documento:</dt>
+                  <dd data-ng-bind-template="{{view.load.socioPersona.tipoDocumento.abreviatura}}/{{view.load.socioPersona.numeroDocumento}}"></dd>
+                  <dt>Razon socila:</dt>
+                  <dd data-ng-bind="view.load.socioPersona.razonSocial"></dd>
+                  <dt>Fecha constitucion:</dt>
+                  <dd data-ng-bind="view.load.socioPersona.fechaConstitucion | date : 'dd/MM/yyyy'"></dd>
                 </dl>
               </fieldset>
             </div>

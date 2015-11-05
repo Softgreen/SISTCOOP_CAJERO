@@ -11,7 +11,7 @@ angular.module('socio').controller('Socio.Socio.Editar.CuentaPersonal.CrearContr
 		};
 
 		$scope.view.load = {
-			socioPersonaNatural: undefined
+			socioPersona: undefined
 		};
 
 		$scope.loadSocioPersonaNatural = function () {

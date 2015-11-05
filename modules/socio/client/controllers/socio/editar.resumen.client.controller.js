@@ -2,23 +2,29 @@
 
 /* jshint -W098 */
 angular.module('socio').controller('Socio.Socio.EditarSocio.ResumenController',
-    function ($scope, $state, socio, PersonaNaturalService, SocioService) {
+    function ($scope, $state, socio, PersonaNaturalService, PersonaJuridicaService, SocioService) {
 
         $scope.view = {
             socio: socio
         };
 
         $scope.view.load = {
-            socioPersonaNatural: undefined,
+            socioPersona: undefined,
             representanteLegal: undefined,
             cuentaAporte: undefined,
             cuentasPersonales: undefined
         };
 
         $scope.loadSocioAsPersonaNatural = function () {
-            PersonaNaturalService.findByTipoNumeroDocumento($scope.view.socio.idTipoDocumento, $scope.view.socio.numeroDocumento).then(function (response) {
-                $scope.view.load.socioPersonaNatural = response;
-            });
+            if($scope.view.socio.tipoPersona === 'NATURAL') {
+                PersonaNaturalService.findByTipoNumeroDocumento($scope.view.socio.idTipoDocumento, $scope.view.socio.numeroDocumento).then(function (response) {
+                    $scope.view.load.socioPersona = response;
+                });
+            } else {
+                PersonaJuridicaService.findByTipoNumeroDocumento($scope.view.socio.idTipoDocumento, $scope.view.socio.numeroDocumento).then(function (response) {
+                    $scope.view.load.socioPersona = response;
+                });
+            }
         };
         $scope.loadSocioAsPersonaNatural();
 

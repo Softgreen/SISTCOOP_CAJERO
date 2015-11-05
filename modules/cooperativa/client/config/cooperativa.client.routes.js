@@ -29,6 +29,11 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
         //Transacciones cliente
         $urlRouterProvider.when('/cooperativa/app/transaccionCliente/transacciones', '/cooperativa/app/transaccionCliente/transacciones/compraVenta');
         $urlRouterProvider.when('/cooperativa/app/transaccionCliente/historial', '/cooperativa/app/transaccionCliente/historial/buscar');
+
+        //Transacciones interna
+        $urlRouterProvider.when('/cooperativa/app/transaccionInterna/transaccionesBovedaCaja', '/cooperativa/app/transaccionInterna/transaccionesBovedaCaja/buscar');
+        $urlRouterProvider.when('/cooperativa/app/transaccionInterna/transaccionesCajaCaja', '/cooperativa/app/transaccionInterna/transaccionesCajaCaja/buscar');
+
         $stateProvider
             .state('cooperativa', {
                 abstract: true,
@@ -540,20 +545,6 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                 resolve: {}
             })
 
-            //Transacciones internas
-            .state('cooperativa.app.transaccionInterna.buscarTransaccionesBovedaCaja', {
-                url: '/buscarTransaccionesBovedaCaja',
-                templateUrl: 'modules/cooperativa/client/views/transaccionInterna/form-buscar-transaccionBovedaCaja.html',
-                controller: 'Cooperativa.BuscarTransaccionBovedaCajaController',
-                resolve: {}
-            })
-            .state('cooperativa.app.transaccionInterna.buscarTransaccionesCajaCaja', {
-                url: '/buscarTransaccionesCajaCaja',
-                templateUrl: 'modules/cooperativa/client/views/transaccionInterna/form-buscar-transaccionCajaCaja.html',
-                controller: 'Cooperativa.BuscarTransaccionCajaCajaController',
-                resolve: {}
-            })
-
             //Transaccion Cliente
             .state('cooperativa.app.transaccionCliente.transaccion', {
                 url: '/transacciones',
@@ -597,6 +588,36 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                 ncyBreadcrumb: {
                     label: 'Home'
                 }
+            })
+
+            //Transacciones internas
+            .state('cooperativa.app.transaccionInterna.bovedaCaja', {
+                url: '/transaccionesBovedaCaja',
+                template: '<div ui-view></div>',
+                ncyBreadcrumb: {
+                    skip: true // Never display this state in breadcrumb.
+                }
+            })
+            .state('cooperativa.app.transaccionInterna.cajaCaja', {
+                url: '/transaccionesCajaCaja',
+                template: '<div ui-view></div>',
+                ncyBreadcrumb: {
+                    skip: true // Never display this state in breadcrumb.
+                }
+            })
+
+            .state('cooperativa.app.transaccionInterna.bovedaCaja.buscar', {
+                url: '/buscar',
+                templateUrl: 'modules/cooperativa/client/views/transaccionInterna/bovedaCaja/form-buscar-transaccionBovedaCaja.html',
+                controller: 'Cooperativa.TransaccionInterna.BovedaCaja.BuscarController',
+                resolve: {}
+            })
+
+            .state('cooperativa.app.transaccionInterna.cajaCaja.buscar', {
+                url: '/buscar',
+                templateUrl: 'modules/cooperativa/client/views/transaccionInterna/cajaCaja/form-buscar-transaccionCajaCaja.html',
+                controller: 'Cooperativa.TransaccionInterna.CajaCaja.BuscarController',
+                resolve: {}
             });
 
     }

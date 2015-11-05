@@ -7,6 +7,9 @@ angular.module('persona').filter('si_no', function () {
         var modeTwoResult = ['Abierto', 'Cerrado'];
         var modeTreeResult = ['Descongelado', 'Congelado'];
 
+        var modeFourResult = ['Solicitado', 'Cancelado'];
+        var modeFiveResult = ['Confirmado', 'No confirmado'];
+
         var result = defaultResult;
         if (mode) {
             if (mode.toLowerCase() === 'si') {
@@ -17,6 +20,10 @@ angular.module('persona').filter('si_no', function () {
                 result = modeTwoResult;
             } else if (mode.toLowerCase() === 'congelado') {
                 result = modeTreeResult;
+            } else if (mode.toLowerCase() === 'solicitado') {
+                result = modeFourResult;
+            } else if (mode.toLowerCase() === 'confirmado') {
+                result = modeFiveResult;
             } else {
                 result = defaultResult;
             }

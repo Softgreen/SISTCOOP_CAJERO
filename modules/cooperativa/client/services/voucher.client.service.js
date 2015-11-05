@@ -204,12 +204,66 @@ angular.module('cooperativa').factory('VoucherService', function (EMPRESA, $filt
         fnImprimir();
     };
 
+
+    var fnBovedaCaja = function (item) {
+        if (notReady()) {
+            return;
+        }
+        fnResetPrinter();
+
+        fnCabecera();
+        if (item.origen === 'CAJA') {
+            fnNegritaCentrado('TRANSACCION CAJA/BOVEDA');
+        } else if (item.origen === 'BOVEDA') {
+            fnNegritaCentrado('TRANSACCION BOVEDA/CAJA');
+        } else {
+            alert('Origen no valido');
+        }
+        fnTabTexto(item.agenciaAbreviatura, 'TRANS.: ' + item.id);
+        fnTabTexto('ORIGEN: ' + item.origenTransaccion);
+        fnTabTexto('DESTINO: ' + item.destinoTransaccion);
+        fnTabTexto('FECHA: ' + $filter('date')(item.fecha, 'dd/MM/yyyy'), 'HORA: ' + $filter('date')(item.hora, 'HH:mm:ss'));
+
+        fnTabTexto('MONEDA: ' + item.moneda.denominacion);
+        if (item.moneda.simbolo.charCodeAt(0) === '€') {
+            fnTabTexto('MONTO: ' + $filter('currency')(item.monto, chr(238)));
+        } else {
+            fnTabTexto('MONTO: ' + $filter('currency')(item.monto, item.moneda.simbolo));
+        }
+
+        if (item.estadoSolicitud) {
+            fnTabTexto('ESTADO SOLICITUD: SOLICITADO');
+        } else {
+            fnTabTexto('ESTADO SOLICITUD: CANCELADO');
+        }
+        if (item.estadoConfirmacion) {
+            fnTabTexto('ESTADO CONFIRMACION: CONFIRMADO');
+        } else {
+            fnTabTexto('ESTADO CONFIRMACION: NO CONFIRMADO');
+        }
+
+        fnSaltoLinea();
+        fnSaltoLinea();
+        fnSaltoLinea();
+
+        fnTabTexto('________________', '________________');
+        fnTabTexto('Firma cajero', 'Firma jefe caja', 2);
+        fnImprimir();
+    };
+
+    var fnCajaCaja = function (item) {
+
+    };
+
     return {
         imprimirVoucherAporte: fnCuentaAporte,
         imprimirVoucherCompraVenta: fnCompraVenta,
         imprimirVoucherCuentaPersonal: fnCuentaPersonal,
         imprimirVoucherTransferencia: fnTransferencia,
-        imprimirVoucherCheque: fnCheque
+        imprimirVoucherCheque: fnCheque,
+
+        imprimirVoucherTransaccionBovedaCaja: fnBovedaCaja,
+        imprimirVoucherTransaccionCajaCaja: fnCajaCaja
     };
 
 });

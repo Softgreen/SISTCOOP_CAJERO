@@ -59,17 +59,19 @@ angular.module('persona').controller('Cooperativa.TransaccionInterna.BovedaCaja.
                     };
                 }
 
-                $scope.working = true;
-                SessionService.crearTransaccionBovedaCajaOrigenCaja($scope.combo.selected.boveda.id, transaccion).then(
-                    function (data) {
-                        $scope.working = false;
-                        toastr('Transaccion creada satisfactoriamente');
-                        $state.transitionTo('^.buscar');
-                    },
-                    function error(err) {
-                       toastr.error(err.data.message);
-                    }
-                );
+                SGDialog.confirm('Guardar', 'Estas seguro de realizar la transaccion', function () {
+                    $scope.working = true;
+                    SessionService.crearTransaccionBovedaCajaOrigenCaja($scope.combo.selected.boveda.id, transaccion).then(
+                        function (data) {
+                            $scope.working = false;
+                            toastr('Transaccion creada satisfactoriamente');
+                            $state.transitionTo('^.buscar');
+                        },
+                        function error(err) {
+                            toastr.error(err.data.message);
+                        }
+                    );
+                });
             } else {
                 toastr.warning('Monto de transaccion no valido');
             }

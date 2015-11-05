@@ -6,6 +6,8 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
 
         var moduleName = 'cooperativa';
 
+        $urlRouterProvider.when('/cooperativa/app', '/cooperativa/app/transaccionCliente/transacciones/compraVenta');
+
         $urlRouterProvider.when('/cooperativa/app/estructura/bovedas', '/cooperativa/app/estructura/bovedas/buscar');
         $urlRouterProvider.when('/cooperativa/app/estructura/cajas', '/cooperativa/app/estructura/cajas/buscar');
 

@@ -680,6 +680,38 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                 ncyBreadcrumb: {
                     label: 'Home'
                 }
+            })
+            .state('cooperativa.app.administracion.historial.editar', {
+                url: '/editar/:historial',
+                templateUrl: 'modules/cooperativa/client/views/administracion/historial/form-editar-historial.html',
+                controller: 'Cooperativa.Administracion.Historial.EditarController',
+                resolve: {
+                    historial: function ($state, $stateParams) {
+                        return {id: $stateParams.historial};
+                    }
+                },
+                ncyBreadcrumb: {
+                    label: 'Editar historial',
+                    parent: 'cooperativa.app.administracion.historial.buscar'
+                }
+            })
+            .state('cooperativa.app.administracion.historial.editar.resumen', {
+                url: '/resumen',
+                templateUrl: 'modules/cooperativa/client/views/boveda/form-editar-boveda-resumen.html',
+                controller: 'Cooperativa.Boveda.Editar.ResumenController',
+                resolve: {},
+                ncyBreadcrumb: {
+                    skip: true // Never display this state in breadcrumb.
+                }
+            })
+            .state('cooperativa.app.administracion.historial.editar.datosPrincipales', {
+                url: '/datosPrincipales',
+                templateUrl: 'modules/cooperativa/client/views/boveda/form-editar-boveda-datosPrincipales.html',
+                controller: 'Cooperativa.Boveda.Editar.DatosPrincipalesController',
+                resolve: {},
+                ncyBreadcrumb: {
+                    label: 'Datos principales'
+                }
             });
 
     }

@@ -37,7 +37,7 @@ angular.module('cooperativa').controller('Cooperativa.Administracion.Historial.B
 
         $scope.gridActions = {
             edit: function (row) {
-                $state.go('^.editar', {boveda: row.id});
+                $state.go('^.editar', {historial: row.id});
             }
         };
 

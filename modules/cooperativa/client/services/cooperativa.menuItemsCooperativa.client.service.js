@@ -93,8 +93,8 @@ angular.module('cooperativa').service('$menuItemsCooperativa', [
             transaccionInterna.addItem('Boveda/Caja', 'cooperativa.app.transaccionInterna.bovedaCaja');
             transaccionInterna.addItem('Caja/Caja', 'cooperativa.app.transaccionInterna.cajaCaja');
 
-            otros.addItem('Pendientes caja', 'cooperativa.app.transaccionInterna.buscarTransaccionesBovedaCaja');
-            otros.addItem('Historial cierres', 'cooperativa.app.transaccionInterna.buscarTransaccionesCajaCaja');
+            otros.addItem('Pendientes caja', 'cooperativa.app.administracion.pendiente');
+            otros.addItem('Historial cierres', 'cooperativa.app.administracion.historial');
 
             return this;
         };

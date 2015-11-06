@@ -36,6 +36,9 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
         $urlRouterProvider.when('/cooperativa/app/transaccionInterna/transaccionesBovedaCaja', '/cooperativa/app/transaccionInterna/transaccionesBovedaCaja/buscar');
         $urlRouterProvider.when('/cooperativa/app/transaccionInterna/transaccionesCajaCaja', '/cooperativa/app/transaccionInterna/transaccionesCajaCaja/buscar');
 
+        //Administracion
+        $urlRouterProvider.when('/cooperativa/app/administracion/historiales', '/cooperativa/app/administracion/historiales/buscar');
+
         $stateProvider
             .state('cooperativa', {
                 abstract: true,
@@ -68,13 +71,18 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                 template: '<div ui-view></div>',
                 abstract: true
             })
+            .state('cooperativa.app.transaccionCliente', {
+                url: '/transaccionCliente',
+                template: '<div ui-view></div>',
+                abstract: true
+            })
             .state('cooperativa.app.transaccionInterna', {
                 url: '/transaccionInterna',
                 template: '<div ui-view></div>',
                 abstract: true
             })
-            .state('cooperativa.app.transaccionCliente', {
-                url: '/transaccionCliente',
+            .state('cooperativa.app.administracion', {
+                url: '/administracion',
                 template: '<div ui-view></div>',
                 abstract: true
             })
@@ -645,6 +653,32 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                 ncyBreadcrumb: {
                     label: 'Crear transaccion caja-caja',
                     parent: 'cooperativa.app.transaccionInterna.cajaCaja.buscar'
+                }
+            })
+
+            //administracion
+            .state('cooperativa.app.administracion.pendiente', {
+                url: '/pendientes',
+                template: '<div ui-view></div>',
+                ncyBreadcrumb: {
+                    skip: true // Never display this state in breadcrumb.
+                }
+            })
+            .state('cooperativa.app.administracion.historial', {
+                url: '/historiales',
+                template: '<div ui-view></div>',
+                ncyBreadcrumb: {
+                    skip: true // Never display this state in breadcrumb.
+                }
+            })
+
+            .state('cooperativa.app.administracion.historial.buscar', {
+                url: '/buscar',
+                templateUrl: 'modules/cooperativa/client/views/administracion/historial/form-buscar-historiales.html',
+                controller: 'Cooperativa.Administracion.Historial.BuscarController',
+                resolve: {},
+                ncyBreadcrumb: {
+                    label: 'Home'
                 }
             });
 

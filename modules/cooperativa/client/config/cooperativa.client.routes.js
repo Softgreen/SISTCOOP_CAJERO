@@ -39,6 +39,8 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
         //Administracion
         $urlRouterProvider.when('/cooperativa/app/administracion/historiales', '/cooperativa/app/administracion/historiales/buscar');
 
+        $urlRouterProvider.when('/cooperativa/app/administracion/pendientes', '/cooperativa/app/administracion/pendientes/buscar');
+
         $stateProvider
             .state('cooperativa', {
                 abstract: true,
@@ -672,6 +674,26 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                 }
             })
 
+            .state('cooperativa.app.administracion.pendiente.buscar', {
+                url: '/buscar',
+                templateUrl: 'modules/cooperativa/client/views/administracion/pendiente/form-buscar-pendiente.html',
+                controller: 'Cooperativa.Administracion.Pendiente.BuscarController',
+                resolve: {},
+                ncyBreadcrumb: {
+                    label: 'Home'
+                }
+            })
+            .state('cooperativa.app.administracion.pendiente.crear', {
+                url: '/crear',
+                templateUrl: 'modules/cooperativa/client/views/administracion/pendiente/form-crear-pendiente.html',
+                controller: 'Cooperativa.Administracion.Pendiente.CrearController',
+                resolve: {},
+                ncyBreadcrumb: {
+                    label: 'Crear pendiente',
+                    parent: 'cooperativa.app.administracion.pendiente.buscar'
+                }
+            })
+
             .state('cooperativa.app.administracion.historial.buscar', {
                 url: '/buscar',
                 templateUrl: 'modules/cooperativa/client/views/administracion/historial/form-buscar-historiales.html',
@@ -713,6 +735,7 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                     label: 'Datos principales'
                 }
             });
+
 
     }
 ]);

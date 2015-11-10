@@ -38,6 +38,12 @@ angular.module('cooperativa').factory('VoucherService', function (EMPRESA, $filt
         qz.append(text2 || ' ');
         qz.append('\r\n');//salto de linea
     };
+    var fnTabTexto3 = function (text1, text2, text3) {
+        qz.append(text1 + '\t');
+        qz.append(text2 + '\t');
+        qz.append(text3 + '\t');
+        qz.append('\r\n');//salto de linea
+    };
     var fnImprimir = function () {
         qz.append('\x1D\x56\x41');//cortar papel
         qz.append('\x1B\x40');//reset
@@ -117,7 +123,7 @@ angular.module('cooperativa').factory('VoucherService', function (EMPRESA, $filt
         if (item.tipoTransaccion === 'DEPOSITO') {
             fnTabTexto('IMPORTE RECIBIDO: ' + item.moneda.simbolo + $filter('number')(item.monto, 2));
         } else {
-            fnTabTexto("IMPORTE PAGADO:" + item.moneda.simbolo + $filter('number')(item.monto, 2));
+            fnTabTexto('IMPORTE PAGADO:' + item.moneda.simbolo + $filter('number')(item.monto, 2));
         }
 
         if (saldo === true) {
@@ -166,7 +172,7 @@ angular.module('cooperativa').factory('VoucherService', function (EMPRESA, $filt
         }
         fnSaltoLinea();
 
-        fnTabTexto("MONTO:" + item.moneda.simbolo + $filter('number')(item.monto, 2));
+        fnTabTexto('MONTO:' + item.moneda.simbolo + $filter('number')(item.monto, 2));
 
         fnSaltoLinea();
         fnSaltoLinea();
@@ -319,6 +325,100 @@ angular.module('cooperativa').factory('VoucherService', function (EMPRESA, $filt
         fnImprimir();
     };
 
+    var fnCajaResumen = function (item) {
+        if (notReady()) {
+            return;
+        }
+        fnResetPrinter();
+
+        fnCabecera();
+        fnNegritaCentrado('RESUMEN DE OPERACIONES');
+
+        fnTabTexto('AGENCIA: ' + item.agencia, 'CAJA: ' + item.caja);
+        fnTabTexto('FEC.APERT.: ' + $filter('date')(item.fechaApertura, 'dd/MM/yyyy'), 'HORA.APERT.: ' + $filter('date')(item.horaApertura, 'HH:mm:ss'));
+        fnTabTexto('FEC.CIERRE.: ' + $filter('date')(item.fechaCierre, 'dd/MM/yyyy'), 'HORA.CIERRE.: ' + $filter('date')(item.horaCierre, 'HH:mm:ss'));
+        fnTabTexto('TRABAJADOR: ' + item.trabajador);
+        fnSaltoLinea();
+
+        fnTabTexto('DEPOSITOS (TOTAL): ' + (item.depositosAporte + item.depositosLibre + item.depositosPlazoFijo + item.depositosRecaudadora));
+        fnTabTexto('C.LIBRE: ' + item.depositosLibre, 'C.P.FIJO:' + item.depositosPlazoFijo);
+        fnTabTexto('C.RECAUDADORA:' + item.depositosRecaudadora);
+        fnSaltoLinea();
+
+        fnTabTexto('RETIROS (TOTAL): ' + (item.retirosAporte + item.retirosLibre + item.retirosPlazoFijo + item.retirosRecaudadora));
+        fnTabTexto('C.LIBRE: ' + item.retirosLibre, 'C.P.FIJO: ' + item.retirosPlazoFijo);
+        fnTabTexto('C.RECAUDADORA:' + item.retirosRecaudadora);
+        fnSaltoLinea();
+
+        fnTabTexto('COMPRA/VENTA (TOTAL): ' + (item.compra + item.venta));
+        fnTabTexto('COMPRA: ' + item.compra, 'VENTA: ' + item.venta);
+        fnSaltoLinea();
+
+        fnTabTexto('TRANS. EXTORNADOS (TOTAL): ' + (item.transExtornadoDepositoRetiro + item.transExtornadoCompraVenta + item.transExtornadoAporte + item.transExtornadoCheque));
+        fnTabTexto('DEPOSITO/RETIRO:' + item.transExtornadoDepositoRetiro);
+        fnTabTexto('COMPRA/VENTA:' + item.transExtornadoCompraVenta);
+        fnTabTexto('CHEQUE:' + item.transExtornadoCheque);
+        fnSaltoLinea();
+
+        fnTabTexto('TRANS. MAYOR CUANTIA(TOTAL): ' + (item.depositoMayorCuantia + item.retiroMayorCuantia + item.compraVentaMayorCuantia));
+        fnTabTexto('DEPOSITOS:' + item.depositoMayorCuantia, 'RETIROS:' + item.retiroMayorCuantia);
+        fnTabTexto('COMPRA/VENTA:' + item.compraVentaMayorCuantia);
+        fnSaltoLinea();
+
+        fnTabTexto('TRANS. CAJA-CAJA(TOTAL): ' + (item.enviadoCajaCaja + item.recibidoCajaCaja));
+        fnTabTexto('ENVIADOS:' + item.enviadoCajaCaja, 'RECIBIDOS:' + item.recibidoCajaCaja);
+        fnSaltoLinea();
+
+        fnTabTexto('TRANS. BOVEDA-CAJA(TOTAL): ' + (item.enviadoBovedaCaja + item.enviadoBovedaCaja));
+        fnTabTexto('ENVIADOS:' + item.enviadoBovedaCaja, 'RECIBIDOS:' + item.enviadoBovedaCaja);
+        fnSaltoLinea();
+
+        fnTabTexto('CIERRE CAJA(PENDIENTES):');
+        fnTabTexto('SOBRANTE:' + item.pendienteSobrante, 'FALTANTE:' + item.pendienteSobrante);
+
+        fnSaltoLinea();
+        fnSaltoLinea();
+        fnTabTexto('________________', '________________');
+        fnTabTexto('CAJERO', 'JEFE DE CAJA', 2);
+        fnImprimir();
+    };
+
+    var fnCajaBalance = function (item) {
+        if (notReady()) {
+            return;
+        }
+        fnResetPrinter();
+
+        fnCabecera();
+        fnNegritaCentrado('BALANCE CAJA');
+
+        fnTabTexto('AGENCIA: ' + item.agencia, 'CAJA: ' + item.caja);
+        fnTabTexto('FEC.APERT.: ' + $filter('date')(item.fechaApertura, 'dd/MM/yyyy'), 'HORA.APERT.: ' + $filter('date')(item.horaApertura, 'HH:mm:ss'));
+        fnTabTexto('FEC.CIERRE.: ' + $filter('date')(item.fechaCierre, 'dd/MM/yyyy'), 'HORA.CIERRE.: ' + $filter('date')(item.horaCierre, 'HH:mm:ss'));
+        fnTabTexto('TRABAJADOR: ' + item.trabajador);
+        fnSaltoLinea();
+
+        fnTabTexto3('Denominacion', 'Cantidad', 'Subtotal');
+
+        for (var i = 0; i < item.detalle.length; i++) {
+            fnTabTexto3($filter('currency')(item.detalle[i].valor, ''), item.detalle[i].cantidad.toString(), $filter('currency')(item.detalle[i].valor * item.detalle[i].cantidad, item.moneda.simbolo));
+        }
+
+        fnSaltoLinea();
+        fnTabTexto('SALDO AYER: ' + $filter('currency')(item.saldoAyer, item.moneda.simbolo));
+        fnTabTexto('ENTRADAS: ' + $filter('currency')(item.entradas, item.moneda.simbolo));
+        fnTabTexto('SALIDAS: ' + $filter('currency')(item.salidas, item.moneda.simbolo));
+        fnTabTexto('SOBRANTES: ' + $filter('currency')(item.sobrante, item.moneda.simbolo));
+        fnTabTexto('FALTANTES: ' + $filter('currency')(item.faltante, item.moneda.simbolo));
+        fnTabTexto('SALDO X DEVOLVER: ' + $filter('currency')(item.porDevolver, item.moneda.simbolo));
+
+        fnSaltoLinea();
+        fnSaltoLinea();
+        fnTabTexto('________________', '________________');
+        fnTabTexto('CAJERO', 'JEFE DE CAJA', 2);
+        fnImprimir();
+    };
+
     return {
         imprimirVoucherAporte: fnCuentaAporte,
         imprimirVoucherCompraVenta: fnCompraVenta,
@@ -329,7 +429,10 @@ angular.module('cooperativa').factory('VoucherService', function (EMPRESA, $filt
         imprimirVoucherTransaccionBovedaCaja: fnBovedaCaja,
         imprimirVoucherTransaccionCajaCaja: fnCajaCaja,
 
-        imprimirVoucherPendiente: fnPendiente
+        imprimirVoucherPendiente: fnPendiente,
+
+        imprimirVoucherCajaResumen: fnCajaResumen,
+        imprimirVoucherCajaBalance: fnCajaBalance
     };
 
 });

@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('cooperativa').controller('Cooperativa.Administracion.Historial.EditarController',
-    function ($scope, $state, CAJA, historial, CajaService) {
+    function ($scope, $state, CAJA, historial, CajaService, VoucherService) {
 
         $scope.view = {
             historial: historial
@@ -23,5 +23,12 @@ angular.module('cooperativa').controller('Cooperativa.Administracion.Historial.E
         };
         $scope.loadBalanceCaja();
 
+        $scope.imprimirResumen = function(){
+            VoucherService.imprimirVoucherCajaResumen($scope.view.load.resumenCaja);
+        };
+
+        $scope.imprimirVoucherPorMoneda = function(item){
+            VoucherService.imprimirVoucherCajaBalance(item);
+        };
     }
 );

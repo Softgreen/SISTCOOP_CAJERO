@@ -13,7 +13,7 @@ angular.module('cooperativa').controller('Cooperativa.Administracion.Pendiente.B
             multiSelect: false,
 
             columnDefs: [
-                {field: 'moneda.denominacion', displayName: 'MONEDA', width: '15%'},
+                {field: 'moneda.denominacion', displayName: 'MONEDA', width: '20%'},
                 {field: 'monto', cellFilter: 'number: 2', displayName: 'MONTO', width: '15%'},
                 {field: 'tipoPendiente', displayName: 'TIPO', width: '15%'},
                 {field: 'fecha', cellFilter: "date : 'dd/MM/yyyy'", displayName: 'FECHA', width: '15%'},
@@ -70,7 +70,7 @@ angular.module('cooperativa').controller('Cooperativa.Administracion.Pendiente.B
 
         $scope.gridActions = {
             pagar: function (row) {
-                $state.go('^.crear', {idPendienteRelacionado: row.id, tipoPendiente: 'PAGO'});
+                $state.go('^.crear', {idPendienteRelacionado: row.id, monto: Math.abs(row.montoPorPagar), tipoPendiente: 'PAGO'});
             },
             imprimir: function (row) {
                 PendienteCajaService.getVoucherPendienteCaja(row.id).then(function (response) {

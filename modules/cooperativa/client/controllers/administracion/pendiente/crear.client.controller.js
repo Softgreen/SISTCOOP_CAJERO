@@ -47,7 +47,7 @@ angular.module('cooperativa').controller('Cooperativa.Administracion.Pendiente.C
             if (angular.isDefined($scope.view.params.idPendienteRelacionado)) {
                 PendienteCajaService.findById($scope.view.params.idPendienteRelacionado).then(function (response) {
                     $scope.view.load.pendienteRelacionado = response;
-                    $scope.view.pendiente.monto = response.monto;
+                    //$scope.view.pendiente.monto = response.monto;
                 });
             }
 

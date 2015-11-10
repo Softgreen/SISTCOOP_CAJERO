@@ -684,7 +684,7 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                 }
             })
             .state('cooperativa.app.administracion.pendiente.crear', {
-                url: '/crear',
+                url: '/crear?idBoveda&monto&idPendienteRelacionado&tipoPendiente',
                 templateUrl: 'modules/cooperativa/client/views/administracion/pendiente/form-crear-pendiente.html',
                 controller: 'Cooperativa.Administracion.Pendiente.CrearController',
                 resolve: {},

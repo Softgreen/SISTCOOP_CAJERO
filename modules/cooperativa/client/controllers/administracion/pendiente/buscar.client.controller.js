@@ -54,7 +54,7 @@ angular.module('cooperativa').controller('Cooperativa.Administracion.Pendiente.B
 
         $scope.gridActions = {
             pagar: function (row) {
-                $state.go('^.editar', {historial: row.id});
+                $state.go('^.crear', {idPendienteRelacionado: row.id, tipoPendiente: 'PAGO'});
             },
             imprimir: function(){
 

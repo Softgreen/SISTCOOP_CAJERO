@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('cooperativa').controller('Cooperativa.Operaciones.CerrarCajaController',
-    function ($scope, $state, toastr, CAJA, CajaService, SessionService) {
+    function ($scope, $state, $location, $window, toastr, CAJA, CajaService, SessionService) {
 
         $scope.working = false;
 
@@ -28,6 +28,12 @@ angular.module('cooperativa').controller('Cooperativa.Operaciones.CerrarCajaCont
                     });
                 }
                 $scope.view.load.detalleHistorialActivo = response;
+
+                /*for (var i = 0; i < $scope.view.load.detalleHistorialActivo.length; i++) {
+                    angular.forEach($scope.view.load.detalleHistorialActivo[i].detalle, function (row) {
+                        row.cantidad = 0;
+                    });
+                }*/
             });
         };
         $scope.loadDetalle();
@@ -52,12 +58,11 @@ angular.module('cooperativa').controller('Cooperativa.Operaciones.CerrarCajaCont
                     toastr.success('Caja cerrada satisfactoriamente');
                     CAJA.abierto = false;
                     CAJA.estadoMovimiento = false;
+                    $state.go('cooperativa.app.administracion.historial.editar', {historial: response.id});
                 },
                 function error(err) {
                     $scope.working = false;
                     if (err.status === 400) {
-                        console.log(err);
-                        console.log(err.data);
                         for (var i = 0; i < err.data.length; i++) {
                             $scope.view.error.pendiente.push({
                                 idboveda: err.data[i].idboveda,
@@ -73,7 +78,9 @@ angular.module('cooperativa').controller('Cooperativa.Operaciones.CerrarCajaCont
         };
 
         $scope.crearPendiente = function (item) {
-            alert(item);
+            var baseLen = $location.absUrl().length - $location.url().length;
+            var url = $location.absUrl().substring(0, baseLen);
+            $window.open(url + '/cooperativa/app/administracion/pendientes/crear' + '?idBoveda=' + item.idboveda + '&monto=' + item.monto + '&tipoPendiente=' + (item.monto <= 0 ? 'SOBRANTE' : 'FALTANTE'));
         };
 
     }

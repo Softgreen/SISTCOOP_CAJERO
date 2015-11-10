@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('cooperativa').controller('Cooperativa.Administracion.Pendiente.BuscarController',
-    function ($scope, $state, CAJA, CajaService) {
+    function ($scope, $state, CAJA, CajaService, PendienteCajaService, VoucherService) {
 
         $scope.view = {};
 
@@ -13,15 +13,21 @@ angular.module('cooperativa').controller('Cooperativa.Administracion.Pendiente.B
             multiSelect: false,
 
             columnDefs: [
-                {field: 'moneda.denominacion', displayName: 'MONEDA'},
-                {field: 'monto', cellFilter: 'number: 2', displayName: 'MONTO'},
-                {field: 'tipoPendiente', displayName: 'TIPO'},
-                {field: 'fecha', cellFilter: "date : 'dd/MM/yyyy'", displayName: 'FECHA'},
-                {field: 'hora', cellFilter: "date : 'HH:mm:ss'", displayName: 'HORA'},
+                {field: 'moneda.denominacion', displayName: 'MONEDA', width: '15%'},
+                {field: 'monto', cellFilter: 'number: 2', displayName: 'MONTO', width: '15%'},
+                {field: 'tipoPendiente', displayName: 'TIPO', width: '15%'},
+                {field: 'fecha', cellFilter: "date : 'dd/MM/yyyy'", displayName: 'FECHA', width: '15%'},
+                {field: 'hora', cellFilter: "date : 'HH:mm:ss'", displayName: 'HORA', width: '15%'},
                 {
                     name: 'edit',
                     displayName: 'Edit',
-                    cellTemplate: '<div style="text-align: center; padding-top: 4px;"><button type="button" ng-click="grid.appScope.gridActions.edit(row.entity)" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-edit"></span>Editar</button></div>'
+                    cellTemplate: '' +
+                    '<div style="text-align: center; padding-top: 5px;">' +
+                    '<button type="button" data-ng-click="grid.appScope.gridActions.imprimir(row.entity)" class="btn btn-info btn-xs">' +
+                    '<i class="pficon pficon-print"></i>' +
+                    '<span>&nbsp;Imprimir</span>' +
+                    '</button>' +
+                    '</div>'
                 }
             ]
         };
@@ -41,9 +47,19 @@ angular.module('cooperativa').controller('Cooperativa.Administracion.Pendiente.B
                     '<span data-ng-bind="row.entity.moneda.simbolo"></span>' +
                     '<span data-ng-bind="row.entity.monto | currency: \'\'"></span>' +
                     '</div>',
-                    width: '29%'
+                    width: '23%'
                 },
-                {field: 'hora', cellFilter: 'date: "dd/MM/yyyy HH:mm:ss"', displayName: 'FECHA', width: '44%'},
+                {
+                    name: 'montoPorPagar',
+                    displayName: 'POR PAGAR',
+                    cellTemplate: '' +
+                    '<div style="text-align: right; padding-top: 5px; padding-right: 5px;">' +
+                    '<span data-ng-bind="row.entity.moneda.simbolo"></span>' +
+                    '<span data-ng-bind="row.entity.montoPorPagar | currency: \'\'"></span>' +
+                    '</div>',
+                    width: '25%'
+                },
+                {field: 'hora', cellFilter: 'date: "dd/MM/yyyy HH:mm:ss"', displayName: 'FECHA', width: '28%'},
                 {
                     name: 'edit',
                     displayName: 'Edit',
@@ -56,8 +72,10 @@ angular.module('cooperativa').controller('Cooperativa.Administracion.Pendiente.B
             pagar: function (row) {
                 $state.go('^.crear', {idPendienteRelacionado: row.id, tipoPendiente: 'PAGO'});
             },
-            imprimir: function(){
-
+            imprimir: function (row) {
+                PendienteCajaService.getVoucherPendienteCaja(row.id).then(function (response) {
+                    VoucherService.imprimirVoucherPendiente(response);
+                });
             }
         };
 

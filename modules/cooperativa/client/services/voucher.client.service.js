@@ -290,6 +290,35 @@ angular.module('cooperativa').factory('VoucherService', function (EMPRESA, $filt
         fnImprimir();
     };
 
+    var fnPendiente = function (item) {
+        if (notReady()) {
+            return;
+        }
+        fnResetPrinter();
+
+        fnCabecera();
+        fnNegritaCentrado('PENDIENTE');
+
+        fnTabTexto('AGENCIA: ' + item.agenciaAbreviatura);
+        fnTabTexto('PENDIENTE: ' + item.idPendienteCaja);
+        fnTabTexto('T.PENDIENTE: ' + item.tipoPendiente);
+        fnTabTexto('FECHA: ' + $filter('date')(item.fecha, 'dd/MM/yyyy'), 'HORA: ' + $filter('date')(item.hora, 'HH:mm:ss'));
+        fnTabTexto('MONEDA: ' + item.moneda.denominacion);
+        fnTabTexto('MONTO: ' + item.moneda.simbolo + $filter('number')(item.monto, 2));
+        fnTabTexto('CAJA: ' + item.cajaDenominacion + item.cajaAbreviatura);
+        fnTabTexto('TRABAJADOR: ' + item.trabajadorCrea);
+
+        if (!angular.isUndefined(item.observacion)) {
+            fnTabTexto('OBSERVACION: ' + item.observacion);
+        }
+
+        fnSaltoLinea();
+        fnSaltoLinea();
+        fnTabTexto('________________', '________________');
+        fnTabTexto('JEFE DE CAJA', 'CAJERO', 2);
+        fnImprimir();
+    };
+
     return {
         imprimirVoucherAporte: fnCuentaAporte,
         imprimirVoucherCompraVenta: fnCompraVenta,
@@ -298,7 +327,9 @@ angular.module('cooperativa').factory('VoucherService', function (EMPRESA, $filt
         imprimirVoucherCheque: fnCheque,
 
         imprimirVoucherTransaccionBovedaCaja: fnBovedaCaja,
-        imprimirVoucherTransaccionCajaCaja: fnCajaCaja
+        imprimirVoucherTransaccionCajaCaja: fnCajaCaja,
+
+        imprimirVoucherPendiente: fnPendiente
     };
 
 });

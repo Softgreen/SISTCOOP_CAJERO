@@ -77,8 +77,8 @@ angular.module('cooperativa').controller('Cooperativa.Administracion.Pendiente.C
             $scope.working = true;
 
             SessionService.crearPendiente(
-                $scope.combo.selected.boveda.id, $scope.view.pendiente.monto * $scope.combo.selected.tipoPendiente.factor,
-                $scope.view.pendiente.observacion, $scope.combo.selected.tipoPendiente.valor, $scope.view.params.idPendienteRelacionado
+                $scope.combo.selected.boveda.id, $scope.view.pendiente.monto * $scope.combo.selected.tipo.factor,
+                $scope.view.pendiente.observacion, $scope.combo.selected.tipo.valor, $scope.view.params.idPendienteRelacionado
             ).then(
                 function (response) {
                     $scope.working = false;

@@ -8,14 +8,17 @@ angular.module('cooperativa').controller('Cooperativa.Administracion.Historial.E
             historial: historial
         };
         $scope.view.load = {
-            balanceCaja: undefined
+            balanceCaja: undefined,
+            resumenCaja: undefined
         };
 
         $scope.loadBalanceCaja = function () {
             CajaService.getVoucherCierreCaja(CAJA.id, $scope.view.historial.id).then(function (response) {
                 $scope.view.load.balanceCaja = response;
-                console.log(response);
-                console.log(response.length);
+            });
+
+            CajaService.getResumenCierreCaja(CAJA.id, $scope.view.historial.id).then(function (response) {
+                $scope.view.load.resumenCaja = response;
             });
         };
         $scope.loadBalanceCaja();

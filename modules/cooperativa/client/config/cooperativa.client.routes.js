@@ -38,6 +38,7 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
 
         //Administracion
         $urlRouterProvider.when('/cooperativa/app/administracion/historiales', '/cooperativa/app/administracion/historiales/buscar');
+        $urlRouterProvider.when('/cooperativa/app/administracion/historiales/editar/:historial', '/cooperativa/app/administracion/historiales/editar/:historial/resumen');
 
         $urlRouterProvider.when('/cooperativa/app/administracion/pendientes', '/cooperativa/app/administracion/pendientes/buscar');
 
@@ -719,17 +720,17 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
             })
             .state('cooperativa.app.administracion.historial.editar.resumen', {
                 url: '/resumen',
-                templateUrl: 'modules/cooperativa/client/views/boveda/form-editar-boveda-resumen.html',
-                controller: 'Cooperativa.Boveda.Editar.ResumenController',
+                templateUrl: 'modules/cooperativa/client/views/administracion/historial/form-editar-historial-resumen.html',
+                //controller: 'Cooperativa.Boveda.Editar.ResumenController',
                 resolve: {},
                 ncyBreadcrumb: {
                     skip: true // Never display this state in breadcrumb.
                 }
             })
-            .state('cooperativa.app.administracion.historial.editar.datosPrincipales', {
+            .state('cooperativa.app.administracion.historial.editar.balanceCaja', {
                 url: '/datosPrincipales',
-                templateUrl: 'modules/cooperativa/client/views/boveda/form-editar-boveda-datosPrincipales.html',
-                controller: 'Cooperativa.Boveda.Editar.DatosPrincipalesController',
+                templateUrl: 'modules/cooperativa/client/views/administracion/historial/form-editar-historial-balanceCaja.html',
+                //controller: 'Cooperativa.Boveda.Editar.DatosPrincipalesController',
                 resolve: {},
                 ncyBreadcrumb: {
                     label: 'Datos principales'

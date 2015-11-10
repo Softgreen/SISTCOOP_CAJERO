@@ -9,17 +9,17 @@ angular.module('cooperativa').controller('CooperativaController', ['$scope', 'Au
                 return false;
             }
 
-            var rolesSession = Auth.authz.resourceAccess.cooperativa.roles;
+            /*var rolesSession = Auth.authz.resourceAccess.cooperativa.roles;
             if (rolesSession.indexOf(role) !== -1) {
                 return true;
-            }
+            }*/
 
             return false;
         }
 
         $scope.access = {
 
-            get verBovedas() {
+            /*get verBovedas() {
                 return getAccess('ver-bovedas');
             },
             get verCajas() {
@@ -32,7 +32,7 @@ angular.module('cooperativa').controller('CooperativaController', ['$scope', 'Au
             },
             get administrarCajas() {
                 return getAccess('administrar-cajas');
-            }
+            }*/
 
         };
     }

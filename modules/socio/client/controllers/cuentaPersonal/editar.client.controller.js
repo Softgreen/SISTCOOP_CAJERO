@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('socio').controller('Socio.CuentaPersonal.EditarCuentaPersonalController',
-    function ($scope, $state, toastr, cuentaPersonal, CuentaBancariaService) {
+    function ($scope, $window, $state, toastr, cuentaPersonal, CuentaBancariaService) {
 
         $scope.view = {
             cuentaPersonal: cuentaPersonal
@@ -30,6 +30,10 @@ angular.module('socio').controller('Socio.CuentaPersonal.EditarCuentaPersonalCon
                     toastr.error(err.data.message);
                 }
             );
+        };
+
+        $scope.contrato = function(){
+            $window.open(CuentaBancariaService.getUrlContrato($scope.view.cuentaPersonal.id));
         };
 
     });

@@ -5,6 +5,9 @@
 
   <div class="pull-right">
     <div class="btn-group">
+      <button type="button" data-ng ng-click="contrato()" class="btn btn-default">Contrato</button>
+    </div>
+    <div class="btn-group">
       <button type="button" data-ng-if="view.cuentaPersonal.tipoCuenta == 'PLAZO_FIJO'" ng-click="renovarPlazoFijo()" class="btn btn-default">Renovar plazo fijo</button>
       <button type="button" data-ng-if="view.cuentaPersonal.tipoCuenta == 'PLAZO_FIJO'" ng-click="recalcularPlazoFijo()" class="btn btn-default">Recalcular plazo fijo</button>
     </div>

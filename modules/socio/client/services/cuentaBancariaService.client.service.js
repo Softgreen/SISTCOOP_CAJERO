@@ -189,6 +189,10 @@ angular.module('socio').factory('CuentaBancariaService', ['Restangular',
                     return Restangular.all(baseUrl + '/' + idCuentaBancaria + '/enviarEstadoCuenta/excel?desde=' + desde + '&hasta=' + hasta).post();
                 else
                     return Restangular.all(baseUrl + '/' + idCuentaBancaria + '/enviarEstadoCuenta/pdf?desde=' + desde + '&hasta=' + hasta).post();
+            },
+
+            getUrlContrato: function (id) {
+                return Restangular.one(baseUrl, id).all('cartilla').getRestangularUrl();
             }
         };
 

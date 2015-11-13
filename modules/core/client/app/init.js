@@ -51,7 +51,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).run(function ($ro
 window.auth = {};
 window.auth.keycloakUrl = 'http://multivadelsur.ddns.net:8080/auth';
 window.auth.keycloakRealm = 'SISTEMA_FINANCIERO';
-window.auth.keycloakClientId = 'SISTCOOP_ADMIN';
+window.auth.keycloakClientId = 'SISTCOOP_APP';
 window.auth.rrhhUrl = 'http://multivadelsur.ddns.net:8080/SISTCOOP_REST/rest';
 
 window.auth.empresa = 'MULTIVALORES DEL SUR';

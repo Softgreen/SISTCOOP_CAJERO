@@ -5,11 +5,7 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
   function ($stateProvider, $urlRouterProvider) {
 
     // Redirect to 404 when route not found
-    $urlRouterProvider.otherwise(function ($injector) {
-      $injector.get('$state').transitionTo('not-found', null, {
-        location: false
-      });
-    });
+    $urlRouterProvider.otherwise('/');
 
     // Home state routing
     $stateProvider

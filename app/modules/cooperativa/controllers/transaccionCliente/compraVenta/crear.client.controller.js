@@ -130,7 +130,7 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CompraV
         $scope.login = function () {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: '/modules/cooperativa/client/views/login/form-login.html',
+                templateUrl: 'modules/cooperativa/views/login/form-login.html',
                 controller: 'Cooperativa.LoginController',
                 resolve: {}
             });

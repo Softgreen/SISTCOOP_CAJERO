@@ -77,7 +77,7 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CuentaP
             var modalInstance = $modal.open({
                 animation: true,
                 size: 'lg',
-                templateUrl: '/modules/cooperativa/client/views/transaccionCliente/cuentaPersonal/form-buscar-popup.html',
+                templateUrl: 'modules/cooperativa/views/transaccionCliente/cuentaPersonal/form-buscar-popup.html',
                 controller: 'Cooperativa.TransaccionCliente.CuentaPersonal.Crear.BuscarCuentaPopupController',
                 resolve: {}
             });
@@ -92,7 +92,7 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CuentaP
         };
         $scope.verFirmas = function () {
             var modalInstance = $modal.open({
-                templateUrl: '/modules/cooperativa/client/views/transaccionCliente/cuentaPersonal/form-firmas-popup.html',
+                templateUrl: 'modules/cooperativa/views/transaccionCliente/cuentaPersonal/form-firmas-popup.html',
                 controller: 'Cooperativa.TransaccionCliente.CuentaPersonal.Crear.FirmasPopupController',
                 //size: 'lg',
                 resolve: {
@@ -113,7 +113,7 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CuentaP
         $scope.login = function () {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: '/modules/cooperativa/client/views/login/form-login.html',
+                templateUrl: 'modules/cooperativa/views/login/form-login.html',
                 controller: 'Cooperativa.LoginController',
                 resolve: {}
             });
@@ -142,7 +142,7 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CuentaP
             //verificar transaccion datos
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: '/modules/cooperativa/client/views/transaccionCliente/cuentaPersonal/form-transaccion-cuentaPersonal-verificar.html',
+                templateUrl: 'modules/cooperativa/views/transaccionCliente/cuentaPersonal/form-transaccion-cuentaPersonal-verificar.html',
                 controller: 'Cooperativa.TransaccionCliente.CuentaPersonal.Crear.VerificarController',
                 resolve: {
                     transaccion: function () {

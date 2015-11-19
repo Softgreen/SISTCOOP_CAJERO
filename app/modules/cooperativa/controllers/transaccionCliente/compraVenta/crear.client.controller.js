@@ -143,7 +143,7 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CompraV
         $scope.save = function () {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: '/modules/cooperativa/client/views/transaccionCliente/compraVenta/form-transaccion-compraVenta-verificar.html',
+                templateUrl: 'modules/cooperativa/views/transaccionCliente/compraVenta/form-transaccion-compraVenta-verificar.html',
                 controller: 'Cooperativa.TransaccionCliente.CompraVenta.Crear.VerificarController',
                 resolve: {
                     transaccion: function () {

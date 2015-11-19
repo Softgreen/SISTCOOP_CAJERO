@@ -97,7 +97,7 @@ angular.element(document).ready(function () {
 
 
 angular.module('mean').controller('KeycloakController',
-  function ($scope, Auth) {
+  function ($scope, Auth, CAJA, AGENCIA, PERSONA) {
 
     $scope.logout = function () {
       Auth.authz.logout();
@@ -120,6 +120,11 @@ angular.module('mean').controller('KeycloakController',
       }
     };
     $scope.loadRoles();
+
+    $scope.session = {};
+    $scope.session.caja = CAJA;
+    $scope.session.agencia = AGENCIA;
+    $scope.session.persona = PERSONA;
   }
 );
 

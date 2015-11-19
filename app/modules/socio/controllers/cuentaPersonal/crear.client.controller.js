@@ -86,7 +86,7 @@ angular.module('socio').controller('Socio.CuentaPersonal.CrearCuentaPersonalCont
         $scope.save = function () {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: '/modules/socio/client/views/cuentaPersonal/form-crear-verificarDatos.html',
+                templateUrl: 'modules/socio/views/cuentaPersonal/form-crear-verificarDatos.html',
                 controller: 'Socio.CuentaPersonal.VerificarCuentaPersonalController',
                 resolve: {
                     cuentaPersonal: function () {

@@ -118,7 +118,7 @@ angular.module('socio').controller('Socio.CuentaPersonal.CrearCuentaPersonalCont
                     idTipoDocumento: $scope.combo.selected.tipoDocumento.id,
                     numeroDocumento: $scope.view.cuentaPersonal.numeroDocumento,
                     cantRetirantes: 1,
-                    tasaInteres: $scope.view.cuentaPersonal.tasa,
+                    tasaInteres: $scope.view.cuentaPersonal.tasa/100,
                     titulares: [],
                     beneficiarios: [],
 
@@ -127,6 +127,12 @@ angular.module('socio').controller('Socio.CuentaPersonal.CrearCuentaPersonalCont
                 };
 
                 $scope.working = true;
+
+                if ($scope.combo.selected.tipoPersona.valor === 'NATURAL') {
+                  cuenta.titulares = [$scope.view.load.persona.id];
+                } else if ($scope.combo.selected.tipoPersona.valor === 'JURIDICA') {
+                  cuenta.titulares = [$scope.view.load.persona.representanteLegal.id];
+                }
 
                 if ($scope.combo.selected.tipoCuenta.valor === 'LIBRE') {
                     CuentaBancariaService.crearCuentaAhorro(cuenta).then(

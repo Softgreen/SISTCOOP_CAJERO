@@ -128,7 +128,7 @@ angular.module('socio').controller('Socio.CuentaPersonal.CrearCuentaPersonalCont
 
                 $scope.working = true;
 
-                if ($scope.combo.tipoCuenta.valor === 'LIBRE') {
+                if ($scope.combo.selected.tipoCuenta.valor === 'LIBRE') {
                     CuentaBancariaService.crearCuentaAhorro(cuenta).then(
                         function (response) {
                             toastr.success('Cuenta personal creada');
@@ -138,7 +138,7 @@ angular.module('socio').controller('Socio.CuentaPersonal.CrearCuentaPersonalCont
                             toastr.error(err.data.message);
                         }
                     );
-                } else if ($scope.combo.tipoCuenta.valor === 'RECAUDADORA') {
+                } else if ($scope.combo.selected.tipoCuenta.valor === 'RECAUDADORA') {
                     CuentaBancariaService.crearCuentaCorriente(cuenta).then(
                         function (response) {
                             toastr.success('Cuenta personal creada');
@@ -148,7 +148,7 @@ angular.module('socio').controller('Socio.CuentaPersonal.CrearCuentaPersonalCont
                             toastr.error(err.data.message);
                         }
                     );
-                } else if ($scope.combo.tipoCuenta.valor === 'PLAZO_FIJO') {
+                } else if ($scope.combo.selected.tipoCuenta.valor === 'PLAZO_FIJO') {
                     SessionService.crearCuentaPlazoFijo(cuenta).then(
                         function (response) {
                             toastr.success('Cuenta personal creada');

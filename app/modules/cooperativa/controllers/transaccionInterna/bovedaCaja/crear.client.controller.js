@@ -64,8 +64,8 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionInterna.BovedaC
                     SessionService.crearTransaccionBovedaCajaOrigenCaja($scope.combo.selected.boveda.id, transaccion).then(
                         function (data) {
                             $scope.working = false;
-                            toastr('Transaccion creada satisfactoriamente');
-                            $state.transitionTo('^.buscar');
+                            toastr.success('Transaccion creada satisfactoriamente');
+                            $state.go('^.buscar');
                         },
                         function error(err) {
                             toastr.error(err.data.message);

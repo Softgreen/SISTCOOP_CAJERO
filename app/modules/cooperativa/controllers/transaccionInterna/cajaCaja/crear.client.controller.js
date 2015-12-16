@@ -36,8 +36,8 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionInterna.CajaCaj
                 SessionService.crearTransaccionCajaCaja($scope.combo.selected.caja.id, $scope.combo.selected.moneda.id, $scope.view.monto, $scope.view.observacion).then(
                     function (rseponse) {
                         $scope.working = false;
-                        toastr('Transaccion creada satisfactoriamente');
-                        $state.transitionTo('^.buscar');
+                        toastr.success('Transaccion creada satisfactoriamente');
+                        $state.go('^.buscar');
                     }, function error(err) {
                         toastr.error(err.data.message);
                     }

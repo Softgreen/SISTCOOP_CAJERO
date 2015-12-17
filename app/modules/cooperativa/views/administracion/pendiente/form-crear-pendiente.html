@@ -79,7 +79,7 @@
   <div class="form-group" data-ng-class="{ 'has-error' : form.observacion.$invalid && form.$submitted }">
     <label class="col-sm-2 control-label">Observacion:</label>
     <div class="col-sm-3">
-      <textarea name="observacion" type="text" data-ng-model="view.pendiente.observacion" data-ng-minlength="1" data-ng-maxlength="200" class="form-control" capitalize />
+      <textarea name="observacion" type="text" data-ng-model="view.pendiente.observacion" data-ng-minlength="1" data-ng-maxlength="200" class="form-control" capitalize></textarea>
       <div data-ng-messages="form.observacion.$error" data-ng-if="form.$submitted">
         <div class="has-error" data-ng-message="required">Ingrese observacion.</div>
         <div class="has-error" data-ng-message="minlength">Ingrese observacion.</div>

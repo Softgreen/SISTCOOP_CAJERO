@@ -12,7 +12,7 @@
 				</div>
 			</div>
 			<div class="col-sm-2" data-ng-controller="Persona.Util.DateController">
-				<div class="form-group" data-ng-class="{ 'has-error' : form.sucursal.$invalid && (form.$submitted)}">
+				<div class="form-group" data-ng-class="{ 'has-error' : form.hasta.$invalid && (form.$submitted)}">
           <div class="input-group">
             <input type="text" name="hasta" class="form-control" data-ng-model="view.hasta" datepicker-popup="dd/MM/yyyy" is-open="opened" datepicker-options="dateOptions" data-ng-required="true" close-text="Close" placeholder="Hasta" required>
             <span class="input-group-btn"><button class="btn btn-default" type="button" data-ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button></span>

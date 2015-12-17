@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('socio').factory('CuentaBancariaService', ['Restangular',
+angular.module('mean').factory('CuentaBancariaService', ['Restangular',
     function (Restangular) {
 
         var _historialCajaService = Restangular.all('cuentasBancarias');
@@ -193,6 +193,9 @@ angular.module('socio').factory('CuentaBancariaService', ['Restangular',
 
             getUrlContrato: function (id) {
                 return Restangular.one(baseUrl, id).all('cartilla').getRestangularUrl();
+            },
+            getUrlEstadoCuentaPdf: function (id, desde, hasta) {
+              return Restangular.one(baseUrl, id).all('/estadoCuenta/pdf?desde='+desde+'&hasta='+hasta).getRestangularUrl();
             }
         };
 

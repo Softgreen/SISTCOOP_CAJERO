@@ -152,7 +152,7 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionInterna.CajaCaj
                 });
             },
             cancelar: function (row) {
-                SGDialog.confirm('Cancelar transaccion', 'Estas seguro de cancelar la transaccion', function () {
+                SGDialog.confirm('Guardar', 'Estas seguro de cancelar la transaccion', function () {
                     SessionService.cancelarTransaccionCajaCaja(row.id).then(
                         function (response) {
                             toastr.success('Transaccion cancelada');

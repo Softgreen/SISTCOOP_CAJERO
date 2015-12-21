@@ -47,7 +47,7 @@
   <div class="form-group" ng-class="{ 'has-error' : form.referencia.$invalid && form.$submitted}">
     <label class="col-sm-2 control-label">Observacion:</label>
     <div class="col-sm-3">
-      <textarea name="observacion" ng-model="view.observacion" class="form-control" ng-maxlength="200"/>
+      <textarea name="observacion" ng-model="view.observacion" class="form-control" ng-maxlength="200"></textarea>
       <div ng-messages="form.observacion.$error" ng-if="form.$submitted">
         <div class="has-error" ng-message="maxlength">Maximo 200 caracteres.</div>
       </div>

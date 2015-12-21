@@ -183,6 +183,7 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CuentaP
                         });
                     },
                     function error(err) {
+                        $scope.working = false;
                         toastr.error(err.data.message);
                     }
                 );

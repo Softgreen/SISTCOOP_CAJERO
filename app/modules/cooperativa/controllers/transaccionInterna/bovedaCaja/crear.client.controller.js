@@ -68,6 +68,7 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionInterna.BovedaC
                             $state.go('^.buscar');
                         },
                         function error(err) {
+                            $scope.working = false;
                             toastr.error(err.data.message);
                         }
                     );

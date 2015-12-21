@@ -174,6 +174,7 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CompraV
                         });
                     },
                     function error(err) {
+                        $scope.working = false;
                         toastr.error(err.data.message);
                     }
                 );

@@ -141,6 +141,7 @@ angular.module('socio').controller('Socio.CuentaPersonal.CrearCuentaPersonalCont
                             $scope.working = false;
                             $state.go('^.editar', {cuentaPersonal: response.id});
                         }, function error(err) {
+                            $scope.working = false;
                             toastr.error(err.data.message);
                         }
                     );
@@ -151,6 +152,7 @@ angular.module('socio').controller('Socio.CuentaPersonal.CrearCuentaPersonalCont
                             $scope.working = false;
                             $state.go('^.editar', {cuentaPersonal: response.id});
                         }, function error(err) {
+                            $scope.working = false;
                             toastr.error(err.data.message);
                         }
                     );
@@ -165,6 +167,7 @@ angular.module('socio').controller('Socio.CuentaPersonal.CrearCuentaPersonalCont
                             //response.idTransaccion
                             //response.id
                         }, function error(err) {
+                            $scope.working = false;
                             toastr.error(err.data.message);
                         }
                     );

@@ -2,7 +2,7 @@
 
 <div data-ng-repeat="item in view.error.pendiente" class="alert alert-danger">
   <span class="pficon pficon-error-circle-o"></span>
-  <strong>!Dinero faltante o sobrante en {{item.boveda}}!</strong> Si desea crear un pendiente <a href="#" data-ng-click="crearPendiente(item)" class="alert-link">haga click aqui</a>.
+  <strong>!Dinero faltante o sobrante en {{item.boveda}}!</strong> Si desea crear un pendiente <button type="button" class="btn btn-link" data-ng-click="crearPendiente(item)" class="alert-link">haga click aqui.</button>
 </div>
 
 <form name="form" data-ng-submit="submit()" novalidate>

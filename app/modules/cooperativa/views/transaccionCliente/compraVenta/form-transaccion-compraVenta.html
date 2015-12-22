@@ -4,29 +4,29 @@
       <div class="actions pull-right">
         <a href="#" data-ng-click="view.transaccion.limpiar()"><span class="pficon pficon-refresh"></span> Limpiar</a>
       </div>
-      <h1>Compra venta de moneda extrangera</h1>
+      <h1>Compra Venta de Moneda Extrangera</h1>
     </div>
     <form name="form" class="form-horizontal" novalidate>
       <div class="form-group" ng-class="{ 'has-error' : form.cliente.$invalid && form.$submitted}">
         <label class="col-sm-3 control-label">Cliente:</label>
         <div class="col-sm-3">
-          <input type="text" name="cliente" ng-model="view.transaccion.cliente" ng-maxlength="100" pf-focused="true" autofocus class="form-control"/>
+          <input type="text" name="cliente" ng-model="view.transaccion.cliente" ng-maxlength="100" pf-focused="true" autofocus class="form-control" style="text-transform: uppercase"/>
           <div ng-messages="form.cliente.$error" ng-if="form.$submitted">
             <div class="has-error" ng-message="maxlength">Maximo 100 caracteres.</div>
           </div>
         </div>
       </div>
       <div class="form-group" ng-class="{ 'has-error' : form.operacion.$invalid && form.$submitted}">
-        <label class="col-sm-3 control-label"><span class="required">*</span> Operacion:</label>
+        <label class="col-sm-3 control-label"><span class="required">*</span> Operación:</label>
         <div class="col-sm-3">
           <ui-select name="operacion" ng-model="combo.selected.operacion" required>
-            <ui-select-match placeholder="Operacion">{{$select.selected.denominacion}}</ui-select-match>
+            <ui-select-match placeholder="Operación">{{$select.selected.denominacion}}</ui-select-match>
             <ui-select-choices group-by="combo.groupFn" repeat="item in combo.operacion | filter: $select.search">
               <div ng-bind-html="item.denominacion | highlight: $select.search"></div>
             </ui-select-choices>
           </ui-select>
           <div ng-messages="form.operacion.$error" ng-if="form.operacion.$dirty || form.$submitted">
-            <div class="has-error" ng-message="required">Ingrese operacion.</div>
+            <div class="has-error" ng-message="required">Ingrese Operacion.</div>
           </div>
         </div>
         <div class="col-sm-6">
@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="form-group" ng-class="{ 'has-error' : form.tipoCambio.$invalid && form.$submitted}">
-        <label class="col-sm-3 control-label"><span class="required">*</span> Tipo cambio:</label>
+        <label class="col-sm-3 control-label"><span class="required">*</span> Tipo Cambio:</label>
         <div class="col-sm-3" data-ng-if="!access.login">
           <span style="font-size: 15px;"><strong data-ng-bind="view.transaccion.tipoCambio | number : 3"></strong></span>
         </div>
@@ -60,7 +60,7 @@
         </div>
       </div>
       <div class="form-group" ng-class="{ 'has-error' : form.montoRecibido.$invalid && form.$submitted}">
-        <label class="col-sm-3 control-label"><span class="required">*</span> Monto recibido:</label>
+        <label class="col-sm-3 control-label"><span class="required">*</span> Monto Recibido:</label>
         <div class="col-sm-3">
           <input type="text" name="montoRecibido" ng-model="view.transaccion.montoRecibido" class="form-control"
                  data-ng-disabled="combo.selected.operacion.tipo == 'VENTA'"
@@ -74,7 +74,7 @@
         </div>
       </div>
       <div class="form-group" ng-class="{ 'has-error' : form.montoEntregado.$invalid && form.$submitted}">
-        <label class="col-sm-3 control-label"><span class="required">*</span> Monto entregado:</label>
+        <label class="col-sm-3 control-label"><span class="required">*</span> Monto Entregado:</label>
         <div class="col-sm-3">
           <input type="text" name="montoEntregado" ng-model="view.transaccion.montoEntregado" class="form-control"
                  data-ng-disabled="combo.selected.operacion.tipo == 'COMPRA'"
@@ -103,7 +103,7 @@
       <div class="actions pull-right">
         <a href="#" data-ng-click="view.voucher.limpiar()">Limpiar</a>
       </div>
-      <h2 class="h5">Ultimos vouchers</h2>
+      <h2 class="h5">Ultimos Vouchers</h2>
     </div>
     <ul class="list-group">
       <li class="list-group-item" data-ng-repeat="item in view.voucher.list">
@@ -132,7 +132,7 @@
         </button>
       </li>
     </ul>
-    <p><a href="#" ui-sref="cooperativa.app.transaccionCliente.historial.buscar">Mas transacciones</a></p>
+    <p><a href="#" ui-sref="cooperativa.app.transaccionCliente.historial.buscar">Mas Transacciones</a></p>
   </div><!-- /col -->
 </div>
 

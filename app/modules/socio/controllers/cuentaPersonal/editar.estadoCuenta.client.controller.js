@@ -35,7 +35,7 @@ angular.module('socio').controller('Socio.CuentaPersonal.EditarCuentaPersonal.Es
 
     $scope.enviarEmail = function () {
       SGDialog.confirm('Enviar', 'Estas seguro de querer enviar un email?', function () {
-        CuentaBancariaService.enviarEstadoCuentaByEmail($scope.id, 'pdf', $scope.view.desde.getTime(), $scope.view.hasta.getTime()).then(function () {
+        CuentaBancariaService.enviarEstadoCuentaByEmail($scope.view.cuentaPersonal.id, 'pdf', $scope.view.desde.getTime(), $scope.view.hasta.getTime()).then(function () {
           toastr.success('Email enviado correctamente');
         });
       });

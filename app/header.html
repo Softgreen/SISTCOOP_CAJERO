@@ -9,8 +9,11 @@
     <img src="images/logo-sistcoop.svg" alt="Sistcoop Enterprise application">
   </a>
 </div>
-<div class="navbar-header btn-danger" data-ng-if="!session.caja.abierto">
-  <p style="margin-top: 5px; margin-bottom: 5px;">Caja Cerrada, no podra realizar transacciones; solo podra realizar consultas. Si su caja ya fue abierta presione&nbsp;<a href="#">F5</a></p>
+
+<div class="navbar-header btn-danger" data-ng-controller="KeycloakController" >
+  <div data-ng-if="!session.caja.abierto">
+    <p style="margin-top: 5px; margin-bottom: 5px;">Caja Cerrada, no podra realizar transacciones; solo podra realizar consultas. Si su caja ya fue abierta presione&nbsp;<a href="#">F5</a></p>
+  </div>
 </div>
 
 <div class="" data-ng-controller="HeaderController">

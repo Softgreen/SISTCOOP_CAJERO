@@ -63,6 +63,7 @@ angular.module('cooperativa').controller('Cooperativa.Operaciones.CerrarCajaCont
                 function error(err) {
                     $scope.working = false;
                     if (err.status === 400) {
+                        $scope.view.error.pendiente = [];
                         for (var i = 0; i < err.data.length; i++) {
                             $scope.view.error.pendiente.push({
                                 idboveda: err.data[i].idboveda,
@@ -70,7 +71,7 @@ angular.module('cooperativa').controller('Cooperativa.Operaciones.CerrarCajaCont
                                 monto: err.data[i].monto
                             });
                         }
-                    } else {
+                    } else {                       
                         toastr.error(err.data.message);
                     }
                 }

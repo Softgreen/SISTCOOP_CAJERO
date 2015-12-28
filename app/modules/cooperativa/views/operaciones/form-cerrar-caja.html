@@ -26,7 +26,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr data-ng-repeat="item in ::tab.detalle | orderBy: 'valor'">
+                <tr data-ng-repeat="item in ::view.load.detalleHistorialActivoInicial[$index].detalle | orderBy: 'valor'">
                   <td class="text-right" style="height: 33px;"><span ng-bind="$index+1"></span></td>
                   <td class="text-right"><span ng-bind="::item.valor | currency: ''"></span></td>
                   <td class="text-right"><span ng-bind="::item.cantidad"></span></td>
@@ -43,7 +43,7 @@
                   <th rowspan="1" colspan="1" class="text-right">
                     <span ng-bind="::tab.moneda.simbolo"></span>
                     &nbsp;
-                    <span ng-bind="::getTotal(tab.detalle) | currency : ''"></span>
+                    <span ng-bind="::getTotal(view.load.detalleHistorialActivoInicial[$index].detalle) | currency : ''"></span>
                   </th>
                 </tr>
                 </tfoot>

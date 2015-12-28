@@ -11,6 +11,7 @@ angular.module('cooperativa').controller('Cooperativa.Operaciones.CerrarCajaCont
         };
 
         $scope.view.load = {
+            detalleHistorialActivoInicial: undefined,
             detalleHistorialActivo: undefined
         };
 
@@ -27,13 +28,14 @@ angular.module('cooperativa').controller('Cooperativa.Operaciones.CerrarCajaCont
                         };
                     });
                 }
+                $scope.view.load.detalleHistorialActivoInicial = angular.copy(response);
                 $scope.view.load.detalleHistorialActivo = response;
 
-                /*for (var i = 0; i < $scope.view.load.detalleHistorialActivo.length; i++) {
+                for (var i = 0; i < $scope.view.load.detalleHistorialActivo.length; i++) {
                     angular.forEach($scope.view.load.detalleHistorialActivo[i].detalle, function (row) {
                         row.cantidad = 0;
                     });
-                }*/
+                }
             });
         };
         $scope.loadDetalle();

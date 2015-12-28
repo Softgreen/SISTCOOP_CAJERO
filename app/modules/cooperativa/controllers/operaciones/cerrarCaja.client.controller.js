@@ -71,7 +71,7 @@ angular.module('cooperativa').controller('Cooperativa.Operaciones.CerrarCajaCont
                                 monto: err.data[i].monto
                             });
                         }
-                    } else {                       
+                    } else {
                         toastr.error(err.data.message);
                     }
                 }

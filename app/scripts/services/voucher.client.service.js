@@ -369,12 +369,12 @@ angular.module('mean').factory('VoucherService', function (EMPRESA, $filter) {
         fnTabTexto('ENVIADOS:' + item.enviadoCajaCaja, 'RECIBIDOS:' + item.recibidoCajaCaja);
         fnSaltoLinea();
 
-        fnTabTexto('TRANS. BOVEDA-CAJA(TOTAL): ' + (item.enviadoBovedaCaja + item.enviadoBovedaCaja));
-        fnTabTexto('ENVIADOS:' + item.enviadoBovedaCaja, 'RECIBIDOS:' + item.enviadoBovedaCaja);
+        fnTabTexto('TRANS. CAJA-BOVEDA(TOTAL): ' + (item.enviadoBovedaCaja + item.recibidoBovedaCaja));
+        fnTabTexto('ENVIADOS:' + item.enviadoBovedaCaja, 'RECIBIDOS:' + item.recibidoBovedaCaja);
         fnSaltoLinea();
 
         fnTabTexto('CIERRE CAJA(PENDIENTES):');
-        fnTabTexto('SOBRANTE:' + item.pendienteSobrante, 'FALTANTE:' + item.pendienteSobrante);
+        fnTabTexto('SOBRANTE:' + item.pendienteSobrante, 'FALTANTE:' + item.pendienteFaltante);
 
         fnSaltoLinea();
         fnSaltoLinea();

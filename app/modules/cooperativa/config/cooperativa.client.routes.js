@@ -73,6 +73,14 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                     label: 'Cerrar Caja'
                 }
             })
+            .state('cooperativa.app.operaciones.giros', {
+              url: '/giros',
+              templateUrl: 'modules/cooperativa/views/operaciones/giro/form-buscar.html',
+              controller: 'Cooperativa.Operaciones.BuscarGiroController',
+              ncyBreadcrumb: {
+                label: 'Giros'
+              }
+            })
 
             //Transaccion Cliente
             .state('cooperativa.app.transaccionCliente.transaccion', {

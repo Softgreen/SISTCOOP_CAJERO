@@ -499,7 +499,7 @@ angular.module('mean').directive('sgUbigeo', ['MaestroService', function (Maestr
     return {
         restrict: 'E',
         replace: false,
-        require: ['^form', 'ngModel'],
+        require: ['^?form', 'ngModel'],
         link: function ($scope, elem, attrs, ngModel) {
 
             ngModel[1].$validators.sgubigeo = function (modelValue, viewValue) {

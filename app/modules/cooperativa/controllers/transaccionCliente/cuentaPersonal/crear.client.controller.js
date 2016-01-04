@@ -163,6 +163,9 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CuentaP
                 var transaccion = {};
                 transaccion.numeroCuenta = $scope.view.transaccion.numeroCuenta;
                 transaccion.referencia = $scope.view.transaccion.referencia;
+                if(transaccion.referencia) {
+                  transaccion.referencia = transaccion.referencia.toUpperCase();
+                }
                 transaccion.interes = 0;
                 if ($scope.combo.selected.tipoTransaccion.denominacion === 'DEPOSITO') {
                     transaccion.monto = $scope.view.transaccion.monto;

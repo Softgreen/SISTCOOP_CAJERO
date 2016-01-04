@@ -163,6 +163,10 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CompraV
                 transaccion.montoEntregado = $scope.view.transaccion.montoEntregado;
                 transaccion.tasaCambio = $scope.view.transaccion.tipoCambio;
                 transaccion.referencia = $scope.view.transaccion.cliente;
+                if(transaccion.referencia) {
+                  transaccion.referencia = transaccion.referencia.toUpperCase();
+                }
+
                 $scope.working = true;
                 SessionService.crearTransaccionCompraVenta(transaccion).then(
                     function (response) {

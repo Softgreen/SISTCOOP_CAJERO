@@ -89,6 +89,7 @@ angular.element(document).ready(function () {
         }
       } else {
         alert('Usuario no tiene el Rol CAJERO');
+        keycloak.logout();
       }
     }).error(function () {
       alert('No se pudo verificar el origen de sucursal y agencia para el usuario');

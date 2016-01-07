@@ -174,7 +174,7 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CompraV
                         toastr.success('Transaccion creada satisfactoriamente.');
                         //$state.go('app.transaccion.compraVentaVoucher', {id: response.id});
                         CajaService.getVoucherCompraVenta(response.id).then(function (voucher) {
-                            $scope.view.voucher.list.push(voucher);
+                            $scope.view.voucher.list.unshift(voucher);
                         });
                     },
                     function error(err) {

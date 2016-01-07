@@ -42,7 +42,7 @@ angular.module('cooperativa').controller('Cooperativa.Administracion.Pendiente.C
         $scope.loadCombos();
 
         $scope.loadParams = function () {
-            $scope.view.pendiente.monto = $scope.view.params.monto;
+            $scope.view.pendiente.monto = parseFloat($scope.view.params.monto);
 
             if (angular.isDefined($scope.view.params.idPendienteRelacionado)) {
                 PendienteCajaService.findById($scope.view.params.idPendienteRelacionado).then(function (response) {

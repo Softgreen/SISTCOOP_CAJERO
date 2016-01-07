@@ -1,0 +1,167 @@
+<div ncy-breadcrumb></div>
+
+<h1><strong>Crear giro</strong></h1>
+
+<form name="form" class="form-horizontal" novalidate>
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="form-group" data-ng-class="{ 'has-error' : (form.agenciaOrigen.$invalid ) && (form.$submitted) }">
+        <label class="col-sm-3 control-label">Origen:</label>
+        <div class="col-sm-3">
+          <input type="text" name="agenciaOrigen" data-ng-model="view.agenciaOrigen.denominacion" class="form-control" disabled/>
+        </div>
+      </div>
+      <div class="form-group" data-ng-class="{ 'has-error' : form.agenciaDestino.$invalid && form.$submitted }">
+        <label class="col-sm-3 control-label"><span class="required">*</span> Destino:</label>
+        <div class="col-sm-5">
+          <ui-select name="agenciaDestino" data-ng-model="combo.selected.agenciaDestino" required>
+            <ui-select-match placeholder="Destino">{{$select.selected.denominacion}}</ui-select-match>
+            <ui-select-choices repeat="item in combo.agenciaDestino | filter: $select.search">
+              <div data-ng-bind-html="item.denominacion | highlight: $select.search"></div>
+            </ui-select-choices>
+          </ui-select>
+          <div data-ng-messages="form.agenciaDestino.$error" data-ng-if="form.$submitted">
+            <div class="has-error" data-ng-message="required">Ingrese destino.</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" data-ng-class="{ 'has-error' : (form.numeroDocumentoEmisor.$invalid || form.nombreClienteEmisor.$invalid ) && (form.$submitted) }">
+        <label class="col-sm-3 control-label"><span class="required">*</span> Emisor:</label>
+        <div class="col-sm-3">
+          <input type="text" name="numeroDocumentoEmisor" data-ng-model="view.numeroDocumentoEmisor" ui-keypress="{13:'buscarClienteEmisor($event)'}" data-ng-pattern="/^[0-9]+$/" class="form-control" pf-focused="true" autofocus placeholder="DNI/RUC"/>
+          <div data-ng-messages="form.numeroDocumentoEmisor.$error" data-ng-if="form.$submitted">
+            <div class="has-error" data-ng-message="required">Ingrese documento.</div>
+            <div class="has-error" data-ng-message="pattern">Numero invalido.</div>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <input type="text" name="nombreClienteEmisor" data-ng-model="view.nombreClienteEmisor" ui-keypress="{13:'buscarClienteEmisor($event)'}" data-ng-minlength="1" data-ng-maxlength="150" class="form-control" required placeholder="Apellidos y Nombres/Razon Social"/>
+          <div data-ng-messages="form.nombreClienteEmisor.$error" data-ng-if="form.$submitted">
+            <div class="has-error" data-ng-message="required">Ingrese nombre emisor.</div>
+            <div class="has-error" data-ng-message="minlength">Debe tener por lo menos 1 digito.</div>
+            <div class="has-error" data-ng-message="maxlength">Debe tener 150 digitos como maximo.</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" data-ng-class="{ 'has-error' : (form.numeroDocumentoReceptor.$invalid || form.nombreClienteReceptor.$invalid ) && (form.$submitted) }">
+        <label class="col-sm-3 control-label"><span class="required">*</span> Receptor:</label>
+        <div class="col-sm-3">
+          <input type="text" name="numeroDocumentoReceptor" data-ng-model="view.numeroDocumentoReceptor" ui-keypress="{13:'buscarClienteReceptor($event)'}" data-ng-pattern="/^[0-9]+$/" class="form-control" placeholder="DNI/RUC"/>
+          <div data-ng-messages="form.numeroDocumentoReceptor.$error" data-ng-if="form.$submitted">
+            <div class="has-error" data-ng-message="required">Ingrese documento.</div>
+            <div class="has-error" data-ng-message="pattern">Numero invalido.</div>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <input type="text" name="nombreClienteReceptor" data-ng-model="view.nombreClienteReceptor" ui-keypress="{13:'buscarClienteReceptor($event)'}" data-ng-minlength="1" data-ng-maxlength="150" class="form-control" required placeholder="Apellidos y Nombres/Razon Social"/>
+          <div data-ng-messages="form.nombreClienteReceptor.$error" data-ng-if="form.$submitted">
+            <div class="has-error" data-ng-message="required">Ingrese nombre receptor.</div>
+            <div class="has-error" data-ng-message="minlength">Debe tener por lo menos 1 digito.</div>
+            <div class="has-error" data-ng-message="maxlength">Debe tener 150 digitos como maximo.</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" data-ng-class="{ 'has-error' : (form.moneda.$invalid ) && (form.$submitted) }">
+        <label class="col-sm-3 control-label"><span class="required">*</span> Moneda:</label>
+        <div class="col-sm-4">
+          <ui-select name="moneda" data-ng-model="combo.selected.moneda" required>
+            <ui-select-match placeholder="Moneda">{{$select.selected.denominacion}}</ui-select-match>
+            <ui-select-choices repeat="item in combo.moneda | filter: $select.search">
+              <div data-ng-bind-html="item.denominacion | highlight: $select.search"></div>
+            </ui-select-choices>
+          </ui-select>
+          <div data-ng-messages="form.moneda.$error" data-ng-if="form.$submitted">
+            <div class="has-error" data-ng-message="required">Ingrese moneda.</div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="btn-group">
+            <label class="btn btn-default" ng-model="combo.selected.moneda" btn-radio="directAccess.moneda[0]">PEN</label>
+            <label class="btn btn-default" ng-model="combo.selected.moneda" btn-radio="directAccess.moneda[1]">USD</label>
+            <label class="btn btn-default" ng-model="combo.selected.moneda" btn-radio="directAccess.moneda[2]">EUR</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error' : form.monto.$invalid && form.$submitted}">
+        <label class="col-sm-3 control-label"><span class="required">*</span> Monto:</label>
+        <div class="col-sm-3">
+          <input type="text" name="monto" ng-model="view.monto" class="form-control"
+                 ui-number-mask="2" min="0" max="999999999"
+                 ng-minlength="1" ng-maxlength="20"
+                 placeholder="0.00" required/>
+          <div ng-messages="form.monto.$error" ng-if="form.$submitted">
+            <div class="has-error" ng-message="required">Ingrese monto.</div>
+            <div class="has-error" ng-message="maxlength">Maximo 100 caracteres.</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error' : form.monto.$invalid && form.$submitted}">
+        <label class="col-sm-3 control-label"><span class="required">*</span> Comision:</label>
+        <div class="col-sm-3">
+          <input type="text" name="comision" ng-model="view.comision" class="form-control"
+                 ui-number-mask="2" min="0" max="999999999"
+                 ng-minlength="1" ng-maxlength="20"
+                 placeholder="0.00" required/>
+          <div ng-messages="form.comision.$error" ng-if="form.$submitted">
+            <div class="has-error" ng-message="required">Ingrese comision.</div>
+            <div class="has-error" ng-message="maxlength">Maximo 100 caracteres.</div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">TOTAL:</label>
+        <div class="col-sm-3">
+          <input type="text" name="total" ng-model="transaccion.total" ui-number-mask="2" class="form-control" disabled/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button sg-save ng-disabled="working">
+            <span ng-show="working">Guardando...</span>
+            <span ng-hide="working">Guardar</span>
+          </button>
+          <button sg-cancel ng-disabled="working" ui-sref="^.buscar">Cancelar</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Opciones avanzadas COMISION</h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Tipo:</label>
+            <div class="col-sm-8">
+              <div class="btn-group">
+                <label class="btn btn-default" ng-model="view.tipoComision" uib-btn-radio="'FIJO'">&nbsp;Fijo&nbsp;</label>
+                <label class="btn btn-default" ng-model="view.tipoComision" uib-btn-radio="'PORCENTURAL'">Porcentual(%)</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Agregar/Quitar:</label>
+            <div class="col-sm-8">
+              <div class="btn-group">
+                <label class="btn btn-default" ng-model="view.modoPagoComision" uib-btn-radio="'ANADIR'" ng-show="view.lugarPagoComision == 'AL_ENVIAR'">Agregar</label>
+                <label class="btn btn-default" ng-model="view.modoPagoComision" uib-btn-radio="'REDUCIR'">Quitar</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Pago:</label>
+            <div class="col-sm-8">
+              <div class="btn-group">
+                <label class="btn btn-default" ng-model="view.lugarPagoComision" uib-btn-radio="'AL_ENVIAR'">Al enviar</label>
+                <label class="btn btn-default" ng-model="view.lugarPagoComision" uib-btn-radio="'AL_COBRAR'">Al cobrar</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>

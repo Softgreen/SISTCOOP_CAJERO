@@ -73,12 +73,31 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                     label: 'Cerrar Caja'
                 }
             })
+
             .state('cooperativa.app.operaciones.giros', {
               url: '/giros',
+              template: '<div ui-view></div>',
+              ncyBreadcrumb: {
+                skip: true // Never display this state in breadcrumb.
+              }
+            })
+            .state('cooperativa.app.operaciones.giros.buscar', {
+              url: '/buscar',
               templateUrl: 'modules/cooperativa/views/operaciones/giro/form-buscar.html',
               controller: 'Cooperativa.Operaciones.BuscarGiroController',
+              resolve: {},
               ncyBreadcrumb: {
-                label: 'Giros'
+                label: 'Home'
+              }
+            })
+            .state('cooperativa.app.operaciones.giros.crear', {
+              url: '/crear',
+              templateUrl: 'modules/cooperativa/views/operaciones/giro/form-crear.html',
+              controller: 'Cooperativa.Operaciones.CrearGiroController',
+              resolve: {},
+              ncyBreadcrumb: {
+                label: 'Crear giro',
+                parent: 'cooperativa.app.operaciones.giros.buscar'
               }
             })
 

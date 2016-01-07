@@ -197,7 +197,7 @@ angular.module('cooperativa').controller('Cooperativa.Operaciones.BuscarGiroCont
       });
     };
 
-    $scope.$watch("estadoGiro", function (newValue, oldValue) {
+    $scope.$watch('estadoGiro', function (newValue, oldValue) {
       if (newValue != oldValue) {
         $scope.searchRecibidos();
         $scope.searchEnviados();

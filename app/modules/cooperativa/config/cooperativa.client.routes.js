@@ -100,7 +100,20 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                 parent: 'cooperativa.app.operaciones.giros.buscar'
               }
             })
-
+            .state('cooperativa.app.operaciones.giros.editar', {
+              url: '/editar/:giro',
+              templateUrl: 'modules/cooperativa/views/operaciones/giro/form-editar.html',
+              controller: 'Cooperativa.Operaciones.EditarGiroController',
+              resolve: {
+                giro: function ($state, $stateParams, GiroService) {
+                  return GiroService.findById($stateParams.giro);
+                }
+              },
+              ncyBreadcrumb: {
+                label: 'Editar historial',
+                parent: 'cooperativa.app.administracion.historial.buscar'
+              }
+            })
             //Transaccion Cliente
             .state('cooperativa.app.transaccionCliente.transaccion', {
                 url: '/transacciones',

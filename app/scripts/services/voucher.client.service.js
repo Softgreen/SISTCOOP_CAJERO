@@ -70,18 +70,18 @@ angular.module('mean').factory('VoucherService', function (EMPRESA, $filter) {
         }
 
         function Recibido(obj) {
-            if (obj.monedaRecibida.simbolo === '�') {
-                fnTabTexto('RECIBIDO: ' + $filter('currency')(obj.montoRecibido, chr(238)));
+            if (obj.monedaRecibida.simbolo === '€') {
+                fnTabTexto('RECIBIDO: ', $filter('currency')(obj.montoRecibido, chr(238)), 2);
             } else {
-                fnTabTexto('RECIBIDO: ' + $filter('currency')(obj.montoRecibido, obj.monedaRecibida.simbolo));
+                fnTabTexto('RECIBIDO: ', $filter('currency')(obj.montoRecibido, obj.monedaRecibida.simbolo), 2);
             }
         }
 
         function Entregado(obj) {
-            if (item.monedaEntregada.simbolo === '�') {
-                fnTabTexto('ENTREGADO: ' + $filter('currency')(obj.montoEntregado, chr(238)));
+            if (item.monedaEntregada.simbolo === '€') {
+                fnTabTexto('ENTREGADO: ', $filter('currency')(obj.montoEntregado, chr(238)), 2);
             } else {
-                fnTabTexto('ENTREGADO: ' + $filter('currency')(obj.montoEntregado, obj.monedaEntregada.simbolo));
+                fnTabTexto('ENTREGADO: ', $filter('currency')(obj.montoEntregado, obj.monedaEntregada.simbolo), 2);
             }
         }
 

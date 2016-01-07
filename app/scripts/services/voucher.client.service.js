@@ -1,7 +1,7 @@
 'use strict';
 
 /* jshint ignore:start */
-angular.module('mean').factory('VoucherService', function (EMPRESA, $filter) {
+angular.module('mean').factory('VoucherService', function (EMPRESA, $filter, NumLetrasJ) {
 
     var fnResetPrinter = function () {
         qz.append("\x1B\x40");
@@ -210,6 +210,74 @@ angular.module('mean').factory('VoucherService', function (EMPRESA, $filter) {
         fnImprimir();
     };
 
+    var fnGiro = function (item) {
+      if (notReady()) {
+        return;
+      }
+      fnResetPrinter();
+
+      fnCabecera();
+
+      if (item.estado === 'ENVIADO') {
+        fnNegritaCentrado('GIRO EN EFECTIVO');
+      } else if (($scope.giro.estado) == "COBRADO") {
+        fnNegritaCentrado('COBRO DE GIRO');
+      }
+
+      fnTabTexto('Nro GIRO:', item.id);
+      fnTabTexto('FECHA: ' + $filter('date')(item.fechaEnvio, 'dd/MM/yyyy'), 'HORA: ' + $filter('date')(item.fechaEnvio, 'HH:mm:ss'));
+      fnTabTexto('ORDENANTE:', item.clienteEmisor);
+      fnTabTexto('BENEFICIARIO:', item.clienteReceptor);
+      fnTabTexto('AG.ORIGEN:', item.agenciaOrigen.abreviatura);
+      fnTabTexto('AG.DESTINO:', item.agenciaDestino.abreviatura);
+      fnTabTexto('MONEDA:', item.moneda.denominacion);
+
+      if ($scope.item.estado === 'ENVIADO') {
+        fnTabTexto('MONTO GIRO:', ($filter('currency')(item.monto, item.moneda.simbolo)));
+
+        if (item.lugarPagoComision === 'AL_ENVIAR') {
+          fnTabTexto('COMISION:', ($filter('currency')(item.comision, item.moneda.simbolo)));
+        } else {
+          fnTabTexto('COMISION A COBRAR:', ($filter('currency')(item.comision, item.moneda.simbolo)));
+        }
+
+        var total = 0;
+        if (item.estadoPagoComision) {
+          fnTabTexto('TOTAL:', ($filter('currency')(item.comision + item.monto, item.moneda.simbolo)));
+          total = item.comision + item.monto;
+        } else {
+          fnTabTexto('TOTAL:', ($filter('currency')(item.monto, item.moneda.simbolo)));
+          total = item.monto;
+        }
+
+        var decimal = Math.floor((total - Math.floor(total)) * 100);
+        fnTabTexto(NumLetrasJ.Convierte(parseInt(total).toString()).toUpperCase() + ' Y ' + decimal + '/100 ');
+      } else if (item.estado === 'COBRADO') {
+        fnTabTexto('MONTO GIRO:', $filter('currency')(item.monto, item.moneda.simbolo));
+
+        var total = 0;
+        if (item.lugarPagoComision === 'AL_ENVIAR') {
+          total = item.monto;
+        } else {
+          fnTabTexto('COMISION:', $filter('currency')(item.comision, item.moneda.simbolo));
+          fnTabTexto('MONTO:', $filter('currency')(item.monto - item.comision, item.moneda.simbolo));
+          total = item.monto - item.comision;
+        }
+
+        var decimal = Math.floor((total - Math.floor(total)) * 100);
+
+        fnTabTexto('MONTO GIRO:', $filter('currency')(item.monto, item.moneda.simbolo));
+        fnTabTexto(NumLetrasJ.Convierte(parseInt(total).toString()).toUpperCase() + ' Y ' + decimal + '/100 ');
+      }
+
+      fnSaltoLinea();
+      fnCentrado('____________________');
+      fnCentrado('Firma del Beneficiario');
+      fnCentrado('Gracias por su preferencia');
+      fnCentrado('Verifique su dinero antes de retirarse  de ventanilla');
+
+      fnImprimir();
+    };
 
     var fnBovedaCaja = function (item) {
         if (notReady()) {
@@ -425,6 +493,7 @@ angular.module('mean').factory('VoucherService', function (EMPRESA, $filter) {
         imprimirVoucherCuentaPersonal: fnCuentaPersonal,
         imprimirVoucherTransferencia: fnTransferencia,
         imprimirVoucherCheque: fnCheque,
+        imprimirVoucherGiro: fnGiro,
 
         imprimirVoucherTransaccionBovedaCaja: fnBovedaCaja,
         imprimirVoucherTransaccionCajaCaja: fnCajaCaja,

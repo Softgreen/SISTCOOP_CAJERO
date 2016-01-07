@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('cooperativa').controller('Cooperativa.Operaciones.BuscarGiroController',
-  function ($scope, $state, AGENCIA, AgenciaService) {
+  function ($scope, $state, AGENCIA, AgenciaService, GiroService, VoucherService) {
 
     $scope.estadoGiro = 'ENVIADO';
 
@@ -59,7 +59,14 @@ angular.module('cooperativa').controller('Cooperativa.Operaciones.BuscarGiroCont
           displayName: 'Edit',
           cellTemplate: '' +
           '<div style="text-align: center; padding-top: 5px;">' +
-          '<button type="button" data-ng-click="grid.appScope.gridActions.cancelar(row.entity)" data-ng-disabled="row.entity.estadoConfirmacion || !row.entity.estadoSolicitud" class="btn btn-danger btn-xs">Cancelar' +
+          '<button type="button" data-ng-click="grid.appScope.gridActions.edit(row.entity)" data-ng-disabled="!row.entity.estado" class="btn btn-info btn-xs">' +
+          '<i class="pficon pficon-edit"></i>' +
+          '<span>&nbsp;Edit</span>' +
+          '</button>' +
+          '&nbsp;' +
+          '<button type="button" data-ng-click="grid.appScope.gridActions.imprimir(row.entity)" data-ng-disabled="!row.entity.estado" class="btn btn-info btn-xs">' +
+          '<i class="pficon pficon-print"></i>' +
+          '<span>&nbsp;Imprimir</span>' +
           '</button>' +
           '</div>'
         }
@@ -130,7 +137,14 @@ angular.module('cooperativa').controller('Cooperativa.Operaciones.BuscarGiroCont
           displayName: 'Edit',
           cellTemplate: '' +
           '<div style="text-align: center; padding-top: 5px;">' +
-          '<button type="button" data-ng-click="grid.appScope.gridActions.cancelar(row.entity)" data-ng-disabled="row.entity.estadoConfirmacion || !row.entity.estadoSolicitud" class="btn btn-danger btn-xs">Cancelar' +
+          '<button type="button" data-ng-click="grid.appScope.gridActions.edit(row.entity)" data-ng-disabled="!row.entity.estado" class="btn btn-info btn-xs">' +
+          '<i class="pficon pficon-edit"></i>' +
+          '<span>&nbsp;Edit</span>' +
+          '</button>' +
+          '&nbsp;' +
+          '<button type="button" data-ng-click="grid.appScope.gridActions.imprimir(row.entity)" data-ng-disabled="!row.entity.estado" class="btn btn-info btn-xs">' +
+          '<i class="pficon pficon-print"></i>' +
+          '<span>&nbsp;Imprimir</span>' +
           '</button>' +
           '</div>'
         }
@@ -151,7 +165,12 @@ angular.module('cooperativa').controller('Cooperativa.Operaciones.BuscarGiroCont
 
     $scope.gridActions = {
       imprimir: function (row) {
-
+        GiroService.findById(row.id).then(function (response) {
+          VoucherService.imprimirVoucherGiro(response);
+        });
+      },
+      edit: function(row) {
+        $state.go('^.editar', {giro: row.id});
       }
     };
 
@@ -184,6 +203,9 @@ angular.module('cooperativa').controller('Cooperativa.Operaciones.BuscarGiroCont
         $scope.searchEnviados();
       }
     }, true);
+
+    $scope.searchRecibidos();
+    $scope.searchEnviados();
 
   }
 );

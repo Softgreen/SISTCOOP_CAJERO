@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.Historial.BuscarController',
-    function ($scope, $state, toastr, CAJA, SGDialog, CajaService, SessionService, VoucherService) {
+    function ($scope, $state, $modal, toastr, CAJA, SGDialog, CajaService, SessionService, VoucherService) {
 
         var paginationOptions = {
             page: 1,
@@ -28,8 +28,8 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.Histori
                 {field: 'idTransaccion', displayName: 'TRANS.', width: '9%'},
                 {field: 'tipoTransaccion', displayName: 'TIPO TRANS.', width: '9%'},
                 {field: 'numeroOperacion', displayName: 'NRO.OP.', width: '9%'},
-                {field: 'moneda', displayName: 'MONEDA', width: '14%'},
-                {field: 'monto', displayName: 'MONTO', width: '14%'},
+                {field: 'moneda', displayName: 'MONEDA', width: '16%'},
+                {field: 'monto', displayName: 'MONTO', width: '19%'},
                 {field: 'fecha', cellFilter: 'date: "dd/MM/yyyy"', displayName: 'FECHA', width: '10%'},
                 {field: 'hora', cellFilter: 'date: "HH:mm:ss"', displayName: 'HORA', width: '10%'},
                 {field: 'estado', cellFilter: 'si_no: "ACTIVO"', displayName: 'ESTADO', width: '10%'},
@@ -37,16 +37,15 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.Histori
                     name: 'edit',
                     displayName: 'Edit',
                     cellTemplate: '' +
-                    '<div style="text-align: center; padding-top: 5px;">' +
-                    '<button type="button" data-ng-click="grid.appScope.gridActions.imprimir(row.entity)" data-ng-disabled="!row.entity.estado" class="btn btn-info btn-xs">' +
-                    '<i class="pficon pficon-print"></i>' +
-                    '<span>&nbsp;Imprimir</span>' +
-                    '</button>' +
-                    '&nbsp;' +
-                    '<button type="button" data-ng-click="grid.appScope.gridActions.extornar(row.entity)" data-ng-disabled="!row.entity.estado" class="btn btn-danger btn-xs">' +
-                    '<i class="pficon pficon-delete"></i>' +
-                    '<span>&nbsp;Extornar</span>' +
-                    '</button>' +
+                    '<div class="btn-group" uib-dropdown dropdown-append-to-body>'+
+                      '<button id="btn-append-to-body" type="button" class="btn btn-default" uib-dropdown-toggle>Acciones <span class="caret"></span></button>'+
+                      '<ul uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body" class="dropdown-menu-right">'+
+                        '<li role="menuitem"><a href="" data-ng-click="grid.appScope.gridActions.ver(row.entity)"><i class="pficon pficon-screen"></i><span>&nbsp;Ver</span></a></li>'+
+                        '<li role="menuitem"><a href="" data-ng-click="grid.appScope.gridActions.imprimir(row.entity)"><i class="pficon pficon-print"></i><span>&nbsp;Imprimir</span></a></li>'+
+                        '<li role="menuitem"><a href="" data-ng-click="grid.appScope.gridActions.imprimir(row.entity, true)"><i class="pficon pficon-print"></i><span>&nbsp;Imprimir con saldo</span></a></li>'+
+                        '<li class="divider" data-ng-hide="!row.entity.estado"></li>'+
+                        '<li role="menuitem" data-ng-hide="!row.entity.estado"><a href="" data-ng-click="grid.appScope.gridActions.extornar(row.entity)"><i class="pficon pficon-delete"></i><span>&nbsp;Extornar</span></a></li>'+
+                      '</ul>'+
                     '</div>'
                 }
             ],
@@ -63,7 +62,22 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.Histori
             }
         };
         $scope.gridActions = {
-            imprimir: function (row) {
+            ver: function(row) {
+              var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'modules/cooperativa/views/transaccionCliente/historial/form-ver-transaccion-popup.html',
+                controller: 'Cooperativa.TransaccionCliente.Historial.VerTransaccionPopupController',
+                resolve: {
+                  transaccion: function () {
+                    return row;
+                  }
+                }
+              });
+              modalInstance.result.then(function () {
+              }, function () {
+              });
+            },
+            imprimir: function (row, saldo) {
                 if (row.tipoTransaccion === 'APORTE') {
                     CajaService.getVoucherCuentaAporte(row.idTransaccion).then(function (response) {
                         VoucherService.imprimirVoucherAporte(response);
@@ -71,7 +85,7 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.Histori
                 }
                 else if (row.tipoTransaccion === 'DEPOSITO' || row.tipoTransaccion === 'RETIRO') {
                     CajaService.getVoucherTransaccionBancaria(row.idTransaccion).then(function (response) {
-                        VoucherService.imprimirVoucherCuentaPersonal(response);
+                        VoucherService.imprimirVoucherCuentaPersonal(response, saldo);
                     });
                 }
                 else if (row.tipoTransaccion === 'COMPRA' || row.tipoTransaccion === 'VENTA') {

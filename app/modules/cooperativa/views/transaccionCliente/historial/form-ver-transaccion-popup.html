@@ -1,0 +1,34 @@
+<form name="form" class="form-horizontal" novalidate>
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">
+      <span class="pficon pficon-close"></span>
+    </button>
+    <h4 class="modal-title">Transaccion</h4>
+  </div>
+  <div class="modal-body">
+    <fieldset class="border-top">
+      <legend><span class="text">Cuenta Personal</span></legend>
+      <dl class="dl-horizontal left">
+        <dt>ID:</dt>
+        <dd data-ng-bind="transaccion.idTransaccion"></dd>
+        <dt>NRO OPERACION:</dt>
+        <dd data-ng-bind="transaccion.numeroOperacion"></dd>
+        <dt>FECHA:</dt>
+        <dd data-ng-bind="transaccion.fecha | date: 'dd/MM/yyyy'"></dd>
+        <dt>TIPO TRANSACCION:</dt>
+        <dd data-ng-bind="transaccion.tipoTransaccion"></dd>
+        <dt>TIPO CUENTA:</dt>
+        <dd data-ng-bind="transaccion.tipoCuenta"></dd>
+        <dt>MONEDA:</dt>
+        <dd data-ng-bind="transaccion.moneda"></dd>
+        <dt>MONTO:</dt>
+        <dd data-ng-bind="transaccion.monto"></dd>
+        <dt>ESTADO:</dt>
+        <dd data-ng-bind="transaccion.estado | si_no : 'ACTIVO'"></dd>
+      </dl>
+    </fieldset>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" data-ng-click="cancel()">Cancelar</button>
+  </div>
+</form>

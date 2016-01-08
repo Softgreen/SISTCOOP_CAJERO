@@ -7,18 +7,18 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CompraV
         $scope.working = false;
 
         $scope.view = {
-            transaccion: {
-                cliente: undefined,
-                tipoCambio: 0,
-                montoRecibido: 0,
-                montoEntregado: 0,
-                limpiar: function () {
-                    $scope.view.transaccion.cliente = undefined;
-                    $scope.view.transaccion.tipoCambio = 0;
-                    $scope.view.transaccion.montoRecibido = 0;
-                    $scope.view.transaccion.montoEntregado = 0;
-                }
-            },
+          transaccion: {
+            cliente: undefined,
+            tipoCambio: 0,
+            montoRecibido: 0,
+            montoEntregado: 0,
+            limpiar: function () {
+              $scope.view.transaccion.cliente = undefined;
+              $scope.view.transaccion.tipoCambio = 0;
+              $scope.view.transaccion.montoRecibido = 0;
+              $scope.view.transaccion.montoEntregado = 0;
+            }
+          },
             voucher: {
                 list: [],
                 limpiar: function () {

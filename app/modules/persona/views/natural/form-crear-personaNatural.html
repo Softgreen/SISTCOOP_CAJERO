@@ -50,7 +50,7 @@
 	<div class="form-group" data-ng-class="{ 'has-error' : form.apellidoPaterno.$invalid && form.$submitted }">
 		<label class="col-sm-2 control-label">Apellido paterno:</label>
 		<div class="col-sm-3">
-			<input name="apellidoPaterno" type="text" data-ng-model="view.persona.apellidoPaterno" data-ng-minlength="1" data-ng-maxlength="60" class="form-control" capitalize required/>
+			<input name="apellidoPaterno" type="text" data-ng-model="view.persona.apellidoPaterno" data-ng-minlength="1" data-ng-maxlength="60" class="form-control" ng-trim="false" text-transform-uppercase required/>
 			<div data-ng-messages="form.apellidoPaterno.$error" data-ng-if="form.$submitted">
 				<div class="has-error" data-ng-message="required">Ingrese apellido paterno.</div>
 				<div class="has-error" data-ng-message="minlength">Ingrese apellido paterno.</div>
@@ -61,7 +61,7 @@
 	<div class="form-group" data-ng-class="{ 'has-error' : form.apellidoMaterno.$invalid && form.$submitted }">
 		<label class="col-sm-2 control-label">Apellido materno:</label>
 		<div class="col-sm-3">
-			<input name="apellidoMaterno" type="text" data-ng-model="view.persona.apellidoMaterno" data-ng-minlength="1" data-ng-maxlength="60" class="form-control" capitalize required/>
+			<input name="apellidoMaterno" type="text" data-ng-model="view.persona.apellidoMaterno" data-ng-minlength="1" data-ng-maxlength="60" class="form-control" ng-trim="false" text-transform-uppercase required/>
 			<div data-ng-messages="form.apellidoMaterno.$error" data-ng-if="form.$submitted">
 				<div class="has-error" data-ng-message="required">Ingrese apellido materno.</div>
 				<div class="has-error" data-ng-message="minlength">Ingrese apellido materno.</div>
@@ -72,7 +72,7 @@
 	<div class="form-group" data-ng-class="{ 'has-error' : form.nombres.$invalid && form.$submitted }">
 		<label class="col-sm-2 control-label">Nombres:</label>
 		<div class="col-sm-3">
-			<input name="nombres" type="text" data-ng-model="view.persona.nombres" data-ng-minlength="1" data-ng-maxlength="70" class="form-control" capitalize required  />
+			<input name="nombres" type="text" data-ng-model="view.persona.nombres" data-ng-minlength="1" data-ng-maxlength="70" class="form-control" ng-trim="false" text-transform-uppercase required  />
 			<div data-ng-messages="form.nombres.$error" data-ng-if="form.$submitted">
 				<div class="has-error" data-ng-message="required">Ingrese nombres.</div>
 				<div class="has-error" data-ng-message="minlength">Ingrese nombres.</div>

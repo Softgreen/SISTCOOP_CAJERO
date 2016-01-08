@@ -21,7 +21,7 @@
     <div class="form-group" data-ng-class="{ 'has-error' : form.abreviatura.$invalid && form.abreviatura.$dirty }">
         <label class="col-sm-2 control-label"><span class="required">*</span> Abreviatura:</label>
         <div class="col-sm-3">
-            <input name="abreviatura" type="text" data-ng-model="view.tipoDocumento.abreviatura" sg-abreviatura-tipo-documento-validate data-ng-minlength="1" data-ng-maxlength="20" class="form-control" required/>
+            <input name="abreviatura" type="text" data-ng-model="view.tipoDocumento.abreviatura" sg-abreviatura-tipo-documento-validate data-ng-minlength="1" data-ng-maxlength="20" class="form-control" text-transform-uppercase required/>
             <div data-ng-messages="form.abreviatura.$error" data-ng-if="form.abreviatura.$dirty">
                 <div class="has-error" data-ng-message="required">Ingrese abreviatura.</div>
                 <div class="has-error" data-ng-message="minlength">Ingrese abreviatura.</div>
@@ -33,7 +33,7 @@
     <div class="form-group" data-ng-class="{ 'has-error' : form.denominacion.$invalid && form.$submitted }">
         <label class="col-sm-2 control-label"><span class="required">*</span> Denominacion:</label>
         <div class="col-sm-3">
-            <input name="denominacion" type="text" data-ng-model="view.tipoDocumento.denominacion" data-ng-minlength="1" data-ng-maxlength="60" class="form-control" required/>
+            <input name="denominacion" type="text" data-ng-model="view.tipoDocumento.denominacion" data-ng-minlength="1" data-ng-maxlength="60" class="form-control" text-transform-uppercase required/>
             <div data-ng-messages="form.denominacion.$error" data-ng-if="form.$submitted">
                 <div class="has-error" data-ng-message="required">Ingrese denominacion.</div>
                 <div class="has-error" data-ng-message="minlength">Ingrese denominacion.</div>

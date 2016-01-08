@@ -4,9 +4,6 @@ angular.module('mean') .service('textTransformService', function () {
     return {
       transform: function (element, ngModelController, callBack) {
         element.on('input', function () {
-
-          console.log(ngModelController.$viewValue.length);
-
           var currentViewValue = ngModelController.$viewValue;
           var modifiedViewValue = callBack(currentViewValue);
 

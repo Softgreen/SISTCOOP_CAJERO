@@ -83,7 +83,7 @@ angular.module('mean').factory('VoucherService', function (EMPRESA, $filter, Num
                 cadena2 = cadena2 + array[i] + ' ';
               }
               fnTabTexto('CLIENTE:' + cadena1);
-              fnTabTexto('', cadena2);
+              fnTabTexto('        ' + cadena2);
             } else {
               fnTabTexto('CLIENTE:' + item.referencia);
             }

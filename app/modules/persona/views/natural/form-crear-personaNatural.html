@@ -1,6 +1,6 @@
 <div ncy-breadcrumb></div>
 
-<h1><strong>Crear persona natural</strong></h1>
+<h1><strong>Crear Persona Natural</strong></h1>
 
 <form name="form" class="form-horizontal" novalidate>
 
@@ -31,7 +31,7 @@
 				</ui-select-choices>
 			</ui-select>
 			<div data-ng-messages="form.tipoDocumento.$error" data-ng-if="form.tipoDocumento.$dirty || form.$submitted">
-				<div class="has-error" data-ng-message="required">Ingrese documento.</div>
+				<div class="has-error" data-ng-message="required">Ingrese Documento.</div>
 			</div>
 		</div>
 		<div class="col-sm-2">
@@ -48,7 +48,7 @@
 		</div>
 	</div>
 	<div class="form-group" data-ng-class="{ 'has-error' : form.apellidoPaterno.$invalid && form.$submitted }">
-		<label class="col-sm-2 control-label">Apellido paterno:</label>
+		<label class="col-sm-2 control-label">Apellido Paterno:</label>
 		<div class="col-sm-3">
 			<input name="apellidoPaterno" type="text" data-ng-model="view.persona.apellidoPaterno" data-ng-minlength="1" data-ng-maxlength="60" class="form-control" ng-trim="false" text-transform-uppercase required/>
 			<div data-ng-messages="form.apellidoPaterno.$error" data-ng-if="form.$submitted">
@@ -59,7 +59,7 @@
 		</div>
 	</div>
 	<div class="form-group" data-ng-class="{ 'has-error' : form.apellidoMaterno.$invalid && form.$submitted }">
-		<label class="col-sm-2 control-label">Apellido materno:</label>
+		<label class="col-sm-2 control-label">Apellido Materno:</label>
 		<div class="col-sm-3">
 			<input name="apellidoMaterno" type="text" data-ng-model="view.persona.apellidoMaterno" data-ng-minlength="1" data-ng-maxlength="60" class="form-control" ng-trim="false" text-transform-uppercase required/>
 			<div data-ng-messages="form.apellidoMaterno.$error" data-ng-if="form.$submitted">
@@ -81,7 +81,7 @@
 		</div>
 	</div>
 	<div class="form-group" data-ng-class="{ 'has-error' : form.fechanacimiento.$invalid && form.$submitted }">
-		<label class="col-sm-2 control-label">Fecha nacimiento:</label>
+		<label class="col-sm-2 control-label">Fecha Nacimiento:</label>
 		<div class="col-sm-2" data-ng-controller="Persona.Util.DateController">
 			<div class="input-group">
 				<input type="text" name="fechanacimiento" class="form-control" sg-max-date="maxDate" data-ng-model="view.persona.fechaNacimiento" datepicker-popup="dd/MM/yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" data-ng-required="true" close-text="Close" placeholder="dd/mm/yyyy" required>
@@ -108,7 +108,7 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-sm-2 control-label">Estado civil <span class="optional">(opcional)</span>:</label>
+		<label class="col-sm-2 control-label">Estado Civil <span class="optional">(opcional)</span>:</label>
 		<div class="col-sm-2">
 			<ui-select name="estadoCivil" data-ng-model="combo.selected.estadoCivil">
 				<ui-select-match placeholder="Seleccione">{{$select.selected}}</ui-select-match>

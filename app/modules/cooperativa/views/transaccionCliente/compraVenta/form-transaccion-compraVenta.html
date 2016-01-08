@@ -10,7 +10,7 @@
       <div class="form-group" ng-class="{ 'has-error' : form.cliente.$invalid && form.$submitted}">
         <label class="col-sm-3 control-label">Cliente:</label>
         <div class="col-sm-3">
-          <input type="text" name="cliente" ng-model="view.transaccion.cliente" ng-maxlength="100" pf-focused="true" autofocus class="form-control" style="text-transform: uppercase;"/>
+          <input type="text" name="cliente" ng-model="view.transaccion.cliente" ng-maxlength="100" pf-focused="true" autofocus class="form-control" ng-trim="false" text-transform-uppercase/>
           <div ng-messages="form.cliente.$error" ng-if="form.$submitted">
             <div class="has-error" ng-message="maxlength">Maximo 100 caracteres.</div>
           </div>

@@ -66,22 +66,42 @@ angular.module('mean').factory('VoucherService', function (EMPRESA, $filter, Num
         fnTabTexto('CAJA: ' + item.cajaDenominacion, 'NRO.OP.: ' + item.numeroOperacion);
         fnTabTexto('FECHA: ' + $filter('date')(item.fecha, 'dd/MM/yyyy'), 'HORA: ' + $filter('date')(item.hora, 'HH:mm:ss'));
         if (item.referencia) {
-            fnTabTexto('CLIENTE: ' + item.referencia);
+            var cadena1 = '';
+            var cadena2 = '';
+            var indexNumbers = -1;
+            var array = item.referencia.split(' ');
+            for(var i = 0; i < array.length; i++) {
+              if(/\d/.test(array[i])) {
+                indexNumbers = i;
+              }
+            }
+            if(indexNumbers !== -1) {
+              for(var i = 0; i <= indexNumbers; i++) {
+                cadena1 = cadena1 + array[i] + ' ';
+              }
+              for(var i = indexNumbers + 1 ; i < array.length; i++) {
+                cadena2 = cadena2 + array[i] + ' ';
+              }
+              fnTabTexto('CLIENTE:' + cadena1);
+              fnTabTexto('', cadena2);
+            } else {
+              fnTabTexto('CLIENTE:' + item.referencia);
+            }
         }
 
         function Recibido(obj) {
             if (obj.monedaRecibida.simbolo === '€') {
-                fnTabTexto('RECIBIDO: ', $filter('currency')(obj.montoRecibido, chr(238)), 2);
+                fnTabTexto('RECIBIDO: ', $filter('currency')(obj.montoRecibido, chr(238)));
             } else {
-                fnTabTexto('RECIBIDO: ', $filter('currency')(obj.montoRecibido, obj.monedaRecibida.simbolo), 2);
+                fnTabTexto('RECIBIDO: ', $filter('currency')(obj.montoRecibido, obj.monedaRecibida.simbolo));
             }
         }
 
         function Entregado(obj) {
             if (item.monedaEntregada.simbolo === '€') {
-                fnTabTexto('ENTREGADO: ', $filter('currency')(obj.montoEntregado, chr(238)), 2);
+                fnTabTexto('ENTREGADO: ', $filter('currency')(obj.montoEntregado, chr(238)));
             } else {
-                fnTabTexto('ENTREGADO: ', $filter('currency')(obj.montoEntregado, obj.monedaEntregada.simbolo), 2);
+                fnTabTexto('ENTREGADO: ', $filter('currency')(obj.montoEntregado, obj.monedaEntregada.simbolo));
             }
         }
 

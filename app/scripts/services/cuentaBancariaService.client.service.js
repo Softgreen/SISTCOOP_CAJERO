@@ -196,6 +196,13 @@ angular.module('mean').factory('CuentaBancariaService', ['Restangular',
             },
             getUrlEstadoCuentaPdf: function (id, desde, hasta) {
               return Restangular.one(baseUrl, id).all('/estadoCuenta/pdf?desde='+desde+'&hasta='+hasta).getRestangularUrl();
+            },
+
+            getCapitalizacion: function (idCuentaBancaria) {
+              return Restangular.one(baseUrl + '/' + idCuentaBancaria + '/capitalizacion/datos').get();
+            },
+            capitalizarCuenta: function (idCuentaBancaria) {
+              return Restangular.all(baseUrl + '/' + idCuentaBancaria + '/capitalizacion/capitalizar').post();
             }
         };
 

@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()">
+    <span class="pficon pficon-close"></span>
+  </button>
+  <h4 class="modal-title">�Estas seguro de realizar esta operacion?</h4>
+</div>
+<div class="modal-body">
+  <fieldset class="border-top">
+    <legend><span class="text">Cuenta personal</span></legend>
+    <dl class="dl-horizontal left">
+      <dt>TIPO CUENTA:</dt>
+      <dd data-ng-bind="view.cuentaPersonal.tipoCuenta"></dd>
+      <dt>SOCIO:</dt>
+      <dd data-ng-bind="view.cuentaPersonal.socio"></dd>
+      <dt>DOCUMENTO:</dt>
+      <dd data-ng-bind-template="{{view.cuentaPersonal.tipoDocumento}}:{{view.cuentaPersonal.numeroDocumento}}"></dd>
+      <dt>ESTADO CUENTA:</dt>
+      <dd data-ng-bind="view.cuentaPersonal.estadoCuenta"></dd>
+    </dl>
+  </fieldset>
+  <fieldset class="border-top">
+    <legend><span class="text">Datos de capitalizacion</span></legend>
+    <dl class="dl-horizontal left">
+      <dt>DESDE:</dt>
+      <dd data-ng-bind="view.capitalizacion.desde | date: 'dd/MM/yyyy'"></dd>
+      <dt>HASTA:</dt>
+      <dd data-ng-bind="view.capitalizacion.hasta | date: 'dd/MM/yyyy'"></dd>
+      <dt>MONTO A CAPITALIZAR:</dt>
+      <dd data-ng-bind-template="{{view.cuentaPersonal.moneda}}{{view.capitalizacion.monto | number: 4}}"></dd>
+    </dl>
+  </fieldset>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" data-ng-click="ok()">Guardar</button>
+  <button class="btn btn-default" data-ng-click="cancel()">Cancelar</button>
+</div>

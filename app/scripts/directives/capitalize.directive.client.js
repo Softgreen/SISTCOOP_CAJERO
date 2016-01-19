@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean') .service('textTransformService', function () {
+angular.module('mean').service('textTransformService', function () {
     return {
       transform: function (element, ngModelController, callBack) {
         element.on('input', function () {

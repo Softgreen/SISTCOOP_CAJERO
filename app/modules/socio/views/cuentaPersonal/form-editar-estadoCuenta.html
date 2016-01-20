@@ -50,6 +50,7 @@
         <tr class="t-head">
           <th align="left">Fecha</th>
           <th align="left">Descripción</th>
+          <th align="left">Referencia</th>
           <th align="right">Monto</th>
         </tr>
         </thead>
@@ -57,10 +58,12 @@
         <tr data-ng-repeat="item in view.load.estadoCuenta">
           <td><span data-ng-bind="item.fecha | date: 'dd/MM/yyyy'"></span></td>
           <td align="left"><span data-ng-bind="item.tipoTransaccion"></span></td>
+          <td align="left"><span data-ng-bind="item.referencia"></span></td>
           <td align="right" ng-class="{'required': item.monto < 0}"><span data-ng-bind="item.monto | currency: ''"></span></td>
         </tr>
 
         <tr class="space-3">
+          <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td><strong>Saldo disponible</strong></td>
           <td align="right">

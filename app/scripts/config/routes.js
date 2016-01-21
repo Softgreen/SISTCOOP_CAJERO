@@ -13,6 +13,11 @@ angular.module('mean').config(['$stateProvider', '$urlRouterProvider',
         url: '/',
         templateUrl: 'home.html'
       })
+      .state('impresora', {
+        url: '/impresora',
+        templateUrl: 'impresora.html',
+        controller: 'ConfiguracionImpresoraController'
+      })
       .state('not-found', {
         url: '/not-found',
         templateUrl: '404.html',

@@ -72,6 +72,7 @@ module.exports = function(config) {
       'bower_components/qz-tray/3rdparty/html2canvas.js',
       'bower_components/qz-tray/3rdparty/jquery.plugin.html2canvas.js',
       'bower_components/jquery.maskedinput/dist/jquery.maskedinput.js',
+      'bower_components/angular-local-storage/dist/angular-local-storage.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/config.js",

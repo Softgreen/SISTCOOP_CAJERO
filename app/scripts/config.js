@@ -28,7 +28,8 @@ var ApplicationConfiguration = (function () {
     'ngFileUpload',
     'ncy-angular-breadcrumb',
     'angularSpinner',
-    'angular-ui-view-spinner'
+    'angular-ui-view-spinner',
+    'LocalStorageModule'
   ];
 
   // Add a new vertical module

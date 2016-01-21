@@ -5,7 +5,7 @@
     "angular": "1.4.7",
     "patternfly": "^2.6.0",
     "angular-animate": "1.4.7",
-    "angular-cookies": "1.4.7",
+    "angular-cookies": "~1.4.9",
     "angular-resource": "1.4.7",
     "angular-route": "1.4.7",
     "angular-sanitize": "1.4.7",
@@ -35,7 +35,8 @@
     "jquery": "~2.1.4",
     "sistcoop": "https://github.com/Softgreen/SISTCOOP-JS.git#master",
     "qz-tray": "https://github.com/Softgreen/SISTCOOP-QZTRAY.git#master",
-    "jquery.maskedinput": "~1.4.1"
+    "jquery.maskedinput": "~1.4.1",
+    "angular-local-storage": "~0.2.3"
   },
   "resolutions": {
     "angular": "1.4.7"

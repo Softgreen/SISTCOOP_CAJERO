@@ -24,6 +24,7 @@ window.auth.rrhhUrl = 'http://192.168.1.90:8080/SISTCOOP_REST/rest';
 
 window.auth.empresa = 'MULTIVALORES DEL SUR';
 window.auth.printer = 'EPSON TM-U220';
+window.auth.printerCookieName = 'sg-sistcoop-printer';
 
 //Then define the init function for starting up the application
 angular.element(document).ready(function () {
@@ -78,6 +79,7 @@ angular.element(document).ready(function () {
 
       angular.module('mean').constant('EMPRESA', window.auth.empresa);
       angular.module('mean').constant('PRINTER', window.auth.printer);
+      angular.module('mean').constant('PRINTER_COOKIE', window.auth.printerCookieName);
 
       if(keycloak.realmAccess.roles.indexOf('CAJERO') !== -1) {
         if (angular.isUndefined(sistcoop.agencia) || angular.isUndefined(sistcoop.caja) || angular.isUndefined(sistcoop.persona)) {
@@ -286,11 +288,21 @@ angular.module('mean').factory('SGUsuarioKeycloak', ['KeycloakRestangular', 'REA
 }]);
 
 /* jshint ignore:start */
-angular.module('mean').config(['RestangularProvider', 'PRINTER',
-  function (RestangularProvider, PRINTER) {
-    //RestangularProvider.setBaseUrl('http://localhost:8080/SistCoopREST/rest');
-    //RestangularProvider.setBaseUrl('http://multivadelsur.ddns.net:8080/SISTCOOP_REST/rest');
+angular.module('mean').config(['RestangularProvider',
+  function (RestangularProvider) {
     RestangularProvider.setBaseUrl(window.auth.rrhhUrl);
+  }
+]);
+
+angular.module('mean').run(['localStorageService', 'PRINTER', 'PRINTER_COOKIE',
+  function (localStorageService, PRINTER, PRINTER_COOKIE) {
+
+    //Load printer
+    var cookieName = PRINTER_COOKIE;
+    var valueCookie = localStorageService.get(cookieName);
+    if(valueCookie !== null){
+      PRINTER = valueCookie;
+    }
 
     if(isLoaded()){
       findPrinter(PRINTER);

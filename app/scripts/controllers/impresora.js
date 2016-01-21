@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('mean').controller('ConfiguracionImpresoraController', ['$scope', '$state', 'toastr', 'localStorageService', 'PRINTER',
-  function($scope, $state, toastr, localStorageService, PRINTER) {
+angular.module('mean').controller('ConfiguracionImpresoraController', ['$scope', '$state', 'toastr', 'localStorageService', 'PRINTER', 'PRINTER_COOKIE',
+  function($scope, $state, toastr, localStorageService, PRINTER, PRINTER_COOKIE) {
 
-    $scope.cookieName = 'sg-sistcoop-printer';
+    $scope.cookieName = PRINTER_COOKIE;
 
     $scope.view = {
       defaulPrinterName: undefined
@@ -19,7 +19,6 @@ angular.module('mean').controller('ConfiguracionImpresoraController', ['$scope',
         localStorageService.set(cookieName, defaulPrinterName);
         $scope.view.defaulPrinterName = defaulPrinterName;
       }
-      console.log('en nombre es:' + $scope.view.defaulPrinterName);
     };
     $scope.loadPrinter();
 

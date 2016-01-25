@@ -34,7 +34,7 @@
   <div class="form-group" ng-class="{ 'has-error' : form.monto.$invalid && form.$submitted}">
     <label class="col-sm-2 control-label"><span class="required">*</span> Monto:</label>
     <div class="col-sm-3">
-      <input type="text" name="monto" ng-model="view.transaccion.monto" class="form-control"
+      <input type="text" name="monto" ng-model="view.monto" class="form-control"
              ui-number-mask="2" min="0" max="999999999"
              ng-minlength="1" ng-maxlength="20"
              placeholder="0.00" required/>

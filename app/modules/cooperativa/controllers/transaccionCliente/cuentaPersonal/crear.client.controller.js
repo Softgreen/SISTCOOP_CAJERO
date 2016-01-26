@@ -211,5 +211,9 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CuentaP
             });
         };
 
+        $scope.consultaSaldo = function () {
+          VoucherService.imprimirConsultaEstadoCuenta($scope.view.load.cuentaPersonal);
+        };
+
     }
 );

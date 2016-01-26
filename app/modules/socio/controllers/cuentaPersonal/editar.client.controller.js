@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('socio').controller('Socio.CuentaPersonal.EditarCuentaPersonalController',
-    function ($scope, $window, $state, $modal, toastr, cuentaPersonal, CuentaBancariaService, SGDialog) {
+    function ($scope, $window, $state, $modal, toastr, cuentaPersonal, CuentaBancariaService, SGDialog, VoucherService) {
 
         $scope.view = {
             cuentaPersonal: cuentaPersonal
@@ -75,6 +75,10 @@ angular.module('socio').controller('Socio.CuentaPersonal.EditarCuentaPersonalCon
               }
             );
           });
+        };
+
+        $scope.consultaSaldo = function () {
+          VoucherService.imprimirConsultaEstadoCuenta($scope.view.cuentaPersonal);
         };
 
     });

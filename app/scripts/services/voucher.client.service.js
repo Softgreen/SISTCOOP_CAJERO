@@ -54,6 +54,26 @@ angular.module('mean').factory('VoucherService', function (EMPRESA, $filter, Num
         alert('Metodo no implementado');
     };
 
+    var fnConsultaEstadoCuenta = function(item) {
+      if (notReady()) {
+        return;
+      }
+      fnResetPrinter();
+
+      fnCabecera();
+      fnNegritaCentrado(' CONSULTA ESTADO CUENTA ');
+      fnTabTexto('FECHA: ' + $filter('date')(new Date(), 'dd/MM/yyyy'), 'HORA: ' + $filter('date')(new Date(), 'HH:mm:ss'));
+
+      fnTabTexto('CLIENTE: ' + item.socio);
+
+      fnTabTexto('T.CUENTA: ' + item.tipoCuenta);
+      fnTabTexto('NRO.CUENTA: ' + item.numeroCuenta);
+      fnTabTexto('MONEDA: ' + item.moneda);
+      fnTabTexto('SALDO: ' + item.moneda + $filter('number')(item.saldo, 2));
+
+      fnCentrado('Gracias por su preferencia');
+    };
+
     var fnCompraVenta = function (item) {
         if (notReady()) {
             return;
@@ -508,6 +528,8 @@ angular.module('mean').factory('VoucherService', function (EMPRESA, $filter, Num
     };
 
     return {
+        imprimirConsultaEstadoCuenta: fnConsultaEstadoCuenta,
+
         imprimirVoucherAporte: fnCuentaAporte,
         imprimirVoucherCompraVenta: fnCompraVenta,
         imprimirVoucherCuentaPersonal: fnCuentaPersonal,

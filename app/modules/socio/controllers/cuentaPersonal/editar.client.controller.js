@@ -2,7 +2,7 @@
 
 /* jshint -W098 */
 angular.module('socio').controller('Socio.CuentaPersonal.EditarCuentaPersonalController',
-    function ($scope, $window, $state, $modal, toastr, cuentaPersonal, CuentaBancariaService) {
+    function ($scope, $window, $state, $modal, toastr, cuentaPersonal, CuentaBancariaService, SGDialog) {
 
         $scope.view = {
             cuentaPersonal: cuentaPersonal
@@ -61,6 +61,19 @@ angular.module('socio').controller('Socio.CuentaPersonal.EditarCuentaPersonalCon
               }
             );
           }, function () {
+          });
+        };
+
+        $scope.cancelar = function() {
+          SGDialog.confirm('Guardar', 'Esta operacion no puede ser revertida ¿Estas seguro de cancelar la cuenta? Recuerda retirar todo el saldo de la cuenta antes de cancelarla.', function () {
+            CuentaBancariaService.cancelarCuenta($scope.view.cuentaPersonal.id).then(
+              function (response) {
+                toastr.success('Cuenta cancelada correctamente');
+                $state.go('socio.app.socio.cuentaPersonal.buscar');
+              }, function error(err) {
+                toastr.error(err.data.message);
+              }
+            );
           });
         };
 

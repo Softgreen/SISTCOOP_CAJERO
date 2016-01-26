@@ -22,7 +22,7 @@
       <button type="button" data-ng-if="view.cuentaPersonal.estadoCuenta == 'CONGELADO'" data-ng-click="descongelar()" class="btn btn-default">Descongelar</button>
     </div>
     <div class="btn-group">
-      <button type="button" class="btn btn-danger">
+      <button type="button" data-ng-click="cancelar()" class="btn btn-danger">
         <i class="pficon pficon-delete"></i>
         <span>Cancelar</span>
       </button>

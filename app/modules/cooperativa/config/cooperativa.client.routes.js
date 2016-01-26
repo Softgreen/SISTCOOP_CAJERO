@@ -65,6 +65,14 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                 abstract: true
             })
 
+            .state('cooperativa.app.operaciones.dashboard', {
+              url: '/dashboard',
+              templateUrl: 'modules/cooperativa/views/operaciones/form-dashboard.html',
+              controller: 'Cooperativa.Operaciones.DashboardController',
+              ncyBreadcrumb: {
+                label: 'Dashboard'
+              }
+            })
             .state('cooperativa.app.operaciones.cerrarCaja', {
                 url: '/cerrarCaja',
                 templateUrl: 'modules/cooperativa/views/operaciones/form-cerrar-caja.html',

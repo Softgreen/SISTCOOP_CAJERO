@@ -71,7 +71,9 @@ angular.module('mean').factory('VoucherService', function (EMPRESA, $filter, Num
       fnTabTexto('MONEDA: ' + item.moneda);
       fnTabTexto('SALDO: ' + item.moneda + $filter('number')(item.saldo, 2));
 
+      fnSaltoLinea();
       fnCentrado('Gracias por su preferencia');
+      fnImprimir();
     };
 
     var fnCompraVenta = function (item) {

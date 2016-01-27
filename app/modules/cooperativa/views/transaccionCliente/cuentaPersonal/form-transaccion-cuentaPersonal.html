@@ -152,10 +152,10 @@
           <dd style="margin-left: 130px;" data-ng-bind="item.estado | si_no: 'ACTIVO' | uppercase"></dd>
         </dl>
         <div class="input-group">
-          <button type="button" data-ng-click="imprimir(item, false)" data-ng-disabled="!item.estado" class="btn btn-info btn-xs">
+          <button type="button" data-ng-click="imprimir(item, false, $index)" data-ng-disabled="!item.estado" class="btn btn-info btn-xs">
             <i class="pficon pficon-print"></i><span>&nbsp;Imprimir</span>
           </button>
-          <button type="button" data-ng-click="imprimir(item, true)" data-ng-disabled="!item.estado" class="btn btn-info btn-xs">
+          <button type="button" data-ng-click="imprimir(item, true, $index)" data-ng-disabled="!item.estado" class="btn btn-info btn-xs">
             <i class="pficon pficon-print"></i><span>&nbsp;Impr.Con saldo</span>
           </button>
         </div>

@@ -194,8 +194,11 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CuentaP
             });
         };
 
-        $scope.imprimir = function (item, saldo) {
+        $scope.imprimir = function (item, saldo, index) {
             VoucherService.imprimirVoucherCuentaPersonal(item, saldo);
+            if(index) {
+              $scope.view.voucher.list.splice(index, 1);
+            }
         };
         $scope.extornar = function (item, index) {
             SGDialog.confirmDelete('Transaccion', '', function () {

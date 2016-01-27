@@ -124,7 +124,7 @@
           <dt style="width: 130px;">Estado:</dt>
           <dd style="margin-left: 130px;" data-ng-bind="item.estado | si_no: 'ACTIVO' | uppercase"></dd>
         </dl>
-        <button type="button" data-ng-click="imprimir(item)" data-ng-disabled="!item.estado" class="btn btn-info btn-xs">
+        <button type="button" data-ng-click="imprimir(item, $index)" data-ng-disabled="!item.estado" class="btn btn-info btn-xs">
           <i class="pficon pficon-print"></i><span>&nbsp;Imprimir</span>
         </button>
         <button type="button" data-ng-click="extornar(item, $index)" data-ng-disabled="!item.estado" class="btn btn-danger btn-xs">

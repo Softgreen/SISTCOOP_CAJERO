@@ -186,8 +186,11 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CompraV
             });
         };
 
-        $scope.imprimir = function (item) {
+        $scope.imprimir = function (item, index) {
             VoucherService.imprimirVoucherCompraVenta(item);
+            if(index) {
+              $scope.view.voucher.list.splice(index, 1);
+            }
         };
         $scope.extornar = function (item, index) {
             SGDialog.confirmDelete('Transaccion', '', function () {

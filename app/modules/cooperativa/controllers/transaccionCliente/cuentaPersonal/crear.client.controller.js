@@ -128,7 +128,16 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CuentaP
             if ($scope.combo.selected.tipoTransaccion.denominacion === 'RETIRO') {
                 if ($scope.view.transaccion.monto > $scope.view.load.cuentaPersonal.saldo) {
                     SGDialog.confirm('Sobregiro', 'Esta cuenta no cuenta con saldo suficiente. Desea Realizar un SOBREGIRO?', function () {
-                        $scope.crearTransaccion();
+                        var modalInstance = $modal.open({
+                          animation: true,
+                          templateUrl: 'modules/cooperativa/views/login/form-login.html',
+                          controller: 'Cooperativa.LoginController',
+                          resolve: {}
+                        });
+                        modalInstance.result.then(function () {
+                          $scope.crearTransaccion();
+                        }, function () {
+                        });
                     });
                 } else {
                     $scope.crearTransaccion();

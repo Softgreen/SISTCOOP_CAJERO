@@ -108,15 +108,24 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.Histori
             },
             extornar: function (row) {
                 SGDialog.confirmDelete('Transaccion', '', function () {
-                    SessionService.extornarTransaccion(row.idTransaccion).then(
+                    var modalInstance = $modal.open({
+                      animation: true,
+                      templateUrl: 'modules/cooperativa/views/login/form-login.html',
+                      controller: 'Cooperativa.LoginController',
+                      resolve: {}
+                    });
+                    modalInstance.result.then(function () {
+                      SessionService.extornarTransaccion(row.idTransaccion).then(
                         function (response) {
-                            toastr.success('Transaccion extornada satisfactoriamente.');
-                            $scope.search();
+                          toastr.success('Transaccion extornada satisfactoriamente.');
+                          $scope.search();
                         }, function error(err) {
-                            toastr.error(err.data.message);
-                            $scope.search();
+                          toastr.error(err.data.message);
+                          $scope.search();
                         }
-                    );
+                      );
+                    }, function () {
+                    });
                 });
             }
         };

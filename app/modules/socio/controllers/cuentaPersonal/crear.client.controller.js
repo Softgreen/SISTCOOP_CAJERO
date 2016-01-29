@@ -84,6 +84,11 @@ angular.module('socio').controller('Socio.CuentaPersonal.CrearCuentaPersonalCont
         };
 
         $scope.save = function () {
+            if(angular.isUndefined($scope.view.load.persona)) {
+                toastr.warning('Persona no seleccionada, haga clic en el boton buscar.');
+                return;
+            }
+
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'modules/socio/views/cuentaPersonal/form-crear-verificarDatos.html',

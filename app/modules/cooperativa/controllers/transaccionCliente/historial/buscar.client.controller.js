@@ -32,7 +32,14 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.Histori
                 {field: 'monto', displayName: 'MONTO', width: '19%'},
                 {field: 'fecha', cellFilter: 'date: "dd/MM/yyyy"', displayName: 'FECHA', width: '10%'},
                 {field: 'hora', cellFilter: 'date: "HH:mm:ss"', displayName: 'HORA', width: '10%'},
-                {field: 'estado', cellFilter: 'si_no: "ACTIVO"', displayName: 'ESTADO', width: '10%'},
+                {
+                  field: 'estado', cellFilter: 'si_no: "ACTIVO"', displayName: 'ESTADO', width: '10%',
+                  cellClass:function(grid, row, col, rowRenderIndex, colRenderIndex) {
+                    if (!grid.getCellValue(row,col)) {
+                      return 'has-error';
+                    }
+                  }
+                },
                 {
                     name: 'edit',
                     displayName: 'Edit',

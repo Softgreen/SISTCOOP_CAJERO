@@ -13,7 +13,7 @@ angular.module('socio').controller('Socio.CuentaPersonal.BuscarCuentaPersonalCon
             filterText: undefined,
             tipoCuentasBancarias: ['LIBRE', 'PLAZO_FIJO', 'RECAUDADORA'],
             tipoPersonas: ['NATURAL', 'JURIDICA'],
-            tipoEstadoCuenta: ['ACTIVO', 'CONGELADO', 'INACTIVO'],
+            tipoEstadoCuenta: ['ACTIVO', 'CONGELADO'/*, 'INACTIVO'*/],
             estado: true
         };
 

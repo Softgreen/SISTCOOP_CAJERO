@@ -23,7 +23,9 @@ angular.module('socio').controller('Socio.CuentaPersonal.EditarCuentaPersonal.Es
     $scope.loadFechas();
 
     $scope.loadEstadoCuenta = function () {
-      CuentaBancariaService.getEstadoCuenta($scope.view.cuentaPersonal.id, $scope.view.desde.getTime(), $scope.view.hasta.getTime(), true).then(function (response) {
+      var hasta = $scope.view.hasta;
+      hasta.setDate(hasta.getDate() + 1);
+      CuentaBancariaService.getEstadoCuenta($scope.view.cuentaPersonal.id, $scope.view.desde.getTime(), hasta.getTime(), true).then(function (response) {
         $scope.view.load.estadoCuenta = response;
       });
     };

@@ -13,7 +13,7 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionCliente.CuentaP
             filterText: undefined,
             tipoCuentasBancarias: ['LIBRE', 'PLAZO_FIJO', 'RECAUDADORA'],
             tipoPersonas: ['NATURAL', 'JURIDICA'],
-            tipoEstadoCuenta: ['ACTIVO', 'CONGELADO', 'INACTIVO'],
+            tipoEstadoCuenta: ['ACTIVO', 'CONGELADO'/*, 'INACTIVO'*/],
             estado: true
         };
 

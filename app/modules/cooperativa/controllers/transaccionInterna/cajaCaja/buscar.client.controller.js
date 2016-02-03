@@ -109,7 +109,7 @@ angular.module('cooperativa').controller('Cooperativa.TransaccionInterna.CajaCaj
             multiSelect: false,
 
             columnDefs: [
-                {field: 'hora', cellFilter: 'date: "dd/MM/yyyy HH:mm:ss"', displayName: 'FECHA', width: '24%'},
+                {field: 'hora', cellFilter: 'date: "dd/MM/yyyy HH:mm:ss"', displayName: 'FECHA', width: '21%'},
                 {field: 'estadoConfirmacion', cellFilter: 'si_no: "CONFIRMADO"', displayName: 'E.CONFIRMACION', width: '18%'},
                 {
                     name: 'monto',

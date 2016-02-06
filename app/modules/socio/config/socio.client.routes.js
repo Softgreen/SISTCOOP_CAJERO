@@ -37,6 +37,10 @@ angular.module('socio').config(['$stateProvider', '$urlRouterProvider',
         $urlRouterProvider.when('/socio/app/socio/cuentasPersonales/editar/:cuentaPersonal', '/socio/app/socio/cuentasPersonales/editar/:cuentaPersonal/resumen');
         $urlRouterProvider.when('/socio/app/socio/cuentasPersonales/editar/:cuentaPersonal/chequeras', '/socio/app/socio/cuentasPersonales/editar/:cuentaPersonal/chequeras/buscar');
 
+
+        $urlRouterProvider.when('/socio/app/creditos/creditos', '/socio/app/creditos/creditos/buscar');
+        //$urlRouterProvider.when('/socio/app/socio/socios/editar/:socio', '/socio/app/socio/socios/editar/:socio/resumen');
+
         $stateProvider
             .state('socio', {
                 abstract: true,
@@ -63,6 +67,11 @@ angular.module('socio').config(['$stateProvider', '$urlRouterProvider',
                 url: '/socio',
                 template: '<div ui-view></div>',
                 abstract: true
+            })
+            .state('socio.app.credito', {
+              url: '/creditos',
+              template: '<div ui-view></div>',
+              abstract: true
             })
             .state('socio.app.configuracion', {
                 url: '/configuracion',
@@ -257,6 +266,56 @@ angular.module('socio').config(['$stateProvider', '$urlRouterProvider',
                 parent: 'socio.app.socio.cuentaPersonal.editar.resumen'
               }
             })
+
+
+            //Creditos
+            .state('socio.app.credito.credito', {
+              url: '/creditos',
+              template: '<div ui-view></div>',
+              ncyBreadcrumb: {
+                skip: true // Never display this state in breadcrumb.
+              }
+            })
+            .state('socio.app.credito.credito.buscar', {
+              url: '/buscar',
+              templateUrl: 'modules/socio/views/credito/form-buscar.html',
+              controller: 'Socio.Credito.BuscarController',
+              ncyBreadcrumb: {
+                label: 'Home'
+              }
+            })
+            .state('socio.app.credito.credito.crear', {
+              url: '/crear',
+              templateUrl: 'modules/socio/views/credito/form-crear.html',
+              controller: 'Socio.Credito.CrearController',
+              ncyBreadcrumb: {
+                label: 'Crear credito',
+                parent: 'socio.app.credito.credito.buscar'
+              }
+            })
+            .state('socio.app.credito.credito.editar', {
+              url: '/editar/:credito',
+              templateUrl: 'modules/socio/views/credito/form-editar.html',
+              resolve: {
+                credito: function ($state, $stateParams, CreditoService) {
+                  return CreditoService.findById($stateParams.credito);
+                }
+              },
+              controller: 'Socio.Credito.EditarController',
+              ncyBreadcrumb: {
+                label: 'Editar credito',
+                parent: 'socio.app.credito.credito.buscar'
+              }
+            })
+            .state('socio.app.credito.credito.editar.resumen', {
+              url: '/resumen',
+              templateUrl: 'modules/socio/views/credito/form-editar-resumen.html',
+              controller: 'Socio.Credito.Editar.ResumenController',
+              ncyBreadcrumb: {
+                skip: true // Never display this state in breadcrumb.
+              }
+            })
+
 
             //configuracion
             .state('socio.app.configuracion.configuracion', {

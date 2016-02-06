@@ -87,8 +87,12 @@ angular.module('socio').service('$menuItemsSocio', ['Auth',
 
             //if (rolesSession.indexOf('ver-socios') !== -1) {
             var socios = this.addItem('Socios', '');
+            var creditos = this.addItem('Creditos', '');
+
             socios.addItem('Clientes', 'socio.app.socio.socio');
             socios.addItem('Cuentas personales', 'socio.app.socio.cuentaPersonal');
+
+            creditos.addItem('Creditos', 'socio.app.credito.credito');
             //}
 
             //var configuracion = this.addItem('Configuracion', '');

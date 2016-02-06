@@ -78,11 +78,11 @@ angular.module('mean').factory('SessionService', ['Restangular',
             crearTransaccionGiro: function (transaccion) {
                 return Restangular.all(baseUrl + '/transaccionGiro').post(transaccion);
             },
-            crearTransaccionSobreGiro: function (transaccion) {
-                return Restangular.all(baseUrl + '/transaccionSobreGiro').post(transaccion);
+            crearTransaccionCredito: function (transaccion) {
+                return Restangular.all(baseUrl + '/transaccionCredito').post(transaccion);
             },
-            crearTransaccionHistorialSobreGiro: function (transaccion) {
-                return Restangular.all(baseUrl + '/transaccionSobreGiro/pagar').post(transaccion);
+            crearTransaccionHistorialCredito: function (transaccion) {
+                return Restangular.all(baseUrl + '/transaccionCredito/pagar').post(transaccion);
             },
 
             crearTransaccionBovedaCajaOrigenCaja: function (boveda, detalle) {

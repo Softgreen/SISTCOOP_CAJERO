@@ -97,7 +97,7 @@ angular.module('socio').controller('Socio.Credito.CrearController',
       //hallando comision
       if ($scope.combo.selected.tipoInteres.valor === 'PORCENTUAL') {
         interes = $scope.view.credito.monto * $scope.view.credito.interes / 100;
-        
+
         //redondeo a un decimal y hacia arriba
         interes = Math.round(interes * 10) / 10;
       } else {

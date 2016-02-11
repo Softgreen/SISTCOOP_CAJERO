@@ -39,7 +39,7 @@ angular.module('socio').config(['$stateProvider', '$urlRouterProvider',
 
 
         $urlRouterProvider.when('/socio/app/creditos/creditos', '/socio/app/creditos/creditos/buscar');
-        //$urlRouterProvider.when('/socio/app/socio/socios/editar/:socio', '/socio/app/socio/socios/editar/:socio/resumen');
+        $urlRouterProvider.when('/socio/app/creditos/creditos/editar/:credito', '/socio/app/creditos/creditos/editar/:credito/resumen');
 
         $stateProvider
             .state('socio', {

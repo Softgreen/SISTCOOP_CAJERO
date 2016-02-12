@@ -155,6 +155,7 @@ angular.module('mean').factory('VoucherService', function (EMPRESA, $filter, Num
         fnTabTexto(item.agenciaAbreviatura, 'TRANS.: ' + item.idTransaccionBancaria);
         fnTabTexto('CAJA: ' + item.cajaDenominacion, 'NRO.OP.: ' + item.numeroOperacion);
         fnTabTexto('FECHA: ' + $filter('date')(item.fecha, 'dd/MM/yyyy'), 'HORA: ' + $filter('date')(item.hora, 'HH:mm:ss'));
+        fnTabTexto('NRO CTA: ' + item.numeroCuenta);
         fnTabTexto('CLIENTE: ' + item.socio);
         fnTabTexto('MONEDA: ' + item.moneda.denominacion);
         if (item.referencia) {

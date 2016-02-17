@@ -156,6 +156,15 @@ angular.module('cooperativa').config(['$stateProvider', '$urlRouterProvider',
                     label: 'Home'
                 }
             })
+            .state('cooperativa.app.transaccionCliente.transaccion.credito', {
+              url: '/credito',
+              templateUrl: 'modules/cooperativa/views/transaccionCliente/credito/form-transaccion-credito.html',
+              controller: 'Cooperativa.TransaccionCliente.Credito.CrearController',
+              resolve: {},
+              ncyBreadcrumb: {
+                label: 'Home'
+              }
+            })
 
             .state('cooperativa.app.transaccionCliente.historial.buscar', {
                 url: '/buscar',

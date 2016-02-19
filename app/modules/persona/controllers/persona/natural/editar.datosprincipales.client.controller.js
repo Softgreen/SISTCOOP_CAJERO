@@ -33,11 +33,16 @@ angular.module('persona').controller('Persona.Natural.EditarPersonaNatural.Datos
         $scope.save = function () {
             $scope.view.persona.sexo = $scope.combo.selected.sexo;
             $scope.view.persona.estadoCivil = $scope.combo.selected.estadoCivil;
+
+            if(angular.isUndefined($scope.view.persona.apellidoMaterno) || $scope.view.persona.apellidoMaterno === ""){
+              $scope.view.persona.apellidoMaterno = ' ';
+            }
+
             $scope.working = true;
             PersonaNaturalService.update($scope.view.persona).then(
                 function(response){
                     $scope.working = false;
-                    toastr.success('Persona actualizada');
+                    toastr.success('Persona Actualizada');
                 },
                 function error(err){
                     toastr.error(err.data.message);

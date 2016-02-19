@@ -27,7 +27,7 @@
     <div class="form-group" data-ng-class="{ 'has-error' : form.apellidoMaterno.$invalid && form.$submitted }">
         <label class="col-sm-2 control-label">Apellido Materno:</label>
         <div class="col-sm-3">
-            <input name="apellidoMaterno" type="text" data-ng-model="view.persona.apellidoMaterno" data-ng-minlength="1" data-ng-maxlength="60" class="form-control" ng-trim="false" text-transform-uppercase capitalize required/>
+            <input name="apellidoMaterno" type="text" data-ng-model="view.persona.apellidoMaterno" data-ng-minlength="1" data-ng-maxlength="60" class="form-control" ng-trim="false" text-transform-uppercase capitalize />
             <div data-ng-messages="form.apellidoMaterno.$error" data-ng-if="form.$submitted">
                 <div class="has-error" data-ng-message="required">Ingrese apellido materno.</div>
                 <div class="has-error" data-ng-message="minlength">Ingrese apellido materno.</div>

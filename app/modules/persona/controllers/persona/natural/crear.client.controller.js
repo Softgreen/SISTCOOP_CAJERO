@@ -73,9 +73,9 @@ angular.module('persona').controller('Persona.Natural.CrearPersonaNaturalControl
                 $scope.view.persona.sexo = $scope.combo.selected.sexo;
                 $scope.view.persona.estadoCivil = $scope.combo.selected.estadoCivil;
 
-                if(angular.isUndefined($scope.view.persona.apellidoMaterno)){
-                  $scope.view.persona.apellidoMaterno = ' ';
-                }
+              if(angular.isUndefined($scope.view.persona.apellidoMaterno) || $scope.view.persona.apellidoMaterno === ""){
+                $scope.view.persona.apellidoMaterno = ' ';
+              }
 
                 $scope.working = true;
                 PersonaNaturalService.crear($scope.view.persona).then(
